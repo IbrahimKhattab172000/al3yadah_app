@@ -24,12 +24,12 @@ class _MyAppState extends State<MyApp> {
       child: const SplashView(),
       builder: (_, child) => KeyboardPopScaffold(
         child: MaterialApp(
-          title: 'غزير',
+          title: 'Al3yadah',
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             hoverColor: Colors.transparent,
             useMaterial3: false,
-            fontFamily: "DINNextLTArabic",
+            fontFamily: "Lato",
             scaffoldBackgroundColor: AppColors.background,
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
@@ -40,7 +40,7 @@ class _MyAppState extends State<MyApp> {
           navigatorKey: navigatorKey,
           home: child,
           localizationsDelegates: context.localizationDelegates,
-          supportedLocales: [const Locale('ar'), const Locale('en')],
+          supportedLocales: [const Locale('en'), const Locale('ar')],
           locale: context.locale,
         ),
       ),

@@ -28,12 +28,12 @@ void main() async {
   runApp(
     EasyLocalization(
       supportedLocales: [
-        Locale('ar'),
         Locale('en'),
+        Locale('ar'),
       ],
       path: 'assets/lang',
       saveLocale: true,
-      startLocale: Locale('ar'),
+      startLocale: Locale('en'),
       child: MyApp(),
     ),
   );
