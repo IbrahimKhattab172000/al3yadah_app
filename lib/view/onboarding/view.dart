@@ -1,6 +1,9 @@
 import 'package:al3yadah_app/core/helpers/app_colors.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
+import 'package:al3yadah_app/core/route_utils/route_utils.dart';
+import 'package:al3yadah_app/view/home/view.dart';
+import 'package:al3yadah_app/view/nav_bar/view.dart';
 import 'package:al3yadah_app/widgets/app_button.dart';
 import 'package:al3yadah_app/widgets/app_text.dart';
 import 'package:flutter/material.dart';
@@ -22,13 +25,13 @@ class _OnBoardingViewState extends State<OnBoardingView> {
       imagePath: "onboarding1",
       title: "Enhanced Efficiency",
       body:
-          "Our user-friendly interface and intuitive navigation system make it easy to navigate through the program,\n saving you time and effort.",
+          "Our user-friendly interface and intuitive navigation system make it easy to navigate through the program, saving you time and effort",
     ),
     BoardingModel(
       imagePath: "onboarding1",
       title: "Seamless Follow-up Care",
       body:
-          "Our program prompts you to review previous data before each visit, ensuring continuity of care.",
+          "Our program prompts you to review previous data before each visit, ensuring continuity of care",
     ),
     BoardingModel(
       imagePath: "onboarding3",
@@ -102,7 +105,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                 ? AppButton(
                     title: "Login",
                     color: AppColors.primary,
-                    onTap: () {},
+                    onTap: () => RouteUtils.navigateTo(const NavBarView()),
                   )
                 : InkWell(
                     onTap: () {
@@ -152,7 +155,7 @@ Widget buildBoardingItem(BoardingModel model) => Column(
         SizedBox(height: 24.height),
         AppText(
           title: model.body,
-          color: AppColors.gray,
+          color: AppColors.txtFieldlable1,
           fontSize: 16,
           textAlign: TextAlign.center,
         ),
