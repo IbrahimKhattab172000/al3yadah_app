@@ -104,23 +104,15 @@ flutter:
     - assets/lang/en.json
 
   fonts:
-    - family: DINNextLTArabic
+    - family: Lato
       fonts:
-        - asset: assets/font/DINNextLTArabic-Black.ttf
+        - asset: assets/font/Lato-Black.ttf
           weight: 900
-        - asset: assets/font/DINNextLTArabic-ExtraBold.ttf
-          weight: 800
-        - asset: assets/font/DINNextLTArabic-Bold.ttf
+        - asset: assets/font/Lato-Bold.ttf
           weight: 700
-        - asset: assets/font/DINNextLTArabic-Bold.ttf
-          weight: 600
-        - asset: assets/font/DINNextLTArabic-Medium.ttf
-          weight: 500
-        - asset: assets/font/DINNextLTArabic-Regular.ttf
+        - asset: assets/font/Lato-Regular.ttf
           weight: 400
-        - asset: assets/font/DINNextLTArabic-Light.ttf
+        - asset: assets/font/Lato-Light.ttf
           weight: 300
-        - asset: assets/font/DINNextLTArabic-ExtraLight.ttf
-          weight: 200
-        - asset: assets/font/DINNextLTArabic-ExtraLight.ttf
+        - asset: assets/font/Lato-Thin.ttf
           weight: 100
