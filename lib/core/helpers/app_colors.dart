@@ -2,6 +2,13 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static const Color primary = Color(0xFF0BB98F);
+  static const Color txtFieldlable1 = Color(0xFF4A4A4A);
+  static const Color txtFieldlable2 = Color(0xFF868686);
+  static const Color txtFieldlableBg = Color(0xFFEBEEED);
+  static const Color purple = Color(0xFFFFA8A7);
+
+///////////////////////////////
+
   static const Color secondary = Color(0xFF19578A);
   static const Color third = Color(0xFF587BBA);
   static const Color fourth = Color(0xFFBAD2F3);
