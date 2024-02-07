@@ -14,6 +14,8 @@ class _FieldsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cubit = NewPatientCubit.of(context);
+
     return Column(
       children: [
         AppTextField(
@@ -56,7 +58,10 @@ class _FieldsList extends StatelessWidget {
           label: "Presented Area",
           hint: 'select',
           items: items,
-          onChange: (value) {},
+          onChange: (value) {
+            cubit.selectArea(area: value.toString());
+            print(cubit.selectedArea);
+          },
         ),
       ],
     );
