@@ -39,6 +39,7 @@ class _NavBar extends StatelessWidget {
                   ? AppColors.primary
                   : AppColors.lightGray,
             ),
+            SizedBox(width: 80.width),
             _navBarItem(
               icon: 'settings',
               title: 'Setting',

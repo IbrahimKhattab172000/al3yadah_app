@@ -9,8 +9,8 @@ class _Add extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         InkWell(
-          // onTap: () => RouteUtils.navigateTo(OrdersView()),
-          child: Container(
+          onTap: () => RouteUtils.navigateTo(NewPatientView()),
+          child: SizedBox(
             height: 82.height,
             width: 82.width,
             child: Image.asset(

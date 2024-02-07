@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 part of '../view.dart';
 
 class _Body extends StatelessWidget {
@@ -8,9 +10,7 @@ class _Body extends StatelessWidget {
     final cubit = NavBarCubit.of(context);
     return [
       HomeView(),
-      HomeView(),
-
-      // SettingView(),
+      SettingView(),
     ][cubit.currentViewIndex];
   }
 }
