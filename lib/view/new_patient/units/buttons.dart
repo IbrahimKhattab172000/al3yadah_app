@@ -22,9 +22,9 @@ class _Buttons extends StatelessWidget {
           onTap: () {
             switch (cubit.selectedArea) {
               case 'Shoulder':
-                RouteUtils.navigateTo(const ShoulderView());
+                RouteUtils.navigateTo(ShoulderView());
               case 'Knee':
-                RouteUtils.navigateTo(const KneeView());
+                RouteUtils.navigateTo(KneeView());
 
               // case 'Ankle':
               //    AnklePage();

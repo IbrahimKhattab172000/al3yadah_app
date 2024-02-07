@@ -5,7 +5,7 @@ import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
 import 'package:al3yadah_app/view/Knee/view.dart';
-import 'package:al3yadah_app/view/new_patient/cubit/cubit.dart';
+import 'package:al3yadah_app/view/new_patient/cubit.dart';
 import 'package:al3yadah_app/view/shoulder/view.dart';
 import 'package:al3yadah_app/widgets/app_app_bar.dart';
 import 'package:al3yadah_app/widgets/app_button.dart';
