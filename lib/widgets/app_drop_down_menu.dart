@@ -107,9 +107,9 @@ class _AppDropDownMenuState extends State<AppDropDownMenu> {
     );
   }
 
-  InputBorder _border(Color color, {double width = 0.5}) {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(_radius),
+  InputBorder _border(Color color, {double width = 2}) {
+    return UnderlineInputBorder(
+      // borderRadius: BorderRadius.circular(_radius),
       borderSide: BorderSide(
         color: color,
         width: width,

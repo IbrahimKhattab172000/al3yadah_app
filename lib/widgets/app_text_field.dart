@@ -58,7 +58,9 @@ class _AppTextFieldState extends State<AppTextField> {
             padding: EdgeInsets.only(bottom: 8.height),
             child: AppText(
               title: widget.label!,
-              color: AppColors.secondary,
+              color: AppColors.txtFieldlable1,
+              fontSize: 16,
+              fontWeight: FontWeight.w700,
             ),
           ),
         InkWell(
@@ -98,9 +100,9 @@ class _AppTextFieldState extends State<AppTextField> {
                     horizontal: 12.width, vertical: 8.height),
                 border: _border(widget.borderColor),
                 enabledBorder: _border(widget.borderColor),
-                focusedBorder: _border(AppColors.primary, width: 1),
+                focusedBorder: _border(AppColors.primary, width: 2),
                 errorBorder: _border(AppColors.red),
-                focusedErrorBorder: _border(AppColors.primary, width: 1),
+                focusedErrorBorder: _border(AppColors.primary, width: 2),
               ),
             ),
           ),
@@ -109,9 +111,9 @@ class _AppTextFieldState extends State<AppTextField> {
     );
   }
 
-  InputBorder _border(Color color, {double width = 1}) {
-    return OutlineInputBorder(
-      borderRadius: BorderRadius.circular(_radius),
+  InputBorder _border(Color color, {double width = 2}) {
+    return UnderlineInputBorder(
+      // borderRadius: BorderRadius.circular(_radius),
       borderSide: BorderSide(
         color: color,
         width: width,

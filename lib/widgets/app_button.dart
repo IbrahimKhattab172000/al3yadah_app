@@ -79,15 +79,15 @@ class AppButton extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(_radius),
+                  // borderRadius: BorderRadius.circular(_radius),
                   color: onTap == null ? AppColors.lightGray : color,
                   gradient: linearColor
                       ? const LinearGradient(
                           begin: Alignment.topCenter,
                           end: Alignment.bottomCenter,
                           colors: [
-                            AppColors.secondary,
-                            AppColors.third,
+                            AppColors.primary,
+                            AppColors.primary,
                           ],
                         )
                       : null,
@@ -128,16 +128,16 @@ class _OutlineAppButton extends AppButton {
                 padding: padding ?? EdgeInsets.symmetric(horizontal: 48.width),
                 child: AppText(
                   title: title,
-                  color: onTap == null ? AppColors.darkGray : titleColor,
+                  color: onTap == null ? AppColors.primary : titleColor,
                   fontSize: titleFontSize,
                   fontWeight: FontWeight.w600,
                 ),
                 decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(_radius),
+                    // borderRadius: BorderRadius.circular(_radius),
                     color: AppColors.white,
                     border: Border.all(
-                      color: onTap == null ? AppColors.darkGray : color,
-                      width: 1,
+                      color: onTap == null ? AppColors.primary : color,
+                      width: 3,
                     )),
               ),
             ),
