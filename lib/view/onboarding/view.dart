@@ -28,7 +28,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
           "Our user-friendly interface and intuitive navigation system make it easy to navigate through the program, saving you time and effort",
     ),
     BoardingModel(
-      imagePath: "onboarding1",
+      imagePath: "onboarding2",
       title: "Seamless Follow-up Care",
       body:
           "Our program prompts you to review previous data before each visit, ensuring continuity of care",

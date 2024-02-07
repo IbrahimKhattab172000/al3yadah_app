@@ -1,5 +1,4 @@
-import 'package:al3yadah_app/view/home/view.dart';
-import 'package:al3yadah_app/view/nav_bar/view.dart';
+import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/view/onboarding/view.dart';
 import 'package:flutter/material.dart';
 
@@ -59,10 +58,20 @@ class _SplashViewState extends State<SplashView> {
       body: SizedBox(
         width: double.infinity,
         height: double.infinity,
-        child: Center(
-          child: Image.asset(
-            Utils.getAssetPNGPath('splash'),
-          ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              Utils.getAssetPNGPath('splash'),
+              height: 150.height,
+              width: 150.width,
+            ),
+            Image.asset(
+              Utils.getAssetPNGPath('al3yadah'),
+              height: 40.height,
+              width: 100.width,
+            ),
+          ],
         ),
       ),
     );
