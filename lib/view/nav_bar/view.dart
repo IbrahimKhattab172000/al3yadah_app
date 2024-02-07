@@ -1,11 +1,14 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:al3yadah_app/core/helpers/app_colors.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
 import 'package:al3yadah_app/view/home/view.dart';
 import 'package:al3yadah_app/view/nav_bar/cubit.dart';
+import 'package:al3yadah_app/view/new_patient/view.dart';
+import 'package:al3yadah_app/view/setting/view.dart';
 import 'package:al3yadah_app/widgets/app_text.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 part 'units/body.dart';
@@ -21,7 +24,8 @@ class NavBarView extends StatelessWidget {
       create: (context) => NavBarCubit(),
       child: BlocBuilder<NavBarCubit, NavBarStates>(
         builder: (context, state) {
-          return const Scaffold(
+          //Don't ever use const here
+          return Scaffold(
             body: _Body(),
             bottomNavigationBar: _NavBar(),
             floatingActionButton: _Add(),
