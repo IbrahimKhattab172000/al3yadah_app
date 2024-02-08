@@ -41,6 +41,7 @@ class ShoulderView extends StatelessWidget {
             appBar: AppAppBar(
               title: "Shoulder Test",
               elevation: 0,
+              hideLeading: true,
             ),
             body: Column(
               children: [

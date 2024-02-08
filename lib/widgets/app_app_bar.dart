@@ -11,12 +11,14 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.actions,
     this.leading,
     this.elevation,
+    this.hideLeading = false,
   }) : super(key: key);
   final double hMargin;
   final String? title;
   final List<Widget>? actions;
   final Widget? leading;
   double? elevation;
+  bool hideLeading;
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +28,7 @@ class AppAppBar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: IconThemeData(
         color: AppColors.primary,
       ),
-      leading: leading,
+      leading: hideLeading ? const SizedBox() : leading,
       centerTitle: true,
 
       // titleSpacing: title == null || title!.isEmpty || !Navigator.canPop(context) ? null : -16,

@@ -30,6 +30,7 @@ class NewPatientView extends StatelessWidget {
             appBar: AppAppBar(
               title: "New patient",
               elevation: 0,
+              hideLeading: true,
             ),
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
