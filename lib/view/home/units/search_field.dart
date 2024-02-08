@@ -22,12 +22,12 @@ class _SearchField extends StatelessWidget {
           ),
         ),
         SizedBox(width: 10.width),
-        const Expanded(
+        Expanded(
           child: AppTextField(
             fillColor: AppColors.txtFieldlableBg,
             hint: "search",
             hintColor: AppColors.txtFieldlable2,
-            leading: Icon(
+            leading: const Icon(
               Icons.search,
               color: AppColors.txtFieldlable2,
             ),
