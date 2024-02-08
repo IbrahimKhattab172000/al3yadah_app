@@ -32,4 +32,18 @@ class ShoulderCubit extends Cubit<ShoulderStates> {
       emit(state);
     }
   }
+
+  //Shoulder test page3 logic
+  bool allImpingementNotDone = true;
+  bool allInstabilityNotDone = true;
+
+  void toggleAllImpingementNotDone({required bool value}) {
+    allImpingementNotDone = value;
+    _emit(ShoulderInit());
+  }
+
+  void toggleAllInstabilityNotDone({required bool value}) {
+    allInstabilityNotDone = value;
+    _emit(ShoulderInit());
+  }
 }
