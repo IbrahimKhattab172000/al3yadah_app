@@ -4,7 +4,7 @@ import 'package:al3yadah_app/core/helpers/app_colors.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
-import 'package:al3yadah_app/view/Knee/view.dart';
+import 'package:al3yadah_app/view/knee/view.dart';
 import 'package:al3yadah_app/view/new_patient/cubit.dart';
 import 'package:al3yadah_app/view/shoulder/view.dart';
 import 'package:al3yadah_app/widgets/app_app_bar.dart';
@@ -34,6 +34,7 @@ class NewPatientView extends StatelessWidget {
             body: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: Column(
                   children: [
                     _FieldsList(),

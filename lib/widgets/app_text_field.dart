@@ -6,7 +6,7 @@ import '../core/helpers/app_colors.dart';
 import '../core/helpers/utils.dart';
 
 class AppTextField extends StatefulWidget {
-  const AppTextField({
+  AppTextField({
     super.key,
     this.hint,
     this.validator,
@@ -18,7 +18,7 @@ class AppTextField extends StatefulWidget {
     this.label,
     this.maxLines = 1,
     this.borderColor = Colors.transparent,
-    this.fillColor = AppColors.white,
+    this.fillColor,
     this.onSaved,
     this.onChanged,
     this.controller,
@@ -37,7 +37,7 @@ class AppTextField extends StatefulWidget {
   final String? label;
   final int maxLines;
   final Color borderColor;
-  final Color fillColor;
+  Color? fillColor;
   final bool secure;
   final void Function(String?)? onSaved;
   final TextEditingController? controller;
@@ -87,7 +87,8 @@ class _AppTextFieldState extends State<AppTextField> {
               obscureText: widget.secure,
               decoration: InputDecoration(
                 hintText: widget.hint ?? '',
-                fillColor: widget.fillColor,
+                fillColor:
+                    widget.fillColor ?? AppColors.primary.withOpacity(0.1),
                 filled: true,
                 hintStyle: TextStyle(
                   color: widget.hintColor ?? AppColors.gray,
