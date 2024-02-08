@@ -7,11 +7,11 @@ class ShoulderCubit extends Cubit<ShoulderStates> {
 
   static ShoulderCubit of(context) => BlocProvider.of(context);
 
-  final int totalSteps = 4;
-  int currentStep = 0;
+  final int totalSteps = 5;
+  int currentStep = 1;
 
-  bool get isLast => currentStep == 4;
-  bool get isFirst => currentStep == 0;
+  bool get isLast => currentStep == 5;
+  bool get isFirst => currentStep == 1;
 
   void nextStep() {
     currentStep++;
