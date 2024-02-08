@@ -1,8 +1,15 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:al3yadah_app/core/helpers/app_colors.dart';
+import 'package:al3yadah_app/core/helpers/dimensions.dart';
+import 'package:al3yadah_app/core/helpers/utils.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
 import 'package:al3yadah_app/view/shoulder/cubit.dart';
+import 'package:al3yadah_app/widgets/app/app_double_form_field.dart';
+import 'package:al3yadah_app/widgets/app/app_toggle.dart';
 import 'package:al3yadah_app/widgets/app_button.dart';
 import 'package:al3yadah_app/widgets/app_text.dart';
+import 'package:al3yadah_app/widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
 
 import 'package:al3yadah_app/widgets/app/app_stepper.dart';
@@ -30,7 +37,6 @@ class ShoulderView extends StatelessWidget {
       child: BlocBuilder<ShoulderCubit, ShoulderStates>(
         builder: (context, state) {
           final cubit = ShoulderCubit.of(context);
-
           return Scaffold(
             appBar: AppAppBar(
               title: "Shoulder Test",
@@ -42,10 +48,23 @@ class ShoulderView extends StatelessWidget {
                   currentStep: cubit.currentStep,
                   totalSteps: cubit.totalSteps,
                 ),
-                // ignore: prefer_const_constructors
-                _CurrentShoulderTestPage(),
-                // ignore: prefer_const_constructors
-                _Buttons(),
+                Expanded(
+                  child: SingleChildScrollView(
+                    physics: BouncingScrollPhysics(),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Column(
+                        children: [
+                          SizedBox(height: 24.height),
+                          _CurrentShoulderTestPage(),
+                          SizedBox(height: 34.height),
+                          _Buttons(),
+                          SizedBox(height: Utils.bottomDevicePadding),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           );
