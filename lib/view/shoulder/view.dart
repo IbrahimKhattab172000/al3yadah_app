@@ -5,6 +5,7 @@ import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
 import 'package:al3yadah_app/view/shoulder/cubit.dart';
+import 'package:al3yadah_app/view/success/view.dart';
 import 'package:al3yadah_app/widgets/app/app_double_form_field.dart';
 import 'package:al3yadah_app/widgets/app/app_toggle.dart';
 import 'package:al3yadah_app/widgets/app_button.dart';

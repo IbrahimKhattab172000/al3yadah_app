@@ -29,7 +29,7 @@ class _Buttons extends StatelessWidget {
             if (!cubit.isLast) {
               cubit.nextStep();
             } else {
-              // RouteUtils.navigateTo(SuccessView());
+              RouteUtils.navigateTo(SuccessView());
             }
           },
         ),
