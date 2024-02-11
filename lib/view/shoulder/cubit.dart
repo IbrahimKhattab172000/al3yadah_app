@@ -46,4 +46,18 @@ class ShoulderCubit extends Cubit<ShoulderStates> {
     allInstabilityNotDone = value;
     _emit(ShoulderInit());
   }
+
+  //Shoulder test page4 logic
+  bool allRcTearNotDone = true;
+  bool allScapularStabilityNotDone = true;
+
+  void toggleAllRcTearNotDone({required bool value}) {
+    allRcTearNotDone = value;
+    _emit(ShoulderInit());
+  }
+
+  void toggleAllScapularStabilityNotDone({required bool value}) {
+    allScapularStabilityNotDone = value;
+    _emit(ShoulderInit());
+  }
 }
