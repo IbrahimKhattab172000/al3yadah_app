@@ -1,12 +1,12 @@
 import 'package:al3yadah_app/core/helpers/app_colors.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
+import 'package:al3yadah_app/view/home/widgets/patient_list.dart';
 import 'package:al3yadah_app/widgets/app_text.dart';
 import 'package:al3yadah_app/widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
 
 part 'units/search_field.dart';
-part 'units/patient_card.dart';
 part 'units/title_with_patient_list.dart';
 
 class HomeView extends StatelessWidget {

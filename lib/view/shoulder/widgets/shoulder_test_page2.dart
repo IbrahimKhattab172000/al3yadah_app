@@ -36,7 +36,7 @@ class _ShoulderTestPage2 extends StatelessWidget {
         ),
         _spacer(),
         AppDoubleFormField(
-          label: "- ER",
+          label: "- IR",
         ),
       ],
     );

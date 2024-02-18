@@ -11,17 +11,7 @@ class _TitleWithPatientList extends StatelessWidget {
         children: [
           _title(),
           SizedBox(height: 20.height),
-          Expanded(
-            child: ListView.separated(
-              physics: const BouncingScrollPhysics(),
-              padding: EdgeInsets.zero,
-              itemCount: 10,
-              itemBuilder: (context, items) {
-                return const _PatientCard();
-              },
-              separatorBuilder: (context, index) => SizedBox(height: 12.height),
-            ),
-          ),
+          PatientList(),
           SizedBox(height: 20.height),
         ],
       ),
