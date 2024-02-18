@@ -1,15 +1,15 @@
 import 'dart:io';
 
 import 'package:al3yadah_app/core/caching_utils/caching_utils.dart';
+import 'package:al3yadah_app/core/models/patient.dart';
 import 'package:al3yadah_app/core/network_utils/network_utils.dart';
 import 'package:al3yadah_app/widgets/snack_bar.dart';
 import 'package:dio/dio.dart';
 
 import '../helpers/utils.dart';
-import '../models/logged_user.dart';
 
 class AuthDatasource {
-  static Future<LoggedUser?> register({
+  static Future<Patient?> register({
     required String username,
     required String email,
     required String phone,
@@ -34,7 +34,7 @@ class AuthDatasource {
       if (!success) {
         showSnackBar(response.data['message'], errorMessage: true);
       } else {
-        return LoggedUser.fromJson(response.data['data']['user']);
+        return Patient.fromJson(response.data['data']['user']);
       }
     } catch (e) {
       handleGenericException(e);
@@ -105,7 +105,7 @@ class AuthDatasource {
     }
   }
 
-  static Future<LoggedUser?> updateProfile({
+  static Future<Patient?> updateProfile({
     bool? isMale,
     String? weight,
     String? length,
@@ -135,7 +135,7 @@ class AuthDatasource {
       final success = response.data['success'] ?? false;
       showSnackBar(response.data['message'], errorMessage: !success);
       if (success) {
-        return LoggedUser.fromJson(response.data['data']['user']);
+        return Patient.fromJson(response.data['data']['user']);
       }
     } catch (e) {
       handleGenericException(e);

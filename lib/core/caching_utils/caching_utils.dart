@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:al3yadah_app/core/models/logged_user.dart';
+import 'package:al3yadah_app/core/models/patient.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class CachingUtils {
@@ -12,9 +12,9 @@ class CachingUtils {
     _sharedPreferences = await SharedPreferences.getInstance();
   }
 
-  static LoggedUser? get user {
+  static Patient? get user {
     if (_sharedPreferences.containsKey(_cachingUserKey)) {
-      return LoggedUser.fromJson(
+      return Patient.fromJson(
           jsonDecode(_sharedPreferences.getString(_cachingUserKey)!));
     }
     return null;
