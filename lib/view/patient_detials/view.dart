@@ -9,8 +9,13 @@ import 'package:flutter/material.dart';
 
 class PatientDetailsView extends StatelessWidget {
   final Patient patient;
+  final int index;
 
-  const PatientDetailsView({Key? key, required this.patient}) : super(key: key);
+  const PatientDetailsView({
+    Key? key,
+    required this.patient,
+    required this.index,
+  }) : super(key: key);
 
   Widget _buildCard(String title, String subtitle) {
     return Card(
@@ -71,42 +76,61 @@ class PatientDetailsView extends StatelessWidget {
               ],
             ),
             SizedBox(height: 20),
-            // _buildCard("Cervical Free", "${patient.shoulder.cervicalFree}"),
-            // _buildCard("History", patient.shoulder.history),
-            // _buildCard("Suspect Diagnosis", patient.shoulder.suspectDiagnose),
-            // _buildCard("Place", patient.shoulder.place),
-            // _buildCard("VAS", patient.shoulder.vas),
-            // _buildCard("Palpation", patient.shoulder.palpation),
-            // _buildCard("Flexion Note", patient.shoulder.flexionNote),
-            // _buildCard("Flexion Number", "${patient.shoulder.flexionNum}"),
-            // _buildCard("Extension Note", patient.shoulder.extensionNote),
-            // _buildCard("Extension Number", "${patient.shoulder.extensionNum}"),
-            // _buildCard("Abd Note", patient.shoulder.abdNote),
-            // _buildCard("Abd Number", "${patient.shoulder.abdNum}"),
-            // _buildCard("ER Note", patient.shoulder.erNote),
-            // _buildCard("ER Number", "${patient.shoulder.erNum}"),
-            // _buildCard("IR Note", patient.shoulder.irNote),
-            // _buildCard("IR Number", "${patient.shoulder.irNum}"),
-            // _buildCard("Hawkins Test", patient.shoulder.hawkinsTest),
-            // _buildCard("Neer Test", patient.shoulder.neerTest),
-            // _buildCard("Posterior", patient.shoulder.posterior),
-            // _buildCard("Impingement Note", patient.shoulder.impingementNote),
-            // _buildCard("Apprehension", patient.shoulder.apprehension),
-            // _buildCard("Relocation", patient.shoulder.relocation),
-            // _buildCard("Instability Note", patient.shoulder.instabilityNote),
-            // _buildCard("Belly Off", patient.shoulder.bellyOff),
-            // _buildCard("IRLS", patient.shoulder.irls),
-            // _buildCard("ERLS", patient.shoulder.erls),
-            // _buildCard("RC Tear Note", patient.shoulder.rcTearNote),
-            // _buildCard("Scapular Assistance Test",
-            //     patient.shoulder.scapularAssistanceTest),
-            // _buildCard("Scapular Retraction Test",
-            //     patient.shoulder.scapularRetractionTest),
-            // _buildCard("Acromio Test", patient.shoulder.acromioTest),
-            // _buildCard("Obrien Test", patient.shoulder.obrienTest),
-            // _buildCard("Passive Test", patient.shoulder.passiveTest),
-            // _buildCard("Modified Test", patient.shoulder.modifiedTest),
-            // SizedBox(height: 20),
+            _buildCard("Cervical Free",
+                "${patient.sessions[index].shoulder.cervicalFree}"),
+            _buildCard("History", patient.sessions[index].shoulder.history),
+            _buildCard("Suspect Diagnosis",
+                patient.sessions[index].shoulder.suspectDiagnose),
+            _buildCard("Place", patient.sessions[index].shoulder.place),
+            _buildCard("VAS", patient.sessions[index].shoulder.vas),
+            _buildCard("Palpation", patient.sessions[index].shoulder.palpation),
+            _buildCard(
+                "Flexion Note", patient.sessions[index].shoulder.flexionNote),
+            _buildCard("Flexion Number",
+                "${patient.sessions[index].shoulder.flexionNum}"),
+            _buildCard("Extension Note",
+                patient.sessions[index].shoulder.extensionNote),
+            _buildCard("Extension Number",
+                "${patient.sessions[index].shoulder.extensionNum}"),
+            _buildCard("Abd Note", patient.sessions[index].shoulder.abdNote),
+            _buildCard(
+                "Abd Number", "${patient.sessions[index].shoulder.abdNum}"),
+            _buildCard("ER Note", patient.sessions[index].shoulder.erNote),
+            _buildCard(
+                "ER Number", "${patient.sessions[index].shoulder.erNum}"),
+            _buildCard("IR Note", patient.sessions[index].shoulder.irNote),
+            _buildCard(
+                "IR Number", "${patient.sessions[index].shoulder.irNum}"),
+            _buildCard(
+                "Hawkins Test", patient.sessions[index].shoulder.hawkinsTest),
+            _buildCard("Neer Test", patient.sessions[index].shoulder.neerTest),
+            _buildCard("Posterior", patient.sessions[index].shoulder.posterior),
+            _buildCard("Impingement Note",
+                patient.sessions[index].shoulder.impingementNote),
+            _buildCard(
+                "Apprehension", patient.sessions[index].shoulder.apprehension),
+            _buildCard(
+                "Relocation", patient.sessions[index].shoulder.relocation),
+            _buildCard("Instability Note",
+                patient.sessions[index].shoulder.instabilityNote),
+            _buildCard("Belly Off", patient.sessions[index].shoulder.bellyOff),
+            _buildCard("IRLS", patient.sessions[index].shoulder.irls),
+            _buildCard("ERLS", patient.sessions[index].shoulder.erls),
+            _buildCard(
+                "RC Tear Note", patient.sessions[index].shoulder.rcTearNote),
+            _buildCard("Scapular Assistance Test",
+                patient.sessions[index].shoulder.scapularAssistanceTest),
+            _buildCard("Scapular Retraction Test",
+                patient.sessions[index].shoulder.scapularRetractionTest),
+            _buildCard(
+                "Acromio Test", patient.sessions[index].shoulder.acromioTest),
+            _buildCard(
+                "Obrien Test", patient.sessions[index].shoulder.obrienTest),
+            _buildCard(
+                "Passive Test", patient.sessions[index].shoulder.passiveTest),
+            _buildCard(
+                "Modified Test", patient.sessions[index].shoulder.modifiedTest),
+            SizedBox(height: 20),
           ],
         ),
       ),

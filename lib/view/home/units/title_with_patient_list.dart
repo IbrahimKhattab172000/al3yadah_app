@@ -21,9 +21,10 @@ class _TitleWithPatientList extends StatelessWidget {
 
 Widget _title() {
   return AppText(
-    title: "Patient files",
+    title: "Patients",
     color: AppColors.darkGray,
     fontSize: 20,
     fontWeight: FontWeight.w500,
+    textAlign: TextAlign.center,
   );
 }

@@ -19,7 +19,8 @@ class SessionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => RouteUtils.navigateTo(PatientDetailsView(patient: patient)),
+      onTap: () => RouteUtils.navigateTo(
+          PatientDetailsView(patient: patient, index: index)),
       child: Card(
         elevation: 5,
         child: Padding(

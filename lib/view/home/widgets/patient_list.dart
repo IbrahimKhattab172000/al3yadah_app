@@ -110,7 +110,7 @@ class PatientList extends StatelessWidget {
       presentedArea: 'Shoulder',
       sessions: [
         Session(
-          date: DateTime.now().add(Duration(days: 1)),
+          date: DateTime.now().add(Duration(days: 2)),
           shoulder: Shoulder(
             cervicalFree: true,
             history: 'Previous knee injury while playing sports',
