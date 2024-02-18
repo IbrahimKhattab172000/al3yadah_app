@@ -1,5 +1,4 @@
 class Shoulder {
-  DateTime dateTime;
   bool cervicalFree;
   String history;
   String suspectDiagnose;
@@ -35,7 +34,6 @@ class Shoulder {
   String modifiedTest;
 
   Shoulder({
-    required this.dateTime,
     required this.cervicalFree,
     required this.history,
     required this.suspectDiagnose,
@@ -106,13 +104,11 @@ class Shoulder {
       obrienTest: json['obrienTest'],
       passiveTest: json['passiveTest'],
       modifiedTest: json['modifiedTest'],
-      dateTime: json['dateTime'],
     );
   }
 
   Map<String, dynamic> toJson() {
     return {
-      'dateTime': dateTime,
       'cervicalFree': cervicalFree,
       'history': history,
       'suspectDiagnose': suspectDiagnose,
@@ -148,4 +144,8 @@ class Shoulder {
       'modifiedTest': modifiedTest,
     };
   }
+
+  toMap() {}
+
+  static fromMap(Map<String, dynamic> map) {}
 }
