@@ -1,28 +1,29 @@
-import 'package:al3yadah_app/core/helpers/app_colors.dart';
+import 'package:al3yadah_app/core/models/patient.dart';
+import 'package:al3yadah_app/view/patient_files/widget/session_card.dart';
 import 'package:al3yadah_app/widgets/app_app_bar.dart';
-import 'package:al3yadah_app/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 
 class PatientFilesView extends StatelessWidget {
-  const PatientFilesView({super.key});
+  final Patient patient;
+
+  const PatientFilesView({Key? key, required this.patient}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppAppBar(title: "Sara Ahmed"),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              AppText(
-                title: "First Session 10 /10/2023",
-                color: AppColors.txtFieldlable1,
-                fontSize: 16,
-                fontWeight: FontWeight.w700,
-              ),
-            ],
-          ),
-        ],
+      appBar: AppAppBar(title: patient.name),
+      body: Expanded(
+        child: ListView.builder(
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+          itemCount: patient.sessions.length,
+          itemBuilder: (context, index) {
+            return SessionCard(
+              patient: patient,
+              index: index,
+            );
+          },
+        ),
       ),
     );
   }
