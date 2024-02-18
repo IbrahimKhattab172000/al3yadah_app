@@ -1,4 +1,4 @@
-import 'package:al3yadah_app/core/models/shoulder.dart';
+import 'package:al3yadah_app/core/models/sessions.dart';
 
 class Patient {
   String name;
@@ -9,7 +9,7 @@ class Patient {
   String chiefComplaint;
   String course;
   String presentedArea;
-  Shoulder shoulder;
+  List<Session> sessions;
 
   Patient({
     required this.name,
@@ -20,7 +20,7 @@ class Patient {
     required this.chiefComplaint,
     required this.course,
     required this.presentedArea,
-    required this.shoulder,
+    required this.sessions,
   });
 
   factory Patient.fromJson(Map<String, dynamic> json) => Patient(
@@ -32,7 +32,9 @@ class Patient {
         chiefComplaint: json['chiefComplaint'],
         course: json['course'],
         presentedArea: json['presentedArea'],
-        shoulder: Shoulder.fromJson(json['shoulder']),
+        sessions: List<Session>.from(
+          json['sessions'].map((sessionJson) => Session.fromJson(sessionJson)),
+        ),
       );
 
   Map<String, dynamic> toJson() => {
@@ -44,6 +46,6 @@ class Patient {
         'chiefComplaint': chiefComplaint,
         'course': course,
         'presentedArea': presentedArea,
-        'shoulder': shoulder.toJson(),
+        'sessions': sessions.map((session) => session.toJson()).toList(),
       };
 }
