@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:al3yadah_app/core/models/sessions.dart';
 
 class Patient {
@@ -48,4 +49,28 @@ class Patient {
         'presentedArea': presentedArea,
         'sessions': sessions.map((session) => session.toJson()).toList(),
       };
+
+  Patient copyWith({
+    String? name,
+    int? age,
+    String? occupation,
+    String? medicalRef,
+    int? weight,
+    String? chiefComplaint,
+    String? course,
+    String? presentedArea,
+    List<Session>? sessions,
+  }) {
+    return Patient(
+      name: name ?? this.name,
+      age: age ?? this.age,
+      occupation: occupation ?? this.occupation,
+      medicalRef: medicalRef ?? this.medicalRef,
+      weight: weight ?? this.weight,
+      chiefComplaint: chiefComplaint ?? this.chiefComplaint,
+      course: course ?? this.course,
+      presentedArea: presentedArea ?? this.presentedArea,
+      sessions: sessions ?? this.sessions,
+    );
+  }
 }
