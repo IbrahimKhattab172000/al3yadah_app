@@ -28,10 +28,14 @@ class Shoulder {
   String rcTearNote;
   String scapularAssistanceTest;
   String scapularRetractionTest;
+  String scapularStabilityNote;
+
   String acromioTest;
   String obrienTest;
   String passiveTest;
   String modifiedTest;
+  String obrienTestNote;
+  String treatmentNote;
 
   Shoulder({
     required this.cervicalFree,
@@ -67,6 +71,9 @@ class Shoulder {
     required this.obrienTest,
     required this.passiveTest,
     required this.modifiedTest,
+    required this.obrienTestNote,
+    required this.scapularStabilityNote,
+    required this.treatmentNote,
   });
 
   factory Shoulder.fromJson(Map<String, dynamic> json) {
@@ -104,6 +111,9 @@ class Shoulder {
       obrienTest: json['obrienTest'],
       passiveTest: json['passiveTest'],
       modifiedTest: json['modifiedTest'],
+      obrienTestNote: json['obrienTestNote'],
+      scapularStabilityNote: json['scapularStabilityNote'],
+      treatmentNote: json['treatmentNote'],
     );
   }
 
@@ -142,6 +152,9 @@ class Shoulder {
       'obrienTest': obrienTest,
       'passiveTest': passiveTest,
       'modifiedTest': modifiedTest,
+      'obrienTestNote': obrienTestNote,
+      'scapularStabilityNote': scapularStabilityNote,
+      'treatmentNote': treatmentNote,
     };
   }
 
