@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1082720907867",
+    "project_id": "al3yadah-15d2d",
+    "storage_bucket": "al3yadah-15d2d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1082720907867:android:89820fe7ee05f763b5457e",
+        "android_client_info": {
+          "package_name": "com.example.al3yadah_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtAIZTR2Qk_JwoPGLbQkcleazygOAnSuY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

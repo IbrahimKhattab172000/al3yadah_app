@@ -1,6 +1,8 @@
 import 'dart:io';
 
+import 'package:al3yadah_app/firebase_options.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -10,21 +12,24 @@ import 'my_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  if (kDebugMode) {
-    HttpOverrides.global = MyHttpOverrides();
-  }
-  await Future.value([
-    await NetworkUtils.init(),
-    await EasyLocalization.ensureInitialized(),
-    await CachingUtils.init(),
-    // await Firebase.initializeApp(),
-    // await FirebaseMessagingUtils.instance.init(),
-  ]);
-  SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-    DeviceOrientation.portraitDown,
-  ]);
+  // if (kDebugMode) {
+  //   HttpOverrides.global = MyHttpOverrides();
+  // }
+  // await Future.value([
+  //   await NetworkUtils.init(),
+  //   await EasyLocalization.ensureInitialized(),
+  //   await CachingUtils.init(),
+  //   await Firebase.initializeApp(),
+  //   // await FirebaseMessagingUtils.instance.init(),
+  // ]);
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+  //   DeviceOrientation.portraitDown,
+  // ]);
 
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     EasyLocalization(
       supportedLocales: [
