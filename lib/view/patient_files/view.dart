@@ -1,8 +1,12 @@
 import 'package:al3yadah_app/core/helpers/app_colors.dart';
+import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
 import 'package:al3yadah_app/core/models/patient.dart';
+import 'package:al3yadah_app/core/route_utils/route_utils.dart';
+import 'package:al3yadah_app/view/knee/view.dart';
 import 'package:al3yadah_app/view/new_patient/cubit.dart';
 import 'package:al3yadah_app/view/patient_files/widget/session_card.dart';
+import 'package:al3yadah_app/view/shoulder/view.dart';
 import 'package:al3yadah_app/widgets/app_app_bar.dart';
 import 'package:al3yadah_app/widgets/app_button.dart';
 import 'package:al3yadah_app/widgets/app_dialog.dart';
@@ -24,29 +28,29 @@ class PatientFilesView extends StatelessWidget {
           final cubit = NewPatientCubit.of(context);
           return Scaffold(
             appBar: AppAppBar(title: patient.name),
-            body: Expanded(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: patient.sessions.length,
-                        itemBuilder: (context, index) {
-                          return SessionCard(
-                            patient: patient,
-                            index: index,
-                          );
-                        },
-                      ),
+            body: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+              child: Column(
+                children: [
+                  Expanded(
+                    child: ListView.builder(
+                      physics: const BouncingScrollPhysics(),
+                      itemCount: patient.sessions.length,
+                      itemBuilder: (context, index) {
+                        return SessionCard(
+                          patient: patient,
+                          index: index,
+                        );
+                      },
                     ),
-                    AppButton(
+                  ),
+                  AppButton(
+                    title: "Add session",
+                    onTap: () => AppDialog.show(
                       title: "Add session",
-                      onTap: () => AppDialog.show(
-                        title: "",
-                        dismissible: true,
+                      dismissible: true,
+                      child: Padding(
+                        padding: const EdgeInsets.all(30),
                         child: Column(
                           children: [
                             AppDropDownMenu(
@@ -57,15 +61,40 @@ class PatientFilesView extends StatelessWidget {
                                 cubit.selectArea(area: value.toString());
                                 print(cubit.selectedArea);
                               },
+                              fillColor: AppColors.primary.withOpacity(0.1),
+                            ),
+                            SizedBox(height: 50.height),
+                            AppButton(
+                              title: "Next",
+                              color: AppColors.primary,
+                              onTap: () {
+                                switch (cubit.selectedArea) {
+                                  case 'Shoulder':
+                                    RouteUtils.navigateTo(ShoulderView());
+                                  case 'Knee':
+                                    RouteUtils.navigateTo(KneeView());
+
+                                  // case 'Ankle':
+                                  //    AnklePage();
+                                  // case 'Cervical':
+                                  //    CervicalPage();
+                                  // case 'Lumbar':
+                                  //    LumbarPage();
+                                  // case 'Elbow':
+                                  //    ElbowPage();
+                                  // default:
+                                  //   return DefaultPage();
+                                }
+                              },
                             ),
                           ],
                         ),
                       ),
-                      titleColor: AppColors.white,
                     ),
-                    SizedBox(height: Utils.bottomDevicePadding),
-                  ],
-                ),
+                    titleColor: AppColors.white,
+                  ),
+                  SizedBox(height: Utils.bottomDevicePadding),
+                ],
               ),
             ),
           );

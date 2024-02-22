@@ -22,25 +22,24 @@ class _Buttons extends StatelessWidget {
           onTap: () async {
             await cubit.gatherFirstPageDataAndAdvance();
             print(cubit.patient);
-            RouteUtils.navigateTo(ShoulderView());
 
-            // switch (cubit.selectedArea) {
-            //   case 'Shoulder':
-            //     RouteUtils.navigateTo(ShoulderView());
-            //   case 'Knee':
-            //     RouteUtils.navigateTo(KneeView());
+            switch (cubit.selectedArea) {
+              case 'Shoulder':
+                RouteUtils.navigateTo(ShoulderView());
+              case 'Knee':
+                RouteUtils.navigateTo(KneeView());
 
-            // case 'Ankle':
-            //    AnklePage();
-            // case 'Cervical':
-            //    CervicalPage();
-            // case 'Lumbar':
-            //    LumbarPage();
-            // case 'Elbow':
-            //    ElbowPage();
-            // default:
-            //   return DefaultPage();
-            // }
+              // case 'Ankle':
+              //    AnklePage();
+              // case 'Cervical':
+              //    CervicalPage();
+              // case 'Lumbar':
+              //    LumbarPage();
+              // case 'Elbow':
+              //    ElbowPage();
+              // default:
+              //   return DefaultPage();
+            }
           },
         ),
       ],
