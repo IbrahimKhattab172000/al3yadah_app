@@ -1,7 +1,7 @@
-part of 'cubit.dart';
+// part of 'cubit.dart';
 
-abstract class ShoulderStates {}
+// abstract class ShoulderStates {}
 
-class ShoulderInit extends ShoulderStates {}
+// class ShoulderInit extends ShoulderStates {}
 
-class ShoulderLoading extends ShoulderStates {}
+// class ShoulderLoading extends ShoulderStates {}

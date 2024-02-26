@@ -70,7 +70,7 @@ class PatientFilesView extends StatelessWidget {
                               onTap: () {
                                 switch (cubit.selectedArea) {
                                   case 'Shoulder':
-                                    RouteUtils.navigateTo(ShoulderView());
+                                  // RouteUtils.navigateTo(ShoulderView());
                                   case 'Knee':
                                     RouteUtils.navigateTo(KneeView());
 
