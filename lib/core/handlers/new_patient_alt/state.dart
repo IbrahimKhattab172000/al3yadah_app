@@ -26,18 +26,27 @@ final class NewPatientAltShoulder extends NewPatientAltState {
   final PatientGeneral patientGeneral;
   final Shoulder? shoulder;
 
+  final int currentStep;
+
+  int get totalSteps => 5;
+  bool get isLast => currentStep == 5;
+  bool get isFirst => currentStep == 1;
+
   NewPatientAltShoulder({
     required this.patientGeneral,
+    required this.currentStep,
     this.shoulder,
   });
 
   NewPatientAltShoulder copyWith({
     PatientGeneral? patientGeneral,
     Shoulder? shoulder,
+    int? currentStep,
   }) {
     return NewPatientAltShoulder(
       patientGeneral: patientGeneral ?? this.patientGeneral,
       shoulder: shoulder ?? this.shoulder,
+      currentStep: currentStep ?? this.currentStep,
     );
   }
 }
