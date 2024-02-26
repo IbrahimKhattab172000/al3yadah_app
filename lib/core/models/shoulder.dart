@@ -1,79 +1,82 @@
 class Shoulder {
-  bool cervicalFree;
-  String history;
-  String suspectDiagnose;
-  String place;
-  String vas;
-  String palpation;
-  String flexionNote;
-  int flexionNum;
-  String extensionNote;
-  int extensionNum;
-  String abdNote;
-  int abdNum;
-  String erNote;
-  int erNum;
-  String irNote;
-  int irNum;
-  String hawkinsTest;
-  String neerTest;
-  String posterior;
-  String impingementNote;
-  String apprehension;
-  String relocation;
-  String instabilityNote;
-  String bellyOff;
-  String irls;
-  String erls;
-  String rcTearNote;
-  String scapularAssistanceTest;
-  String scapularRetractionTest;
-  String scapularStabilityNote;
-
-  String acromioTest;
-  String obrienTest;
-  String passiveTest;
-  String modifiedTest;
-  String obrienTestNote;
-  String treatmentNote;
+  bool? cervicalFree;
+  String? history;
+  String? suspectDiagnose;
+  String? place;
+  String? vas;
+  String? palpation;
+  String? flexionNote;
+  int? flexionNum;
+  String? extensionNote;
+  int? extensionNum;
+  String? abdNote;
+  int? abdNum;
+  String? addNote;
+  int? addNum;
+  String? erNote;
+  int? erNum;
+  String? irNote;
+  int? irNum;
+  String? hawkinsTest;
+  String? neerTest;
+  String? posterior;
+  String? impingementNote;
+  String? apprehension;
+  String? relocation;
+  String? instabilityNote;
+  String? bellyOff;
+  String? irls;
+  String? erls;
+  String? rcTearNote;
+  String? scapularAssistanceTest;
+  String? scapularRetractionTest;
+  String? scapularStabilityNote;
+  String? acromioTest;
+  String? obrienTest;
+  String? passiveTest;
+  String? modifiedTest;
+  String? obrienTestNote;
+  String? treatmentNote;
 
   Shoulder({
-    required this.cervicalFree,
-    required this.history,
-    required this.suspectDiagnose,
-    required this.place,
-    required this.vas,
-    required this.palpation,
-    required this.flexionNote,
-    required this.flexionNum,
-    required this.extensionNote,
-    required this.extensionNum,
-    required this.abdNote,
-    required this.abdNum,
-    required this.erNote,
-    required this.erNum,
-    required this.irNote,
-    required this.irNum,
-    required this.hawkinsTest,
-    required this.neerTest,
-    required this.posterior,
-    required this.impingementNote,
-    required this.apprehension,
-    required this.relocation,
-    required this.instabilityNote,
-    required this.bellyOff,
-    required this.irls,
-    required this.erls,
-    required this.rcTearNote,
-    required this.scapularAssistanceTest,
-    required this.scapularRetractionTest,
-    required this.acromioTest,
-    required this.obrienTest,
-    required this.passiveTest,
-    required this.modifiedTest,
-    required this.obrienTestNote,
-    required this.scapularStabilityNote,
-    required this.treatmentNote,
+    this.cervicalFree,
+    this.history,
+    this.suspectDiagnose,
+    this.place,
+    this.vas,
+    this.palpation,
+    this.flexionNote,
+    this.flexionNum,
+    this.extensionNote,
+    this.extensionNum,
+    this.abdNote,
+    this.abdNum,
+    this.addNote,
+    this.addNum,
+    this.erNote,
+    this.erNum,
+    this.irNote,
+    this.irNum,
+    this.hawkinsTest,
+    this.neerTest,
+    this.posterior,
+    this.impingementNote,
+    this.apprehension,
+    this.relocation,
+    this.instabilityNote,
+    this.bellyOff,
+    this.irls,
+    this.erls,
+    this.rcTearNote,
+    this.scapularAssistanceTest,
+    this.scapularRetractionTest,
+    this.acromioTest,
+    this.obrienTest,
+    this.passiveTest,
+    this.modifiedTest,
+    this.obrienTestNote,
+    this.scapularStabilityNote,
+    this.treatmentNote,
   });
 
   factory Shoulder.fromJson(Map<String, dynamic> json) {
