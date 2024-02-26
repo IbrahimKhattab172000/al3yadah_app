@@ -3,7 +3,9 @@ import 'package:al3yadah_app/core/helpers/app_colors.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
 import 'package:al3yadah_app/core/helpers/validator.dart';
+import 'package:al3yadah_app/core/repository/new_patient.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
+import 'package:al3yadah_app/view/new_patient_alt/shoulder/view.dart';
 import 'package:al3yadah_app/widgets/app/app_stepper.dart';
 import 'package:al3yadah_app/widgets/app_app_bar.dart';
 import 'package:al3yadah_app/widgets/app_button.dart';
@@ -18,7 +20,8 @@ class NewPatientAlt extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => NewPatientAltHandler(),
+      create: (context) =>
+          NewPatientAltHandler(newPatientRepository: NewPatientRepository()),
       child: Scaffold(
         appBar: AppAppBar(title: "New Patient"),
         body: Padding(
@@ -34,7 +37,9 @@ class NewPatientAlt extends StatelessWidget {
                     } else if (state is NewPatientAltShoulder) {
                       return NewPatientShoulderWidget(state: state);
                     } else {
-                      return SizedBox();
+                      return const SizedBox(
+                        child: Text("nooo state"),
+                      );
                     }
                   },
                 ),
@@ -72,11 +77,20 @@ class BackAndForthAfterSelectingThePresentedAreaButtons
       children: [
         AppButton.outline(
           title: "Back",
-          onTap: () => RouteUtils.pop(),
+          onTap: () {
+            if (state is NewPatientAltGeneralInfo) {
+              RouteUtils.pop();
+            } else if (state is NewPatientAltShoulder) {
+              context.read<NewPatientAltHandler>().previousStepShoulder();
+            }
+          },
           titleColor: AppColors.primary,
         ),
         AppButton(
-          title: "Next",
+          title: state is NewPatientAltShoulder &&
+                  (state as NewPatientAltShoulder).isLast
+              ? "Submit"
+              : "Next",
           color: AppColors.primary,
           onTap: () {
             if (state is NewPatientAltGeneralInfo) {
@@ -87,9 +101,11 @@ class BackAndForthAfterSelectingThePresentedAreaButtons
                         .patientGeneral
                         .presentedArea,
                   );
-            } else {
-              //TODO: add the method in the handler
-              //TODO:that handles the process of moving to the next page in the selected presented area
+            } else if (state is NewPatientAltShoulder) {
+              print((state as NewPatientAltShoulder).shoulder!.vas);
+              print((state as NewPatientAltShoulder).shoulder!.cervicalFree);
+
+              context.read<NewPatientAltHandler>().nextStepShoulder();
             }
           },
         ),
@@ -173,7 +189,7 @@ class NewPatientGeneralInfoWidget extends StatelessWidget {
   }
 }
 
-Widget _spacer() => SizedBox(height: 16.0);
+Widget _spacer() => const SizedBox(height: 16.0);
 
 class NewPatientShoulderWidget extends StatelessWidget {
   final NewPatientAltShoulder state;
@@ -184,25 +200,16 @@ class NewPatientShoulderWidget extends StatelessWidget {
     return Column(
       children: [
         AppStepper(
-          currentStep: context.read<NewPatientAltHandler>().currentStep,
-          totalSteps: context.read<NewPatientAltHandler>().totalSteps,
+          currentStep: state.currentStep,
+          totalSteps: state.totalSteps,
         ),
-        Expanded(
-          child: SingleChildScrollView(
-            physics: BouncingScrollPhysics(),
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Column(
-                children: [
-                  SizedBox(height: 24.height),
-                  _CurrentShoulderTestPage(),
-                  SizedBox(height: 34.height),
-                  // _Buttons(),
-                  SizedBox(height: Utils.bottomDevicePadding),
-                ],
-              ),
-            ),
-          ),
+        Column(
+          children: [
+            SizedBox(height: 24.height),
+            ShoulderContentView(state: state),
+            // _Buttons(),
+            SizedBox(height: Utils.bottomDevicePadding),
+          ],
         ),
       ],
     );
