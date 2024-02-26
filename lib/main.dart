@@ -7,7 +7,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'core/caching_utils/caching_utils.dart';
-import 'core/network_utils/network_utils.dart';
 import 'my_app.dart';
 
 void main() async {
@@ -44,12 +43,12 @@ void main() async {
   );
 }
 
-// TODO: Remove this code at production
-class MyHttpOverrides extends HttpOverrides {
-  @override
-  HttpClient createHttpClient(SecurityContext? context) {
-    return super.createHttpClient(context)
-      ..badCertificateCallback =
-          (X509Certificate cert, String host, int port) => true;
-  }
-}
+///// TODO: Remove this code at production
+// class MyHttpOverrides extends HttpOverrides {
+//   @override
+//   HttpClient createHttpClient(SecurityContext? context) {
+//     return super.createHttpClient(context)
+//       ..badCertificateCallback =
+//           (X509Certificate cert, String host, int port) => true;
+//   }
+// }

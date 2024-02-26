@@ -56,7 +56,7 @@ class PatientFilesView extends StatelessWidget {
                             AppDropDownMenu(
                               label: "Presented Area",
                               hint: 'select',
-                              items: cubit.items,
+                              items: cubit.areas,
                               onChange: (value) {
                                 cubit.selectArea(area: value.toString());
                                 print(cubit.selectedArea);

@@ -4,6 +4,7 @@ import 'package:al3yadah_app/core/helpers/app_colors.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
+import 'package:al3yadah_app/view/new_patient/cubit.dart';
 import 'package:al3yadah_app/view/shoulder/cubit.dart';
 import 'package:al3yadah_app/view/success/view.dart';
 import 'package:al3yadah_app/widgets/app/app_double_form_field.dart';
@@ -11,6 +12,7 @@ import 'package:al3yadah_app/widgets/app/app_toggle.dart';
 import 'package:al3yadah_app/widgets/app_button.dart';
 import 'package:al3yadah_app/widgets/app_text.dart';
 import 'package:al3yadah_app/widgets/app_text_field.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:al3yadah_app/widgets/app/app_stepper.dart';

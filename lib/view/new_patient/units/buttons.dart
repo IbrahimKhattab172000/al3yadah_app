@@ -20,14 +20,23 @@ class _Buttons extends StatelessWidget {
           title: "Next",
           color: AppColors.primary,
           onTap: () async {
-            await cubit.gatherFirstPageDataAndAdvance();
-            print(cubit.patient);
-
             switch (cubit.selectedArea) {
               case 'Shoulder':
-                RouteUtils.navigateTo(ShoulderView());
+                if (cubit.formKey.currentState!.validate()) {
+                  cubit.formKey.currentState!.save();
+                  cubit.submitNewPatient();
+                  RouteUtils.navigateTo(ShoulderView());
+                }
+                break;
+
               case 'Knee':
                 RouteUtils.navigateTo(KneeView());
+                break;
+
+              // Add cases for other areas
+
+              default:
+                return;
 
               // case 'Ankle':
               //    AnklePage();

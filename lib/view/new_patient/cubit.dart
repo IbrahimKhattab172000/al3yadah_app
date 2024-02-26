@@ -1,4 +1,8 @@
+import 'package:al3yadah_app/core/models/new_patient.dart';
 import 'package:al3yadah_app/core/models/patient.dart';
+import 'package:al3yadah_app/core/models/sessions.dart';
+import 'package:al3yadah_app/core/models/shoulder.dart';
+import 'package:al3yadah_app/core/repository/new_patient.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -13,13 +17,14 @@ class NewPatientCubit extends Cubit<NewPatientStates> {
 
   static NewPatientCubit of(context) => BlocProvider.of(context);
 
-  TextEditingController nameController = TextEditingController();
-  TextEditingController ageController = TextEditingController();
-  TextEditingController occupationController = TextEditingController();
-  TextEditingController medicalRefController = TextEditingController();
-  TextEditingController weightController = TextEditingController();
-  TextEditingController chiefComplaintController = TextEditingController();
-  TextEditingController courseController = TextEditingController();
+  String? name;
+  int? age;
+  String? occupation;
+  String? medicalRef;
+  int? weight;
+  String? chiefComplaint;
+  String? course;
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
 
   Patient patient = Patient(
     name: '',
@@ -30,13 +35,56 @@ class NewPatientCubit extends Cubit<NewPatientStates> {
     chiefComplaint: '',
     course: '',
     presentedArea: '',
-    sessions: [],
+    sessions: [
+      Session(
+        id: 1,
+        date: DateTime.now(),
+        shoulder: Shoulder(
+          cervicalFree: true,
+          history: "history",
+          suspectDiagnose: "suspectDiagnose",
+          place: "place",
+          vas: "vas",
+          palpation: "palpation",
+          flexionNote: "flexionNote",
+          flexionNum: 55,
+          extensionNote: "extensionNote",
+          extensionNum: 22,
+          abdNote: "abdNote",
+          abdNum: 11,
+          erNote: "erNote",
+          erNum: 11,
+          irNote: "irNote",
+          irNum: 4,
+          hawkinsTest: "hawkinsTest",
+          neerTest: "neerTest",
+          posterior: "posterior",
+          impingementNote: "impingementNote",
+          apprehension: "apprehension",
+          relocation: "relocation",
+          instabilityNote: "instabilityNote",
+          bellyOff: "bellyOff",
+          irls: "irls",
+          erls: "erls",
+          rcTearNote: "rcTearNote",
+          scapularAssistanceTest: "scapularAssistanceTest",
+          scapularRetractionTest: "scapularRetractionTest",
+          acromioTest: "acromioTest",
+          obrienTest: "obrienTest",
+          passiveTest: "passiveTest",
+          modifiedTest: "modifiedTest",
+          obrienTestNote: "obrienTestNote",
+          scapularStabilityNote: "scapularStabilityNote",
+          treatmentNote: "treatmentNote",
+        ),
+      ),
+    ],
   );
 
-  late String selectedArea;
+  String? selectedArea;
 
   // List of areas
-  List<String> items = [
+  List<String> areas = [
     'Shoulder',
     'Knee',
     'Ankle',
@@ -61,15 +109,7 @@ class NewPatientCubit extends Cubit<NewPatientStates> {
   }
 
   // Method to set the gathered data for the first page
-  void setFirstPageData({
-    required String name,
-    required int age,
-    required String occupation,
-    required String medicalRef,
-    required int weight,
-    required String chiefComplaint,
-    required String course,
-  }) {
+  void setFirstPageData() {
     patient = patient.copyWith(
       name: name,
       age: age,
@@ -81,30 +121,7 @@ class NewPatientCubit extends Cubit<NewPatientStates> {
     );
   }
 
-  // Method to gather data for the first page and advance to the next step
-  gatherFirstPageDataAndAdvance() {
-    // Retrieve data from controllers
-    String name = nameController.text;
-    int age = int.parse(ageController.text); // Assuming age is an integer
-    String occupation = occupationController.text;
-    String medicalRef = medicalRefController.text;
-    int weight =
-        int.parse(weightController.text); // Assuming weight is an integer
-    String chiefComplaint = chiefComplaintController.text;
-    String course = courseController.text;
-
-    // Set the gathered data in the patient object
-    setFirstPageData(
-      name: name,
-      age: age,
-      occupation: occupation,
-      medicalRef: medicalRef,
-      weight: weight,
-      chiefComplaint: chiefComplaint,
-      course: course,
-    );
-
-    // Advance to the next step
-    _emit(NewPatientDataLoaded());
+  submitNewPatient() async {
+    NewPatientRepository().addPatient(patient);
   }
 }

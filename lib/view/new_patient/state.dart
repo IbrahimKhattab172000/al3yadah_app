@@ -6,11 +6,15 @@ class NewPatientInit extends NewPatientStates {}
 
 class NewPatientLoading extends NewPatientStates {}
 
-class NewPatientDataLoaded extends NewPatientStates {}
+// class NewPatientData extends NewPatientStates {
+//   final Patient patient;
+// }
 
-// New state for when there is an error in the gathered data
-class NewPatientDataError extends NewPatientStates {
-  final String errorMessage;
-
-  NewPatientDataError(this.errorMessage);
+enum PresentedArea {
+  Shoulder,
+  Knee,
+  Ankle,
+  Cervical,
+  Lumbar,
+  Elbow,
 }
