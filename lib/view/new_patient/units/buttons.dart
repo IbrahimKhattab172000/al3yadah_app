@@ -25,7 +25,7 @@ class _Buttons extends StatelessWidget {
                 if (cubit.formKey.currentState!.validate()) {
                   cubit.formKey.currentState!.save();
                   cubit.submitNewPatient();
-                  RouteUtils.navigateTo(ShoulderView());
+                  // RouteUtils.navigateTo(ShoulderView());
                 }
                 break;
 
