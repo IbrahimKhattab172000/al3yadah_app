@@ -6,10 +6,12 @@ import 'package:flutter/material.dart';
 class AppToggle extends StatefulWidget {
   final List<String> optionNames;
   final String label;
+  final Function(int)? onOptionSelected;
 
   AppToggle({
     required this.optionNames,
     required this.label,
+    this.onOptionSelected,
   });
 
   @override
@@ -43,6 +45,10 @@ class _AppToggleState extends State<AppToggle> {
                   setState(() {
                     selectedOptionIndex = index;
                   });
+
+                  if (widget.onOptionSelected != null) {
+                    widget.onOptionSelected!(index);
+                  }
                 },
                 child: Row(
                   children: [
