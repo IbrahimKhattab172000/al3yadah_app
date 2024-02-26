@@ -122,6 +122,6 @@ class NewPatientCubit extends Cubit<NewPatientStates> {
   }
 
   submitNewPatient() async {
-    NewPatientRepository().addPatient(patient);
+    NewPatientRepository().addPatient(patient: patient);
   }
 }

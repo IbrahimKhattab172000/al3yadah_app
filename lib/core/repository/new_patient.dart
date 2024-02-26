@@ -5,7 +5,7 @@ class NewPatientRepository {
   final CollectionReference _patientsCollection =
       FirebaseFirestore.instance.collection('patients');
 
-  Future<void> addPatient(Patient patient) async {
+  Future<void> addPatient({required Patient patient}) async {
     try {
       await _patientsCollection.add(patient.toJson());
     } catch (e) {
