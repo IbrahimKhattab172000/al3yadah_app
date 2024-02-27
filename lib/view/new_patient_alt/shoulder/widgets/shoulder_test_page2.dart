@@ -5,6 +5,8 @@ class _ShoulderTestPage2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final handler = context.read<NewPatientAltHandler>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -18,84 +20,60 @@ class _ShoulderTestPage2 extends StatelessWidget {
         AppDoubleFormField(
           label: "- Flexion",
           onNoteChanged: (value) {
-            context
-                .read<NewPatientAltHandler>()
-                .updateShoulderValues(flexionNote: value);
+            handler.updateShoulderValues(flexionNote: value);
           },
           onNumberChanged: (value) {
-            context
-                .read<NewPatientAltHandler>()
-                .updateShoulderValues(flexionNum: value);
+            handler.updateShoulderValues(flexionNum: value);
           },
         ),
         _spacer(),
         AppDoubleFormField(
           label: "- Extension",
           onNoteChanged: (value) {
-            context
-                .read<NewPatientAltHandler>()
-                .updateShoulderValues(extensionNote: value);
+            handler.updateShoulderValues(extensionNote: value);
           },
           onNumberChanged: (value) {
-            context
-                .read<NewPatientAltHandler>()
-                .updateShoulderValues(extensionNum: value);
+            handler.updateShoulderValues(extensionNum: value);
           },
         ),
         _spacer(),
         AppDoubleFormField(
           label: "- ABD",
           onNoteChanged: (value) {
-            context
-                .read<NewPatientAltHandler>()
-                .updateShoulderValues(abdNote: value);
+            handler.updateShoulderValues(abdNote: value);
           },
           onNumberChanged: (value) {
-            context
-                .read<NewPatientAltHandler>()
-                .updateShoulderValues(abdNum: value);
+            handler.updateShoulderValues(abdNum: value);
           },
         ),
         _spacer(),
         AppDoubleFormField(
           label: "- Add",
           onNoteChanged: (value) {
-            context
-                .read<NewPatientAltHandler>()
-                .updateShoulderValues(addNote: value);
+            handler.updateShoulderValues(addNote: value);
           },
           onNumberChanged: (value) {
-            context
-                .read<NewPatientAltHandler>()
-                .updateShoulderValues(addNum: value);
+            handler.updateShoulderValues(addNum: value);
           },
         ),
         _spacer(),
         AppDoubleFormField(
           label: "- ER",
           onNoteChanged: (value) {
-            context
-                .read<NewPatientAltHandler>()
-                .updateShoulderValues(erNote: value);
+            handler.updateShoulderValues(erNote: value);
           },
           onNumberChanged: (value) {
-            context
-                .read<NewPatientAltHandler>()
-                .updateShoulderValues(erNum: value);
+            handler.updateShoulderValues(erNum: value);
           },
         ),
         _spacer(),
         AppDoubleFormField(
           label: "- IR",
           onNoteChanged: (value) {
-            context
-                .read<NewPatientAltHandler>()
-                .updateShoulderValues(irNote: value);
+            handler.updateShoulderValues(irNote: value);
           },
           onNumberChanged: (value) {
-            context
-                .read<NewPatientAltHandler>()
-                .updateShoulderValues(irNum: value);
+            handler.updateShoulderValues(irNum: value);
           },
         ),
       ],

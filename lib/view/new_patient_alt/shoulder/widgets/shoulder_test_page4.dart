@@ -5,6 +5,8 @@ class _ShoulderTestPage4 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final handler = context.read<NewPatientAltHandler>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -60,21 +62,44 @@ class _ShoulderTestPage4 extends StatelessWidget {
               AppToggle(
                 optionNames: const ['+ve', '-ve', 'not done'],
                 label: "Belly off",
+                onOptionSelected: (int selectedIndex) {
+                  handler.updateShoulderValues(
+                    bellyOff: handler.selectedIndexInterpretation(
+                      selectedIndex: selectedIndex,
+                    ),
+                  );
+                },
               ),
               _spacer(),
               AppToggle(
                 optionNames: const ['+ve', '-ve', 'not done'],
                 label: "IRLS",
+                onOptionSelected: (int selectedIndex) {
+                  handler.updateShoulderValues(
+                    irls: handler.selectedIndexInterpretation(
+                      selectedIndex: selectedIndex,
+                    ),
+                  );
+                },
               ),
               _spacer(),
               AppToggle(
                 optionNames: const ['+ve', '-ve', 'not done'],
                 label: "ERLS",
+                onOptionSelected: (int selectedIndex) {
+                  handler.updateShoulderValues(
+                    erls: handler.selectedIndexInterpretation(
+                      selectedIndex: selectedIndex,
+                    ),
+                  );
+                },
               ),
               _spacer(),
               AppTextField(
                 hint: "note",
                 fillColor: AppColors.background,
+                onChanged: (value) =>
+                    handler.updateShoulderValues(rcTearNote: value),
               ),
             ],
           ),
@@ -131,16 +156,32 @@ class _ShoulderTestPage4 extends StatelessWidget {
               AppToggle(
                 optionNames: const ['+ve', '-ve', 'not done'],
                 label: "Scapular assistance test",
+                onOptionSelected: (int selectedIndex) {
+                  handler.updateShoulderValues(
+                    scapularAssistanceTest: handler.selectedIndexInterpretation(
+                      selectedIndex: selectedIndex,
+                    ),
+                  );
+                },
               ),
               _spacer(),
               AppToggle(
                 optionNames: const ['+ve', '-ve', 'not done'],
                 label: "Scapular retraction test",
+                onOptionSelected: (int selectedIndex) {
+                  handler.updateShoulderValues(
+                    scapularRetractionTest: handler.selectedIndexInterpretation(
+                      selectedIndex: selectedIndex,
+                    ),
+                  );
+                },
               ),
               _spacer(),
               AppTextField(
                 hint: "note",
                 fillColor: AppColors.background,
+                onChanged: (value) =>
+                    handler.updateShoulderValues(scapularStabilityNote: value),
               ),
             ],
           ),
@@ -149,6 +190,13 @@ class _ShoulderTestPage4 extends StatelessWidget {
         AppToggle(
           optionNames: const ['+ve', '-ve', 'not done'],
           label: "Acromio clavicular cross body adducation test",
+          onOptionSelected: (int selectedIndex) {
+            handler.updateShoulderValues(
+              acromioTest: handler.selectedIndexInterpretation(
+                selectedIndex: selectedIndex,
+              ),
+            );
+          },
         ),
         _spacer(),
       ],

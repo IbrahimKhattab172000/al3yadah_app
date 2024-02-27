@@ -6,6 +6,7 @@ class ShoulderTestPage1 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final handler = context.read<NewPatientAltHandler>();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -14,9 +15,7 @@ class ShoulderTestPage1 extends StatelessWidget {
           label: 'Cervical exam is free',
           onOptionSelected: (int selectedIndex) {
             bool cervicalFree = selectedIndex == 0;
-            context
-                .read<NewPatientAltHandler>()
-                .updateShoulderValues(cervicalFree: cervicalFree);
+            handler.updateShoulderValues(cervicalFree: cervicalFree);
             print('Selected index: $selectedIndex' + "free? $cervicalFree");
           },
         ),
@@ -30,17 +29,15 @@ class ShoulderTestPage1 extends StatelessWidget {
         SizedBox(height: 12.height),
         AppTextField(
           hint: "note",
-          onChanged: (value) => context
-              .read<NewPatientAltHandler>()
-              .updateShoulderValues(history: value),
+          validator: Validator.empty,
+          onChanged: (value) => handler.updateShoulderValues(history: value),
         ),
         _spacer(),
         AppTextField(
           label: "Suspect diagnose",
           hint: "note",
-          onChanged: (value) => context
-              .read<NewPatientAltHandler>()
-              .updateShoulderValues(suspectDiagnose: value),
+          onChanged: (value) =>
+              handler.updateShoulderValues(suspectDiagnose: value),
         ),
         SizedBox(height: 24.height),
         AppText(
@@ -53,25 +50,22 @@ class ShoulderTestPage1 extends StatelessWidget {
         AppTextField(
           label: "-  Place",
           hint: "note",
-          onChanged: (value) => context
-              .read<NewPatientAltHandler>()
-              .updateShoulderValues(place: value),
+          onChanged: (value) => handler.updateShoulderValues(place: value),
+          validator: Validator.empty,
         ),
         _spacer(),
         AppTextField(
           label: "-  VAS",
           hint: "note",
-          onChanged: (value) => context
-              .read<NewPatientAltHandler>()
-              .updateShoulderValues(vas: value),
+          onChanged: (value) => handler.updateShoulderValues(vas: value),
+          validator: Validator.empty,
         ),
         _spacer(),
         AppTextField(
           label: "Palpation",
           hint: "note",
-          onChanged: (value) => context
-              .read<NewPatientAltHandler>()
-              .updateShoulderValues(palpation: value),
+          onChanged: (value) => handler.updateShoulderValues(palpation: value),
+          validator: Validator.empty,
         ),
       ],
     );

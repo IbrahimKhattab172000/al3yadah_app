@@ -5,6 +5,8 @@ class _ShoulderTestPage3 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final handler = context.read<NewPatientAltHandler>();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -67,26 +69,43 @@ class _ShoulderTestPage3 extends StatelessWidget {
                 optionNames: const ['+ve', '-ve', 'not done'],
                 label: "Hawkins test",
                 onOptionSelected: (int selectedIndex) {
-                  // Handle the selected index here
-
-                  print('Selected index: $selectedIndex');
-                  // You can call your handler or update your state here
+                  handler.updateShoulderValues(
+                    hawkinsTest: handler.selectedIndexInterpretation(
+                      selectedIndex: selectedIndex,
+                    ),
+                  );
                 },
               ),
               _spacer(),
               AppToggle(
                 optionNames: const ['+ve', '-ve', 'not done'],
                 label: "Neer test",
+                onOptionSelected: (int selectedIndex) {
+                  handler.updateShoulderValues(
+                    neerTest: handler.selectedIndexInterpretation(
+                      selectedIndex: selectedIndex,
+                    ),
+                  );
+                },
               ),
               _spacer(),
               AppToggle(
                 optionNames: const ['+ve', '-ve', 'not done'],
                 label: "Posterior internal impingement",
+                onOptionSelected: (int selectedIndex) {
+                  handler.updateShoulderValues(
+                    posterior: handler.selectedIndexInterpretation(
+                      selectedIndex: selectedIndex,
+                    ),
+                  );
+                },
               ),
               _spacer(),
               AppTextField(
                 hint: "note",
                 fillColor: AppColors.background,
+                onChanged: (value) =>
+                    handler.updateShoulderValues(impingementNote: value),
               ),
             ],
           ),
@@ -143,16 +162,32 @@ class _ShoulderTestPage3 extends StatelessWidget {
               AppToggle(
                 optionNames: const ['+ve', '-ve', 'not done'],
                 label: "Apprehension",
+                onOptionSelected: (int selectedIndex) {
+                  handler.updateShoulderValues(
+                    apprehension: handler.selectedIndexInterpretation(
+                      selectedIndex: selectedIndex,
+                    ),
+                  );
+                },
               ),
               _spacer(),
               AppToggle(
                 optionNames: const ['+ve', '-ve', 'not done'],
                 label: "Relocation",
+                onOptionSelected: (int selectedIndex) {
+                  handler.updateShoulderValues(
+                    relocation: handler.selectedIndexInterpretation(
+                      selectedIndex: selectedIndex,
+                    ),
+                  );
+                },
               ),
               _spacer(),
               AppTextField(
                 hint: "note",
                 fillColor: AppColors.background,
+                onChanged: (value) =>
+                    handler.updateShoulderValues(instabilityNote: value),
               ),
             ],
           ),
