@@ -1,7 +1,7 @@
 import 'package:al3yadah_app/core/handlers/new_patient_alt/handler.dart';
 import 'package:al3yadah_app/core/helpers/app_colors.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
-import 'package:al3yadah_app/core/models/shoulder.dart';
+import 'package:al3yadah_app/core/helpers/validator.dart';
 import 'package:al3yadah_app/widgets/app/app_double_form_field.dart';
 import 'package:al3yadah_app/widgets/app/app_toggle.dart';
 import 'package:al3yadah_app/widgets/app_text.dart';
