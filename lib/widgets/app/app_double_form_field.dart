@@ -1,3 +1,4 @@
+import 'package:al3yadah_app/core/helpers/validator.dart';
 import 'package:flutter/material.dart';
 import 'package:al3yadah_app/core/helpers/app_colors.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
@@ -39,6 +40,7 @@ class AppDoubleFormField extends StatelessWidget {
                 hint: "number",
                 inputType: TextInputType.number,
                 onChanged: (value) => onNumberChanged(int.parse(value)),
+                validator: Validator.empty,
               ),
             ),
             SizedBox(width: 8.width),
@@ -47,6 +49,7 @@ class AppDoubleFormField extends StatelessWidget {
               child: AppTextField(
                 hint: "note",
                 onChanged: (value) => onNoteChanged(value),
+                validator: Validator.empty,
               ),
             ),
           ],
