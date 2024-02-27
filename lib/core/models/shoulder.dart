@@ -134,6 +134,8 @@ class Shoulder {
       'extensionNum': extensionNum,
       'abdNote': abdNote,
       'abdNum': abdNum,
+      'addNote': addNote,
+      'addNum': addNum,
       'erNote': erNote,
       'erNum': erNum,
       'irNote': irNote,
@@ -151,17 +153,13 @@ class Shoulder {
       'rcTearNote': rcTearNote,
       'scapularAssistanceTest': scapularAssistanceTest,
       'scapularRetractionTest': scapularRetractionTest,
+      'scapularStabilityNote': scapularStabilityNote,
       'acromioTest': acromioTest,
       'obrienTest': obrienTest,
       'passiveTest': passiveTest,
       'modifiedTest': modifiedTest,
       'obrienTestNote': obrienTestNote,
-      'scapularStabilityNote': scapularStabilityNote,
       'treatmentNote': treatmentNote,
     };
   }
-
-  toMap() {}
-
-  static fromMap(Map<String, dynamic> map) {}
 }
