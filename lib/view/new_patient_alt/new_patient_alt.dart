@@ -102,8 +102,18 @@ class BackAndForthAfterSelectingThePresentedAreaButtons
                         .presentedArea,
                   );
             } else if (state is NewPatientAltShoulder) {
-              print((state as NewPatientAltShoulder).shoulder!.vas);
-              print((state as NewPatientAltShoulder).shoulder!.cervicalFree);
+              // print((state as NewPatientAltShoulder).shoulder!.vas ?? "");
+              // print((state as NewPatientAltShoulder).shoulder!.cervicalFree ??
+              //     "");
+              // print((state as NewPatientAltShoulder).shoulder!.extensionNote ??
+              //     "");
+              // print(
+              //     (state as NewPatientAltShoulder).shoulder!.instabilityNote ??
+              //         "");
+              // print(
+              //     (state as NewPatientAltShoulder).shoulder!.acromioTest ?? "");
+              // print((state as NewPatientAltShoulder).shoulder!.treatmentNote ??
+              //     "");
 
               context.read<NewPatientAltHandler>().nextStepShoulder();
             }

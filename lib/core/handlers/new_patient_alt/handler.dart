@@ -1,4 +1,6 @@
+import 'package:al3yadah_app/core/models/patient.dart';
 import 'package:al3yadah_app/core/models/patient_general.dart';
+import 'package:al3yadah_app/core/models/sessions.dart';
 import 'package:al3yadah_app/core/models/shoulder.dart';
 import 'package:al3yadah_app/core/repository/new_patient.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
@@ -223,6 +225,36 @@ class NewPatientAltHandler extends Cubit<NewPatientAltState> {
   }
 
   submitNewPatient() async {
-    // newPatientRepository.addPatient(patient: Patient);
+    final previousState = (state as NewPatientAltShoulder);
+
+    emit(
+      NewPatientAltSubmit(
+          patientGeneral: previousState.patientGeneral,
+          shoulder: previousState.shoulder!),
+    );
+
+    final submitState = (state as NewPatientAltSubmit);
+    newPatientRepository.addPatient(
+      patient: Patient(
+        age: submitState.patientGeneral.age,
+        name: submitState.patientGeneral.name,
+        weight: submitState.patientGeneral.weight,
+        chiefComplaint: submitState.patientGeneral.chiefComplaint,
+        course: submitState.patientGeneral.course,
+        medicalRef: submitState.patientGeneral.medicalRef,
+        occupation: submitState.patientGeneral.occupation,
+        presentedArea: submitState.patientGeneral.presentedArea,
+        sessions: [
+          Session(
+            id: 0,
+            date: DateTime.now(),
+            shoulder: submitState.shoulder,
+          ),
+        ],
+      ),
+    );
+
+    print(
+        "Weight: ${submitState.patientGeneral.weight} + abdNum: ${submitState.shoulder.abdNum!}");
   }
 }
