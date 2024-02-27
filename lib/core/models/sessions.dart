@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:al3yadah_app/core/models/shoulder.dart';
 
 class Session {
@@ -13,24 +11,19 @@ class Session {
     required this.shoulder,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
+  Map<String, dynamic> toJson() {
+    return {
       'id': id,
-      'date': date.millisecondsSinceEpoch,
-      'shoulder': shoulder.toMap(),
+      'date': date,
+      'shoulder': shoulder.toJson(),
     };
   }
 
-  factory Session.fromMap(Map<String, dynamic> map) {
+  factory Session.fromJson(Map<String, dynamic> map) {
     return Session(
       id: map['id'] as int,
       date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
-      shoulder: Shoulder.fromMap(map['shoulder'] as Map<String, dynamic>),
+      shoulder: Shoulder.fromJson(map['shoulder'] as Map<String, dynamic>),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Session.fromJson(String source) =>
-      Session.fromMap(json.decode(source) as Map<String, dynamic>);
 }
