@@ -2,7 +2,6 @@ import 'package:al3yadah_app/core/helpers/app_colors.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
 import 'package:al3yadah_app/view/home/widgets/patient_list.dart';
-import 'package:al3yadah_app/widgets/app_button.dart';
 import 'package:al3yadah_app/widgets/app_text.dart';
 import 'package:al3yadah_app/widgets/app_text_field.dart';
 import 'package:flutter/material.dart';
