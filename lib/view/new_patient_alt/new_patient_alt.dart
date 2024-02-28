@@ -1,4 +1,4 @@
-import 'package:al3yadah_app/core/global_handlers/new_patient_alt/handler.dart';
+import 'package:al3yadah_app/core/handlers/new_patient_alt/handler.dart';
 import 'package:al3yadah_app/core/helpers/app_colors.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
