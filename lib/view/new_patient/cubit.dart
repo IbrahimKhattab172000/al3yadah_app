@@ -1,4 +1,3 @@
-import 'package:al3yadah_app/core/models/new_patient.dart';
 import 'package:al3yadah_app/core/models/patient.dart';
 import 'package:al3yadah_app/core/models/sessions.dart';
 import 'package:al3yadah_app/core/models/shoulder.dart';

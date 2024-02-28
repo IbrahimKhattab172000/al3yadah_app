@@ -1,4 +1,4 @@
-import 'package:al3yadah_app/core/handlers/get_patients/handler.dart';
+import 'package:al3yadah_app/core/global_handlers/get_patients/handler.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/repository/new_patient.dart';
 import 'package:al3yadah_app/view/home/widgets/patient_card.dart';
@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PatientList extends StatelessWidget {
-  PatientList({super.key});
+  const PatientList({super.key});
 
   // List<Patient> patients = [
   //   Patient(

@@ -6,7 +6,6 @@ import 'package:al3yadah_app/core/helpers/utils.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
 import 'package:al3yadah_app/view/home/view.dart';
 import 'package:al3yadah_app/view/nav_bar/cubit.dart';
-import 'package:al3yadah_app/view/new_patient/view.dart';
 import 'package:al3yadah_app/view/new_patient_alt/new_patient_alt.dart';
 import 'package:al3yadah_app/view/setting/view.dart';
 import 'package:al3yadah_app/widgets/app_text.dart';
