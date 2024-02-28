@@ -2,36 +2,49 @@ import 'package:al3yadah_app/core/models/patient.dart';
 import 'package:al3yadah_app/core/models/patient_general.dart';
 import 'package:al3yadah_app/core/models/sessions.dart';
 import 'package:al3yadah_app/core/models/shoulder.dart';
-import 'package:al3yadah_app/core/repository/new_patient.dart';
+import 'package:al3yadah_app/core/repository/patient_main.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
+import 'package:al3yadah_app/view/new_patient_or_session/new_patient_or_session.dart';
 import 'package:al3yadah_app/view/success/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'state.dart';
 
-class NewPatientAltHandler extends Cubit<NewPatientAltState> {
-  final NewPatientRepository newPatientRepository;
-  NewPatientAltHandler({required this.newPatientRepository})
-      : super(NewPatientAltInitial()) {
-    _initial();
-  }
+class PatientMainHandler extends Cubit<PatientMainState> {
+  final PatientMainRepository patientMainRepository;
 
-  _initial() {
-    emit(
-      NewPatientAltGeneralInfo(
-        patientGeneral: PatientGeneral(
-          name: "name",
-          age: 1,
-          occupation: "occupation",
-          medicalRef: "medicalRef",
-          weight: 1,
-          chiefComplaint: "chiefComplaint",
-          course: "course",
-          presentedArea: "presentedArea",
+  PatientMainHandler({
+    required this.patientMainRepository,
+  }) : super(PatientMainStateInitial());
+
+  initial({
+    required bool addingSession,
+    PatientGeneral? patientGeneral,
+    String? presentedArea,
+  }) {
+    if (!addingSession) {
+      emit(
+        PatientMainStateGeneralInfo(
+          patientGeneral: PatientGeneral(
+            name: "name",
+            age: 1,
+            occupation: "occupation",
+            medicalRef: "medicalRef",
+            weight: 1,
+            chiefComplaint: "chiefComplaint",
+            course: "course",
+            presentedArea: "presentedArea",
+          ),
         ),
-      ),
-    );
+      );
+    } else {
+      generateStateAccordingToTheSelectedPresentedAreaForAddingSessions(
+        currentStep: 1,
+        patientGeneral: patientGeneral!,
+        presentedArea: presentedArea!,
+      );
+    }
   }
 
 // TextEditingController nameController = TextEditingController();
@@ -65,26 +78,26 @@ class NewPatientAltHandler extends Cubit<NewPatientAltState> {
   }
 
   void nextStepShoulder() {
-    if ((state as NewPatientAltShoulder).currentStep < 5) {
-      emit((state as NewPatientAltShoulder).copyWith(
-          currentStep: (state as NewPatientAltShoulder).currentStep + 1));
-      print((state as NewPatientAltShoulder).currentStep);
+    if ((state as PatientMainStateShoulder).currentStep < 5) {
+      emit((state as PatientMainStateShoulder).copyWith(
+          currentStep: (state as PatientMainStateShoulder).currentStep + 1));
+      print((state as PatientMainStateShoulder).currentStep);
     } else {
-      submitNewPatient();
+      submitNewPatientOrAddSession();
       RouteUtils.navigateTo(SuccessView());
     }
   }
 
   void previousStepShoulder() {
-    if (!(state as NewPatientAltShoulder).isFirst) {
-      emit((state as NewPatientAltShoulder).copyWith(
-          currentStep: (state as NewPatientAltShoulder).currentStep - 1));
-      print((state as NewPatientAltShoulder).currentStep);
+    if (!(state as PatientMainStateShoulder).isFirst) {
+      emit((state as PatientMainStateShoulder).copyWith(
+          currentStep: (state as PatientMainStateShoulder).currentStep - 1));
+      print((state as PatientMainStateShoulder).currentStep);
     } else {
-      print((state as NewPatientAltShoulder).currentStep);
+      print((state as PatientMainStateShoulder).currentStep);
 
-      emit(NewPatientAltGeneralInfo(
-          patientGeneral: (state as NewPatientAltShoulder).patientGeneral));
+      emit(PatientMainStateGeneralInfo(
+          patientGeneral: (state as PatientMainStateShoulder).patientGeneral));
     }
   }
 
@@ -99,7 +112,7 @@ class NewPatientAltHandler extends Cubit<NewPatientAltState> {
     String? presentedArea,
   }) {
     emit(
-      (state as NewPatientAltGeneralInfo).copyWith(
+      (state as PatientMainStateGeneralInfo).copyWith(
         patientGeneral: PatientGeneral(
             name: name!,
             age: age!,
@@ -114,19 +127,19 @@ class NewPatientAltHandler extends Cubit<NewPatientAltState> {
   }
 
   moveNextAccordingToPresentedArea({required String presentedArea}) {
-    if (state is NewPatientAltGeneralInfo &&
-        (state as NewPatientAltGeneralInfo).patientGeneral.presentedArea ==
+    if (state is PatientMainStateGeneralInfo &&
+        (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
             "Shoulder") {
       emit(
-        NewPatientAltShoulder(
-          patientGeneral: (state as NewPatientAltGeneralInfo).patientGeneral,
+        PatientMainStateShoulder(
+          patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
           currentStep: 1,
         ),
       );
-    } else if (state is NewPatientAltGeneralInfo &&
-        (state as NewPatientAltGeneralInfo).patientGeneral.presentedArea ==
+    } else if (state is PatientMainStateGeneralInfo &&
+        (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
             "Knee") {
-      emit(NewPatientAltKnee());
+      emit(PatientMainStateKnee());
     } else {
       return;
     }
@@ -173,10 +186,10 @@ class NewPatientAltHandler extends Cubit<NewPatientAltState> {
     String? treatmentNote,
   }) {
     final currentShoulder =
-        (state as NewPatientAltShoulder).shoulder ?? Shoulder();
+        (state as PatientMainStateShoulder).shoulder ?? Shoulder();
 
     emit(
-      (state as NewPatientAltShoulder).copyWith(
+      (state as PatientMainStateShoulder).copyWith(
         shoulder: Shoulder(
           cervicalFree: cervicalFree ?? currentShoulder.cervicalFree,
           history: history ?? currentShoulder.history,
@@ -224,17 +237,17 @@ class NewPatientAltHandler extends Cubit<NewPatientAltState> {
     );
   }
 
-  submitNewPatient() async {
-    final previousState = (state as NewPatientAltShoulder);
+  submitNewPatientOrAddSession() async {
+    final previousState = (state as PatientMainStateShoulder);
 
     emit(
-      NewPatientAltSubmit(
+      PatientMainStateSubmit(
           patientGeneral: previousState.patientGeneral,
           shoulder: previousState.shoulder!),
     );
 
-    final submitState = (state as NewPatientAltSubmit);
-    newPatientRepository.addPatient(
+    final submitState = (state as PatientMainStateSubmit);
+    patientMainRepository.addPatient(
       patient: Patient(
         age: submitState.patientGeneral.age,
         name: submitState.patientGeneral.name,
@@ -256,5 +269,49 @@ class NewPatientAltHandler extends Cubit<NewPatientAltState> {
 
     print(
         "Weight: ${submitState.patientGeneral.weight} + abdNum: ${submitState.shoulder.abdNum!}");
+  }
+
+  ///----------------------------------For adding sessions---------------------------///
+
+  void addSessionToPatient({
+    required String patientId,
+    required Session session,
+  }) async {
+    emit(PatientMainStateAddSessionLoading());
+
+    try {
+      await patientMainRepository.addSessionToPatient(
+        patientId: patientId,
+        session: session,
+      );
+
+      emit(PatientMainStateAddSessionSuccess());
+    } catch (e) {
+      emit(PatientMainStateAddSessionError(
+          errorMessage: 'Error adding session: $e'));
+    }
+  }
+
+  generateStateAccordingToTheSelectedPresentedAreaForAddingSessions({
+    required String presentedArea,
+    required PatientGeneral patientGeneral,
+    required int currentStep,
+  }) {
+    switch (presentedArea) {
+      case 'Shoulder':
+        emit(
+          PatientMainStateShoulder(
+            patientGeneral: patientGeneral,
+            currentStep: currentStep,
+          ),
+        );
+
+        RouteUtils.navigateTo(NewPatientOrSession());
+
+        break;
+      case 'Knee':
+      default:
+      // return DefaultPage();
+    }
   }
 }

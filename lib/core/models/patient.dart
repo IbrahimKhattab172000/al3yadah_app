@@ -72,4 +72,8 @@ class Patient {
       sessions: sessions ?? this.sessions,
     );
   }
+
+  void addSession(Session session) {
+    sessions.add(session);
+  }
 }

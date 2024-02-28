@@ -1,29 +1,29 @@
 part of 'handler.dart';
 
-abstract class NewPatientAltState {}
+abstract class PatientMainState {}
 
-final class NewPatientAltInitial extends NewPatientAltState {
-  NewPatientAltInitial();
+final class PatientMainStateInitial extends PatientMainState {
+  PatientMainStateInitial();
 }
 
-final class NewPatientAltGeneralInfo extends NewPatientAltState {
+final class PatientMainStateGeneralInfo extends PatientMainState {
   final PatientGeneral patientGeneral;
 
-  NewPatientAltGeneralInfo({
+  PatientMainStateGeneralInfo({
     required this.patientGeneral,
   });
 
-  NewPatientAltGeneralInfo copyWith({
+  PatientMainStateGeneralInfo copyWith({
     PatientGeneral? patientGeneral,
   }) {
-    return NewPatientAltGeneralInfo(
+    return PatientMainStateGeneralInfo(
       patientGeneral: patientGeneral ?? this.patientGeneral,
     );
   }
 }
 
-final class NewPatientAltShoulder extends NewPatientAltState {
-  final PatientGeneral patientGeneral;
+final class PatientMainStateShoulder extends PatientMainState {
+  late final PatientGeneral patientGeneral;
   final Shoulder? shoulder;
 
   final int currentStep;
@@ -32,18 +32,18 @@ final class NewPatientAltShoulder extends NewPatientAltState {
   bool get isLast => currentStep == 5;
   bool get isFirst => currentStep == 1;
 
-  NewPatientAltShoulder({
+  PatientMainStateShoulder({
     required this.patientGeneral,
     required this.currentStep,
     this.shoulder,
   });
 
-  NewPatientAltShoulder copyWith({
+  PatientMainStateShoulder copyWith({
     PatientGeneral? patientGeneral,
     Shoulder? shoulder,
     int? currentStep,
   }) {
-    return NewPatientAltShoulder(
+    return PatientMainStateShoulder(
       patientGeneral: patientGeneral ?? this.patientGeneral,
       shoulder: shoulder ?? this.shoulder,
       currentStep: currentStep ?? this.currentStep,
@@ -51,20 +51,32 @@ final class NewPatientAltShoulder extends NewPatientAltState {
   }
 }
 
-final class NewPatientAltKnee extends NewPatientAltState {
-  NewPatientAltKnee();
+final class PatientMainStateKnee extends PatientMainState {
+  PatientMainStateKnee();
 }
 
-final class NewPatientAltAnkle extends NewPatientAltState {
-  NewPatientAltAnkle();
+final class PatientMainStateAnkle extends PatientMainState {
+  PatientMainStateAnkle();
 }
 
-final class NewPatientAltSubmit extends NewPatientAltState {
+final class PatientMainStateSubmit extends PatientMainState {
   final PatientGeneral patientGeneral;
   final Shoulder shoulder;
 
-  NewPatientAltSubmit({
+  PatientMainStateSubmit({
     required this.patientGeneral,
     required this.shoulder,
   });
+}
+
+///----------------------------------For adding sessions---------------------------///
+
+final class PatientMainStateAddSessionLoading extends PatientMainState {}
+
+final class PatientMainStateAddSessionSuccess extends PatientMainState {}
+
+final class PatientMainStateAddSessionError extends PatientMainState {
+  final String errorMessage;
+
+  PatientMainStateAddSessionError({required this.errorMessage});
 }

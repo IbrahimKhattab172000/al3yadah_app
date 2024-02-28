@@ -1,12 +1,13 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:al3yadah_app/core/handlers/new_patient_alt/handler.dart';
 import 'package:al3yadah_app/core/helpers/app_colors.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
 import 'package:al3yadah_app/view/home/view.dart';
 import 'package:al3yadah_app/view/nav_bar/cubit.dart';
-import 'package:al3yadah_app/view/new_patient_alt/new_patient_alt.dart';
+import 'package:al3yadah_app/view/new_patient_or_session/new_patient_or_session.dart';
 import 'package:al3yadah_app/view/setting/view.dart';
 import 'package:al3yadah_app/widgets/app_text.dart';
 import 'package:flutter/material.dart';

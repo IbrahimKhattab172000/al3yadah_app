@@ -9,7 +9,12 @@ class _Add extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         InkWell(
-          onTap: () => RouteUtils.navigateTo(NewPatientAlt()),
+          onTap: () async {
+            await context
+                .read<PatientMainHandler>()
+                .initial(addingSession: false);
+            RouteUtils.navigateTo(NewPatientOrSession());
+          },
           child: SizedBox(
             height: 82.height,
             width: 82.width,

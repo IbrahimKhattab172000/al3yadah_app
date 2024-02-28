@@ -1,6 +1,6 @@
 import 'package:al3yadah_app/core/handlers/get_patients/handler.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
-import 'package:al3yadah_app/core/repository/new_patient.dart';
+import 'package:al3yadah_app/core/repository/patient_main.dart';
 import 'package:al3yadah_app/view/home/widgets/patient_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -207,7 +207,7 @@ class PatientList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) =>
-          GetPatientsHandler(newPatientRepository: NewPatientRepository()),
+          GetPatientsHandler(patientMainRepository: PatientMainRepository()),
       child: BlocBuilder<GetPatientsHandler, GetPatientsState>(
         builder: (context, state) {
           if (state is GetPatientsLoaded) {

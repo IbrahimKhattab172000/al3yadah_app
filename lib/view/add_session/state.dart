@@ -1,5 +1,15 @@
-part of 'cubit.dart';
+// part of 'cubit.dart';
 
-abstract class AddSessionState {}
+// abstract class AddSessionState {}
 
-final class AddSessionInitial extends AddSessionState {}
+// class AddSessionInitial extends AddSessionState {}
+
+// class AddSessionLoading extends AddSessionState {}
+
+// class AddSessionSuccess extends AddSessionState {}
+
+// class AddSessionError extends AddSessionState {
+//   final String errorMessage;
+
+//   AddSessionError(this.errorMessage);
+// }
