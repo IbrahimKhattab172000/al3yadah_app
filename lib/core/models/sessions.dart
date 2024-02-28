@@ -1,4 +1,5 @@
 import 'package:al3yadah_app/core/models/shoulder.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Session {
   final int id;
@@ -22,7 +23,7 @@ class Session {
   factory Session.fromJson(Map<String, dynamic> map) {
     return Session(
       id: map['id'] as int,
-      date: DateTime.fromMillisecondsSinceEpoch(map['date'] as int),
+      date: (map['date'] as Timestamp).toDate(), // Handle Timestamp
       shoulder: Shoulder.fromJson(map['shoulder'] as Map<String, dynamic>),
     );
   }
