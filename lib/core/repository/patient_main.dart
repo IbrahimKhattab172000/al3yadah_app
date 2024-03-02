@@ -35,18 +35,31 @@ class PatientMainRepository {
   ///----------------------------------For adding sessions---------------------------///
 
   Future<void> addSessionToPatient({
-    required String patientId,
+    required String name,
     required Session session,
   }) async {
     try {
-      DocumentReference patientRef = _patientsCollection.doc(patientId);
-      Patient existingPatient = await patientRef.get().then((snapshot) {
-        return Patient.fromJson(snapshot.data() as Map<String, dynamic>);
-      });
+      QuerySnapshot patientSnapshot =
+          await _patientsCollection.where('name', isEqualTo: name).get();
 
-      existingPatient.addSession(session);
+      if (patientSnapshot.docs.isNotEmpty) {
+        // Assuming 'name' is unique, so there should be only one document
+        DocumentSnapshot patientDoc = patientSnapshot.docs.first;
+        String patientId = patientDoc.id;
 
-      await patientRef.update(existingPatient.toJson());
+        print('Patient ID: $patientId');
+
+        // update the patient data
+        Patient existingPatient = Patient.fromJson(
+          patientDoc.data() as Map<String, dynamic>,
+        );
+
+        existingPatient.addSession(session);
+
+        await patientDoc.reference.update(existingPatient.toJson());
+      } else {
+        print('Patient not found with name: $name');
+      }
     } catch (e) {
       print('Error adding session to patient: $e');
       rethrow;
