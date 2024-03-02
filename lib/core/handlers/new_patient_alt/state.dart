@@ -25,6 +25,7 @@ final class PatientMainStateGeneralInfo extends PatientMainState {
 final class PatientMainStateShoulder extends PatientMainState {
   late final PatientGeneral patientGeneral;
   final Shoulder? shoulder;
+  final bool addingSession;
 
   final int currentStep;
 
@@ -36,17 +37,20 @@ final class PatientMainStateShoulder extends PatientMainState {
     required this.patientGeneral,
     required this.currentStep,
     this.shoulder,
+    required this.addingSession,
   });
 
   PatientMainStateShoulder copyWith({
     PatientGeneral? patientGeneral,
     Shoulder? shoulder,
     int? currentStep,
+    bool? addingSession,
   }) {
     return PatientMainStateShoulder(
       patientGeneral: patientGeneral ?? this.patientGeneral,
       shoulder: shoulder ?? this.shoulder,
       currentStep: currentStep ?? this.currentStep,
+      addingSession: addingSession ?? this.addingSession,
     );
   }
 }
