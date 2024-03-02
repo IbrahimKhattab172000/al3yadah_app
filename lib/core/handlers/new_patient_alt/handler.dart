@@ -83,7 +83,9 @@ class PatientMainHandler extends Cubit<PatientMainState> {
           currentStep: (state as PatientMainStateShoulder).currentStep + 1));
       print((state as PatientMainStateShoulder).currentStep);
     } else {
-      submitNewPatientOrAddSession();
+      (state as PatientMainStateShoulder).addingSession
+          ? addSessionToPatient()
+          : submitNewPatient();
       RouteUtils.navigateTo(SuccessView());
     }
   }
@@ -134,6 +136,7 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         PatientMainStateShoulder(
           patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
           currentStep: 1,
+          addingSession: false,
         ),
       );
     } else if (state is PatientMainStateGeneralInfo &&
@@ -237,7 +240,7 @@ class PatientMainHandler extends Cubit<PatientMainState> {
     );
   }
 
-  submitNewPatientOrAddSession() async {
+  submitNewPatient() async {
     final previousState = (state as PatientMainStateShoulder);
 
     emit(
@@ -271,18 +274,25 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         "Weight: ${submitState.patientGeneral.weight} + abdNum: ${submitState.shoulder.abdNum!}");
   }
 
-  ///----------------------------------For adding sessions---------------------------///
+  void addSessionToPatient() async {
+    final previousState = (state as PatientMainStateShoulder);
 
-  void addSessionToPatient({
-    required String patientId,
-    required Session session,
-  }) async {
-    emit(PatientMainStateAddSessionLoading());
+    emit(
+      PatientMainStateSubmit(
+        patientGeneral: previousState.patientGeneral,
+        shoulder: previousState.shoulder!,
+      ),
+    );
+    final submitState = (state as PatientMainStateSubmit);
 
     try {
       await patientMainRepository.addSessionToPatient(
-        patientId: patientId,
-        session: session,
+        name: submitState.patientGeneral.name,
+        session: Session(
+          id: 1,
+          date: DateTime.now(),
+          shoulder: submitState.shoulder,
+        ),
       );
 
       emit(PatientMainStateAddSessionSuccess());
@@ -303,6 +313,7 @@ class PatientMainHandler extends Cubit<PatientMainState> {
           PatientMainStateShoulder(
             patientGeneral: patientGeneral,
             currentStep: currentStep,
+            addingSession: true,
           ),
         );
 
