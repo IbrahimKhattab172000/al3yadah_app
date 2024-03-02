@@ -286,6 +286,7 @@ class PatientMainHandler extends Cubit<PatientMainState> {
     final submitState = (state as PatientMainStateSubmit);
 
     try {
+      print(submitState.patientGeneral.name);
       await patientMainRepository.addSessionToPatient(
         name: submitState.patientGeneral.name,
         session: Session(
