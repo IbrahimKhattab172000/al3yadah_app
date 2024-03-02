@@ -87,9 +87,14 @@ class BackAndForthAfterSelectingThePresentedAreaButtons
         ),
         AppButton(
           title: state is PatientMainStateShoulder &&
-                  (state as PatientMainStateShoulder).isLast
+                  (state as PatientMainStateShoulder).isLast &&
+                  !(state as PatientMainStateShoulder).addingSession
               ? "Submit"
-              : "Next",
+              : state is PatientMainStateShoulder &&
+                      (state as PatientMainStateShoulder).addingSession &&
+                      (state as PatientMainStateShoulder).isLast
+                  ? "Add session"
+                  : "Next",
           color: AppColors.primary,
           onTap: () {
             if (state is PatientMainStateGeneralInfo) {
@@ -101,19 +106,6 @@ class BackAndForthAfterSelectingThePresentedAreaButtons
                         .presentedArea,
                   );
             } else if (state is PatientMainStateShoulder) {
-              // print((state as NewPatientAltShoulder).shoulder!.vas ?? "");
-              // print((state as NewPatientAltShoulder).shoulder!.cervicalFree ??
-              //     "");
-              // print((state as NewPatientAltShoulder).shoulder!.extensionNote ??
-              //     "");
-              // print(
-              //     (state as NewPatientAltShoulder).shoulder!.instabilityNote ??
-              //         "");
-              // print(
-              //     (state as NewPatientAltShoulder).shoulder!.acromioTest ?? "");
-              // print((state as NewPatientAltShoulder).shoulder!.treatmentNote ??
-              //     "");
-
               context.read<PatientMainHandler>().nextStepShoulder();
             }
           },
