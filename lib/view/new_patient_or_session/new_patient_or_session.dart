@@ -14,48 +14,54 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class NewPatientOrSession extends StatelessWidget {
-  PatientMainState? addingSessionState;
   NewPatientOrSession({
     super.key,
-    this.addingSessionState,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppAppBar(title: "New Patient"),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-        child: SingleChildScrollView(
-          physics: const BouncingScrollPhysics(),
-          child: Column(
-            children: [
-              BlocBuilder<PatientMainHandler, PatientMainState>(
-                builder: (context, state) {
-                  if (state is PatientMainStateGeneralInfo) {
-                    return NewPatientGeneralInfoWidget(state: state);
-                  } else if (state is PatientMainStateShoulder) {
-                    return NewPatientShoulderWidget(state: state);
-                  } else {
-                    return SizedBox(
-                      child: Text("nooo state${state.toString()}"),
-                    );
-                  }
-                },
+    return BlocBuilder<PatientMainHandler, PatientMainState>(
+      builder: (context, state) {
+        return Scaffold(
+          appBar: AppAppBar(
+              title:
+                  (state is PatientMainStateShoulder) && (state).addingSession
+                      ? "Add"
+                      : "New Patient"),
+          body: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+            child: SingleChildScrollView(
+              physics: const BouncingScrollPhysics(),
+              child: Column(
+                children: [
+                  BlocBuilder<PatientMainHandler, PatientMainState>(
+                    builder: (context, state) {
+                      if (state is PatientMainStateGeneralInfo) {
+                        return NewPatientGeneralInfoWidget(state: state);
+                      } else if (state is PatientMainStateShoulder) {
+                        return NewPatientShoulderWidget(state: state);
+                      } else {
+                        return SizedBox(
+                          child: Text("nooo state${state.toString()}"),
+                        );
+                      }
+                    },
+                  ),
+                  SizedBox(height: 40.height),
+                  BlocBuilder<PatientMainHandler, PatientMainState>(
+                    builder: (context, state) {
+                      return BackAndForthAfterSelectingThePresentedAreaButtons(
+                        state: state,
+                      );
+                    },
+                  ),
+                  SizedBox(height: Utils.bottomDevicePadding),
+                ],
               ),
-              SizedBox(height: 40.height),
-              BlocBuilder<PatientMainHandler, PatientMainState>(
-                builder: (context, state) {
-                  return BackAndForthAfterSelectingThePresentedAreaButtons(
-                    state: state,
-                  );
-                },
-              ),
-              SizedBox(height: Utils.bottomDevicePadding),
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 }
