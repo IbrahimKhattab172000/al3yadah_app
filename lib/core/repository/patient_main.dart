@@ -21,8 +21,12 @@ class PatientMainRepository {
       List<Patient> patients = [];
 
       for (QueryDocumentSnapshot documentSnapshot in querySnapshot.docs) {
-        patients.add(
-            Patient.fromJson(documentSnapshot.data() as Map<String, dynamic>));
+        Map<String, dynamic>? data =
+            documentSnapshot.data() as Map<String, dynamic>?;
+
+        if (data != null) {
+          patients.add(Patient.fromJson(data));
+        }
       }
 
       return patients;
@@ -49,20 +53,58 @@ class PatientMainRepository {
 
         print('Patient ID: $patientId');
 
-        // update the patient data
+        // Update the patient data
         Patient existingPatient = Patient.fromJson(
           patientDoc.data() as Map<String, dynamic>,
         );
 
+        // Assuming the new presented area is based on the session type
+        switch (session.type) {
+          case 'shoulder':
+            existingPatient.presentedArea = 'shoulder';
+            break;
+          case 'knee':
+            existingPatient.presentedArea = 'knee';
+            break;
+        }
+
         existingPatient.addSession(session);
 
         await patientDoc.reference.update(existingPatient.toJson());
+        //update the patients
+        getPatients();
       } else {
         print('Patient not found with name: $name');
       }
     } catch (e) {
       print('Error adding session to patient: $e');
       rethrow;
+    }
+  }
+
+  // search for patient by name--------
+  Future<List<Patient>> searchPatientByName(String name) async {
+    try {
+      QuerySnapshot querySnapshot = await _patientsCollection.get();
+      List<Patient> patients = [];
+
+      for (QueryDocumentSnapshot documentSnapshot in querySnapshot.docs) {
+        Map<String, dynamic>? data =
+            documentSnapshot.data() as Map<String, dynamic>?;
+
+        if (data != null) {
+          Patient patient = Patient.fromJson(data);
+          // Check if the patient name starts with the search name
+          if (patient.name.toLowerCase().startsWith(name.toLowerCase())) {
+            patients.add(patient);
+          }
+        }
+      }
+
+      return patients;
+    } catch (e) {
+      print('Error searching patients by name: $e');
+      throw e;
     }
   }
 }
