@@ -4,6 +4,7 @@ import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
 import 'package:al3yadah_app/core/helpers/validator.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
+import 'package:al3yadah_app/view/new_patient_or_session/knee/view.dart';
 import 'package:al3yadah_app/view/new_patient_or_session/shoulder/view.dart';
 import 'package:al3yadah_app/widgets/app/app_stepper.dart';
 import 'package:al3yadah_app/widgets/app_app_bar.dart';
@@ -40,6 +41,8 @@ class NewPatientOrSession extends StatelessWidget {
                         return NewPatientGeneralInfoWidget(state: state);
                       } else if (state is PatientMainStateShoulder) {
                         return NewPatientShoulderWidget(state: state);
+                      } else if (state is PatientMainStateKnee) {
+                        return NewPatientKneeWidget(state: state);
                       } else {
                         return SizedBox(
                           child: Text("nooo state${state.toString()}"),
@@ -87,20 +90,16 @@ class BackAndForthAfterSelectingThePresentedAreaButtons
               RouteUtils.pop();
             } else if (state is PatientMainStateShoulder) {
               context.read<PatientMainHandler>().previousStepShoulder();
+            } else if (state is PatientMainStateKnee) {
+              context.read<PatientMainHandler>().previousStepKnee();
             }
           },
           titleColor: AppColors.primary,
         ),
         AppButton(
-          title: state is PatientMainStateShoulder &&
-                  (state as PatientMainStateShoulder).isLast &&
-                  !(state as PatientMainStateShoulder).addingSession
-              ? "Submit"
-              : state is PatientMainStateShoulder &&
-                      (state as PatientMainStateShoulder).addingSession &&
-                      (state as PatientMainStateShoulder).isLast
-                  ? "Add session"
-                  : "Next",
+          title: context
+              .read<PatientMainHandler>()
+              .getTitleForNextButtonBasedOnTheState(state: state),
           color: AppColors.primary,
           onTap: () {
             if (state is PatientMainStateGeneralInfo) {
@@ -113,6 +112,8 @@ class BackAndForthAfterSelectingThePresentedAreaButtons
                   );
             } else if (state is PatientMainStateShoulder) {
               context.read<PatientMainHandler>().nextStepShoulder();
+            } else if (state is PatientMainStateKnee) {
+              context.read<PatientMainHandler>().nextStepKnee();
             }
           },
         ),
@@ -214,7 +215,30 @@ class NewPatientShoulderWidget extends StatelessWidget {
           children: [
             SizedBox(height: 24.height),
             ShoulderContentView(state: state),
-            // _Buttons(),
+            SizedBox(height: Utils.bottomDevicePadding),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class NewPatientKneeWidget extends StatelessWidget {
+  final PatientMainStateKnee state;
+  const NewPatientKneeWidget({super.key, required this.state});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AppStepper(
+          currentStep: state.currentStep,
+          totalSteps: state.totalSteps,
+        ),
+        Column(
+          children: [
+            SizedBox(height: 24.height),
+            KneeContentView(state: state),
             SizedBox(height: Utils.bottomDevicePadding),
           ],
         ),
