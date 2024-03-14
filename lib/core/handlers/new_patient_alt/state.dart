@@ -1,12 +1,13 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 part of 'handler.dart';
 
 abstract class PatientMainState {}
 
-final class PatientMainStateInitial extends PatientMainState {
+class PatientMainStateInitial extends PatientMainState {
   PatientMainStateInitial();
 }
 
-final class PatientMainStateGeneralInfo extends PatientMainState {
+class PatientMainStateGeneralInfo extends PatientMainState {
   final PatientGeneral patientGeneral;
 
   PatientMainStateGeneralInfo({
@@ -22,7 +23,7 @@ final class PatientMainStateGeneralInfo extends PatientMainState {
   }
 }
 
-final class PatientMainStateShoulder extends PatientMainState {
+class PatientMainStateShoulder extends PatientMainState {
   late final PatientGeneral patientGeneral;
   final Shoulder? shoulder;
   final bool addingSession;
@@ -55,22 +56,72 @@ final class PatientMainStateShoulder extends PatientMainState {
   }
 }
 
-final class PatientMainStateKnee extends PatientMainState {
-  PatientMainStateKnee();
-}
+class PatientMainStateKnee extends PatientMainState {
+  late final PatientGeneral patientGeneral;
+  final Knee? knee;
+  final bool addingSession;
 
-final class PatientMainStateAnkle extends PatientMainState {
-  PatientMainStateAnkle();
-}
+  final int currentStep;
 
-final class PatientMainStateSubmit extends PatientMainState {
-  final PatientGeneral patientGeneral;
-  final Shoulder shoulder;
-
-  PatientMainStateSubmit({
+  int get totalSteps => 3;
+  bool get isLast => currentStep == 3;
+  bool get isFirst => currentStep == 1;
+  PatientMainStateKnee({
     required this.patientGeneral,
-    required this.shoulder,
+    this.knee,
+    required this.addingSession,
+    required this.currentStep,
   });
+
+  PatientMainStateKnee copyWith({
+    PatientGeneral? patientGeneral,
+    Knee? knee,
+    bool? addingSession,
+    int? currentStep,
+  }) {
+    return PatientMainStateKnee(
+      patientGeneral: patientGeneral ?? this.patientGeneral,
+      knee: knee ?? this.knee,
+      addingSession: addingSession ?? this.addingSession,
+      currentStep: currentStep ?? this.currentStep,
+    );
+  }
+}
+
+class PatientMainStateAnkle extends PatientMainState {
+  late final PatientGeneral patientGeneral;
+  final Ankle? ankle;
+  final bool addingSession;
+
+  final int currentStep;
+
+  int get totalSteps => 2;
+  bool get isLast => currentStep == 2;
+  bool get isFirst => currentStep == 1;
+  PatientMainStateAnkle({
+    required this.patientGeneral,
+    this.ankle,
+    required this.addingSession,
+    required this.currentStep,
+  });
+
+  PatientMainStateAnkle copyWith({
+    PatientGeneral? patientGeneral,
+    Ankle? ankle,
+    bool? addingSession,
+    int? currentStep,
+  }) {
+    return PatientMainStateAnkle(
+      patientGeneral: patientGeneral ?? this.patientGeneral,
+      ankle: ankle ?? this.ankle,
+      addingSession: addingSession ?? this.addingSession,
+      currentStep: currentStep ?? this.currentStep,
+    );
+  }
+}
+
+class PatientMainStateCervical extends PatientMainState {
+  PatientMainStateCervical();
 }
 
 ///----------------------------------For adding sessions---------------------------///
