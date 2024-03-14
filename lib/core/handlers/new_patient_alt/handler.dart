@@ -280,6 +280,90 @@ class PatientMainHandler extends Cubit<PatientMainState> {
     );
   }
 
+//Ankle------------------------------------------------------
+  void nextStepAnkle() {
+    if ((state as PatientMainStateAnkle).currentStep < 2) {
+      emit((state as PatientMainStateAnkle).copyWith(
+          currentStep: (state as PatientMainStateAnkle).currentStep + 1));
+      print((state as PatientMainStateAnkle).currentStep);
+    } else {
+      (state as PatientMainStateAnkle).addingSession
+          ? addSessionToPatient(state: state)
+          : submitNewPatient(state: state);
+      RouteUtils.navigateTo(SuccessView());
+    }
+  }
+
+  void previousStepAnkle() {
+    if (!(state as PatientMainStateAnkle).isFirst) {
+      emit((state as PatientMainStateAnkle).copyWith(
+          currentStep: (state as PatientMainStateAnkle).currentStep - 1));
+      print((state as PatientMainStateAnkle).currentStep);
+    } else {
+      print((state as PatientMainStateAnkle).currentStep);
+
+      emit(PatientMainStateGeneralInfo(
+          patientGeneral: (state as PatientMainStateAnkle).patientGeneral));
+    }
+  }
+
+  updateAnkleValues({
+    String? historyNote,
+    String? palpationNote,
+    int? dorsiFlexionNum,
+    String? dorsiFlexionNote,
+    int? planterFlexionNum,
+    String? planterFlexionNote,
+    int? inversionFlexionNum,
+    String? inversionFlexionNote,
+    int? eversionFlexionNum,
+    String? eversionFlexionNote,
+    String? muscleTestNote,
+    String? anteriorDrawer,
+    String? reverseAnterolateralDrawer,
+    String? anteroLateralTalarPalpation,
+    String? talarTilt,
+    String? performanceTest,
+    String? performanceTestNote,
+    String? treatmentNote,
+  }) {
+    final currentAnkle = (state as PatientMainStateAnkle).ankle ?? Ankle();
+
+    emit(
+      (state as PatientMainStateAnkle).copyWith(
+        ankle: Ankle(
+          historyNote: historyNote ?? currentAnkle.historyNote,
+          palpationNote: palpationNote ?? currentAnkle.palpationNote,
+          dorsiFlexionNum: dorsiFlexionNum ?? currentAnkle.dorsiFlexionNum,
+          dorsiFlexionNote: dorsiFlexionNote ?? currentAnkle.dorsiFlexionNote,
+          planterFlexionNum:
+              planterFlexionNum ?? currentAnkle.planterFlexionNum,
+          planterFlexionNote:
+              planterFlexionNote ?? currentAnkle.planterFlexionNote,
+          inversionFlexionNum:
+              inversionFlexionNum ?? currentAnkle.inversionFlexionNum,
+          inversionFlexionNote:
+              inversionFlexionNote ?? currentAnkle.inversionFlexionNote,
+          eversionFlexionNum:
+              eversionFlexionNum ?? currentAnkle.eversionFlexionNum,
+          eversionFlexionNote:
+              eversionFlexionNote ?? currentAnkle.eversionFlexionNote,
+          muscleTestNote: muscleTestNote ?? currentAnkle.muscleTestNote,
+          anteriorDrawer: anteriorDrawer ?? currentAnkle.anteriorDrawer,
+          reverseAnterolateralDrawer: reverseAnterolateralDrawer ??
+              currentAnkle.reverseAnterolateralDrawer,
+          anteroLateralTalarPalpation: anteroLateralTalarPalpation ??
+              currentAnkle.anteroLateralTalarPalpation,
+          talarTilt: talarTilt ?? currentAnkle.talarTilt,
+          performanceTest: performanceTest ?? currentAnkle.performanceTest,
+          performanceTestNote:
+              performanceTestNote ?? currentAnkle.performanceTestNote,
+          treatmentNote: treatmentNote ?? currentAnkle.treatmentNote,
+        ),
+      ),
+    );
+  }
+
 //For all states -------------------------------------------------------------
   dynamic selectedIndexInterpretation({required int selectedIndex}) {
     if (selectedIndex == 0) {
@@ -308,18 +392,17 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       } else if (state.addingSession && state.isLast) {
         return "Add session-Kn";
       } else {
-        return "Next -Kn";
+        return "Next-Kn";
+      }
+    } else if (state is PatientMainStateAnkle) {
+      if (state.isLast && !state.addingSession) {
+        return "Submit-An";
+      } else if (state.addingSession && state.isLast) {
+        return "Add session-An";
+      } else {
+        return "Next-An";
       }
     }
-    // else if (state is PatientMainStateAnkle) {
-    //   if (state.isLast && !state.addingSession) {
-    //     return "Submit";
-    //   } else if (state.addingSession && state.isLast) {
-    //     return "Add session";
-    //   } else {
-    //     return "Next";
-    //   }
-    // }
     // else if (state is PatientMainStateCervical) {
     //   if (state.isLast && !state.addingSession) {
     //     return "Submit";
@@ -387,6 +470,20 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         );
 
         RouteUtils.navigateTo(NewPatientOrSession());
+
+        break;
+      case 'Ankle':
+        emit(
+          PatientMainStateAnkle(
+            patientGeneral: patientGeneral,
+            currentStep: currentStep,
+            addingSession: true,
+          ),
+        );
+
+        RouteUtils.navigateTo(NewPatientOrSession());
+
+        break;
       default:
       // return DefaultPage();
     }
@@ -407,6 +504,14 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
             "Knee") {
       emit(PatientMainStateKnee(
+        patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
+        currentStep: 1,
+        addingSession: false,
+      ));
+    } else if (state is PatientMainStateGeneralInfo &&
+        (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
+            "Ankle") {
+      emit(PatientMainStateAnkle(
         patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
         currentStep: 1,
         addingSession: false,
@@ -436,6 +541,12 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       session = KneeSession(
         date: DateTime.now(),
         knee: state.knee!,
+      );
+      previousState = state;
+    } else if (state is PatientMainStateAnkle) {
+      session = AnkleSession(
+        date: DateTime.now(),
+        ankle: state.ankle!,
       );
       previousState = state;
     }
@@ -475,6 +586,12 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       session = KneeSession(
         date: DateTime.now(),
         knee: state.knee!,
+      );
+      previousState = state;
+    } else if (state is PatientMainStateAnkle) {
+      session = AnkleSession(
+        date: DateTime.now(),
+        ankle: state.ankle!,
       );
       previousState = state;
     }
