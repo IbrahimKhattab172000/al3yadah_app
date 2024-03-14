@@ -4,6 +4,7 @@ import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
 import 'package:al3yadah_app/core/helpers/validator.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
+import 'package:al3yadah_app/view/new_patient_or_session/ankle/view.dart';
 import 'package:al3yadah_app/view/new_patient_or_session/knee/view.dart';
 import 'package:al3yadah_app/view/new_patient_or_session/shoulder/view.dart';
 import 'package:al3yadah_app/widgets/app/app_stepper.dart';
@@ -43,6 +44,8 @@ class NewPatientOrSession extends StatelessWidget {
                         return NewPatientShoulderWidget(state: state);
                       } else if (state is PatientMainStateKnee) {
                         return NewPatientKneeWidget(state: state);
+                      } else if (state is PatientMainStateAnkle) {
+                        return NewPatientAnkleWidget(state: state);
                       } else {
                         return SizedBox(
                           child: Text("nooo state${state.toString()}"),
@@ -92,6 +95,8 @@ class BackAndForthAfterSelectingThePresentedAreaButtons
               context.read<PatientMainHandler>().previousStepShoulder();
             } else if (state is PatientMainStateKnee) {
               context.read<PatientMainHandler>().previousStepKnee();
+            } else if (state is PatientMainStateAnkle) {
+              context.read<PatientMainHandler>().previousStepAnkle();
             }
           },
           titleColor: AppColors.primary,
@@ -114,6 +119,8 @@ class BackAndForthAfterSelectingThePresentedAreaButtons
               context.read<PatientMainHandler>().nextStepShoulder();
             } else if (state is PatientMainStateKnee) {
               context.read<PatientMainHandler>().nextStepKnee();
+            } else if (state is PatientMainStateAnkle) {
+              context.read<PatientMainHandler>().nextStepAnkle();
             }
           },
         ),
@@ -239,6 +246,31 @@ class NewPatientKneeWidget extends StatelessWidget {
           children: [
             SizedBox(height: 24.height),
             KneeContentView(state: state),
+            SizedBox(height: Utils.bottomDevicePadding),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class NewPatientAnkleWidget extends StatelessWidget {
+  final PatientMainStateAnkle state;
+
+  const NewPatientAnkleWidget({super.key, required this.state});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AppStepper(
+          currentStep: state.currentStep,
+          totalSteps: state.totalSteps,
+        ),
+        Column(
+          children: [
+            SizedBox(height: 24.height),
+            AnkleContentView(state: state),
             SizedBox(height: Utils.bottomDevicePadding),
           ],
         ),
