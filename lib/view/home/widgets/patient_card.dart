@@ -35,11 +35,11 @@ class PatientCard extends StatelessWidget {
           child: Row(
             children: [
               CircleAvatar(
-                backgroundColor: AppColors.purple,
+                backgroundColor: AppColors.primary,
                 radius: 30,
                 child: AppText(
                   title: patient.name.isNotEmpty
-                      ? patient.name.substring(0, 1)
+                      ? patient.name.substring(0, 1).toUpperCase()
                       : '',
                   color: AppColors.background,
                 ),
@@ -64,12 +64,12 @@ class PatientCard extends StatelessWidget {
                   Row(
                     children: [
                       AppText(
-                        title: "Presented area:",
+                        title: "Latest area:",
                         color: AppColors.txtFieldlable2,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
                       ),
-                      SizedBox(width: 10.width),
+                      SizedBox(width: 4.width),
                       AppText(
                         title: patient.presentedArea,
                         color: AppColors.txtFieldlable1,
