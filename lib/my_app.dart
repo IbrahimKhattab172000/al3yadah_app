@@ -21,7 +21,6 @@ class _MyAppState extends State<MyApp> {
       designSize: const Size(375, 812),
       minTextAdapt: true,
       splitScreenMode: false,
-      //هناااااا
       child: const SplashView(),
       builder: (_, child) => KeyboardPopScaffold(
         child: MaterialApp(
