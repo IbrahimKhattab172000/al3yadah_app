@@ -50,7 +50,7 @@ class AppText extends StatelessWidget {
             decorationStyle: TextDecorationStyle.solid,
             decorationColor: color,
             fontWeight: fontWeight,
-            fontFamily: fontFamily ?? "lotta",
+            fontFamily: fontFamily ?? "Lato",
           ),
           overflow: overflow,
           maxLines: maxLines,
