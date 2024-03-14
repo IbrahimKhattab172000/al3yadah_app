@@ -31,6 +31,9 @@ class _SearchField extends StatelessWidget {
               Icons.search,
               color: AppColors.txtFieldlable2,
             ),
+            onTap: () {
+              RouteUtils.navigateTo(SearchPage());
+            },
           ),
         ),
       ],
