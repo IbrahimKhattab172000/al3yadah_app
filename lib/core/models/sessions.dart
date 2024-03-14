@@ -1,3 +1,4 @@
+import 'package:al3yadah_app/core/models/ankle.dart';
 import 'package:al3yadah_app/core/models/knee.dart';
 import 'package:al3yadah_app/core/models/shoulder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -22,7 +23,9 @@ abstract class Session {
         return ShoulderSession.fromJson(map);
       case 'knee':
         return KneeSession.fromJson(map);
-      // Add cases for other types if needed
+
+      case 'ankle':
+        return AnkleSession.fromJson(map);
       default:
         throw UnimplementedError('fromJson not implemented for Session');
     }
@@ -91,6 +94,39 @@ class KneeSession extends Session {
       // id: map['id'] as int,
       date: (map['date'] as Timestamp).toDate(),
       knee: Knee.fromMap(map['knee'] as Map<String, dynamic>),
+    );
+  }
+}
+
+class AnkleSession extends Session {
+  final Ankle ankle;
+
+  AnkleSession({
+    // required int id,
+    required DateTime date,
+    required this.ankle,
+  }) : super(
+          // id: id,
+          date: date,
+          type: 'ankle',
+        );
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      // 'id': id,
+      'date': date,
+      'type': type,
+      'ankle': ankle.toMap(),
+    };
+  }
+
+  @override
+  factory AnkleSession.fromJson(Map<String, dynamic> map) {
+    return AnkleSession(
+      // id: map['id'] as int,
+      date: (map['date'] as Timestamp).toDate(),
+      ankle: Ankle.fromMap(map['ankle'] as Map<String, dynamic>),
     );
   }
 }
