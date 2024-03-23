@@ -1,6 +1,7 @@
 import 'package:al3yadah_app/core/models/ankle.dart';
 import 'package:al3yadah_app/core/models/cervical.dart';
 import 'package:al3yadah_app/core/models/knee.dart';
+import 'package:al3yadah_app/core/models/lumbar.dart';
 import 'package:al3yadah_app/core/models/shoulder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -159,6 +160,38 @@ class CervicalSession extends Session {
       // id: map['id'] as int,
       date: (map['date'] as Timestamp).toDate(),
       cervical: Cervical.fromMap(map['cervical'] as Map<String, dynamic>),
+    );
+  }
+}
+
+class LumbarSession extends Session {
+  final Lumbar lumbar;
+
+  LumbarSession({
+    // required int id,
+    required super.date,
+    required this.lumbar,
+  }) : super(
+          // id: id,
+          type: 'lumbar',
+        );
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      // 'id': id,
+      'date': date,
+      'type': type,
+      'lumbar': lumbar.toMap(),
+    };
+  }
+
+  @override
+  factory LumbarSession.fromJson(Map<String, dynamic> map) {
+    return LumbarSession(
+      // id: map['id'] as int,
+      date: (map['date'] as Timestamp).toDate(),
+      lumbar: Lumbar.fromMap(map['lumbar'] as Map<String, dynamic>),
     );
   }
 }
