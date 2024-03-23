@@ -184,6 +184,38 @@ class PatientMainStateLumbar extends PatientMainState {
   }
 }
 
+class PatientMainStateElbow extends PatientMainState {
+  late final PatientGeneral patientGeneral;
+  final Elbow? elbow;
+  final bool addingSession;
+
+  final int currentStep;
+
+  int get totalSteps => 2;
+  bool get isLast => currentStep == 2;
+  bool get isFirst => currentStep == 1;
+  PatientMainStateElbow({
+    required this.patientGeneral,
+    this.elbow,
+    required this.addingSession,
+    required this.currentStep,
+  });
+
+  PatientMainStateElbow copyWith({
+    PatientGeneral? patientGeneral,
+    Elbow? elbow,
+    bool? addingSession,
+    int? currentStep,
+  }) {
+    return PatientMainStateElbow(
+      patientGeneral: patientGeneral ?? this.patientGeneral,
+      elbow: elbow ?? this.elbow,
+      addingSession: addingSession ?? this.addingSession,
+      currentStep: currentStep ?? this.currentStep,
+    );
+  }
+}
+
 ///----------------------------------For adding sessions---------------------------///
 
 final class PatientMainStateAddSessionLoading extends PatientMainState {}
