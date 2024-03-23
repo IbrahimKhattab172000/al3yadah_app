@@ -1,6 +1,7 @@
 import 'package:al3yadah_app/core/models/ankle.dart';
 import 'package:al3yadah_app/core/models/cervical.dart';
 import 'package:al3yadah_app/core/models/knee.dart';
+import 'package:al3yadah_app/core/models/lumbar.dart';
 import 'package:al3yadah_app/core/models/patient.dart';
 import 'package:al3yadah_app/core/models/patient_general.dart';
 import 'package:al3yadah_app/core/models/sessions.dart';
@@ -466,6 +467,112 @@ class PatientMainHandler extends Cubit<PatientMainState> {
     );
   }
 
+//Lumbar--------------------------------------------------------------------
+  void nextStepLumbar() {
+    if ((state as PatientMainStateLumbar).currentStep < 3) {
+      emit((state as PatientMainStateLumbar).copyWith(
+          currentStep: (state as PatientMainStateLumbar).currentStep + 1));
+      print((state as PatientMainStateLumbar).currentStep);
+    } else {
+      (state as PatientMainStateLumbar).addingSession
+          ? addSessionToPatient(state: state)
+          : submitNewPatient(state: state);
+      RouteUtils.navigateTo(SuccessView());
+    }
+  }
+
+  void previousStepLumbar() {
+    if (!(state as PatientMainStateLumbar).isFirst) {
+      emit((state as PatientMainStateLumbar).copyWith(
+          currentStep: (state as PatientMainStateLumbar).currentStep - 1));
+      print((state as PatientMainStateCervical).currentStep);
+    } else {
+      print((state as PatientMainStateLumbar).currentStep);
+
+      emit(PatientMainStateGeneralInfo(
+          patientGeneral: (state as PatientMainStateLumbar).patientGeneral));
+    }
+  }
+
+  updateLumbarValues({
+    String? noRedFlags,
+    String? psycologicCauses,
+    String? visceralAffection,
+    String? historyNote,
+    String? painPlaceOrDermatomeNote,
+    String? painVasNote,
+    String? observationOrGaitAassisment,
+    String? myotomalAffection,
+    int? romFlexionNumber,
+    int? romExtensionNumber,
+    int? romLSideBendingNumber,
+    int? romRSideBendingNumber,
+    int? romLRotationNumber,
+    int? romRRotationNumber,
+    String? romNote,
+    String? segmentalMobility,
+    String? muscleAssisment,
+    String? pripheralJointScan,
+    String? straightLegRaisingTest,
+    String? slumpTest,
+    String? femordNerveTractionTest,
+    String? neuroDynamicTestNote,
+    String? passiveLumberExtensionTest,
+    String? proneSegmentalInstabilityTest,
+    String? lumberInstabilityNote,
+  }) {
+    final currentLumbar = (state as PatientMainStateLumbar).lumbar ?? Lumbar();
+
+    emit(
+      (state as PatientMainStateLumbar).copyWith(
+        lumbar: Lumbar(
+          noRedFlags: noRedFlags ?? currentLumbar.noRedFlags,
+          psycologicCauses: psycologicCauses ?? currentLumbar.psycologicCauses,
+          visceralAffection:
+              visceralAffection ?? currentLumbar.visceralAffection,
+          historyNote: historyNote ?? currentLumbar.historyNote,
+          painPlaceOrDermatomeNote: painPlaceOrDermatomeNote ??
+              currentLumbar.painPlaceOrDermatomeNote,
+          painVasNote: painVasNote ?? currentLumbar.painVasNote,
+          observationOrGaitAassisment: observationOrGaitAassisment ??
+              currentLumbar.observationOrGaitAassisment,
+          myotomalAffection:
+              myotomalAffection ?? currentLumbar.myotomalAffection,
+          romFlexionNumber: romFlexionNumber ?? currentLumbar.romFlexionNumber,
+          romExtensionNumber:
+              romExtensionNumber ?? currentLumbar.romExtensionNumber,
+          romLSideBendingNumber:
+              romLSideBendingNumber ?? currentLumbar.romLSideBendingNumber,
+          romRSideBendingNumber:
+              romRSideBendingNumber ?? currentLumbar.romRSideBendingNumber,
+          romLRotationNumber:
+              romLRotationNumber ?? currentLumbar.romLRotationNumber,
+          romRRotationNumber:
+              romRRotationNumber ?? currentLumbar.romRRotationNumber,
+          romNote: romNote ?? currentLumbar.romNote,
+          segmentalMobility:
+              segmentalMobility ?? currentLumbar.segmentalMobility,
+          muscleAssisment: muscleAssisment ?? currentLumbar.muscleAssisment,
+          pripheralJointScan:
+              pripheralJointScan ?? currentLumbar.pripheralJointScan,
+          straightLegRaisingTest:
+              straightLegRaisingTest ?? currentLumbar.straightLegRaisingTest,
+          slumpTest: slumpTest ?? currentLumbar.slumpTest,
+          femordNerveTractionTest:
+              femordNerveTractionTest ?? currentLumbar.femordNerveTractionTest,
+          neuroDynamicTestNote:
+              neuroDynamicTestNote ?? currentLumbar.neuroDynamicTestNote,
+          passiveLumberExtensionTest: passiveLumberExtensionTest ??
+              currentLumbar.passiveLumberExtensionTest,
+          proneSegmentalInstabilityTest: proneSegmentalInstabilityTest ??
+              currentLumbar.proneSegmentalInstabilityTest,
+          lumberInstabilityNote:
+              lumberInstabilityNote ?? currentLumbar.lumberInstabilityNote,
+        ),
+      ),
+    );
+  }
+
 //For all states -------------------------------------------------------------
   dynamic selectedIndexInterpretation({required int selectedIndex}) {
     if (selectedIndex == 0) {
@@ -511,6 +618,14 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         return "Add session-Ce";
       } else {
         return "Next-Ce";
+      }
+    } else if (state is PatientMainStateLumbar) {
+      if (state.isLast && !state.addingSession) {
+        return "Submit-Lu";
+      } else if (state.addingSession && state.isLast) {
+        return "Add session-Lu";
+      } else {
+        return "Next-Lu";
       }
     } else {
       return "Next to area";
@@ -596,6 +711,18 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         RouteUtils.navigateTo(NewPatientOrSession());
 
         break;
+      case 'Lumbar':
+        emit(
+          PatientMainStateLumbar(
+            patientGeneral: patientGeneral,
+            currentStep: currentStep,
+            addingSession: true,
+          ),
+        );
+
+        RouteUtils.navigateTo(NewPatientOrSession());
+
+        break;
       default:
       // return DefaultPage();
     }
@@ -632,6 +759,14 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
             "Cervical") {
       emit(PatientMainStateCervical(
+        patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
+        currentStep: 1,
+        addingSession: false,
+      ));
+    } else if (state is PatientMainStateGeneralInfo &&
+        (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
+            "Lumbar") {
+      emit(PatientMainStateLumbar(
         patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
         currentStep: 1,
         addingSession: false,
@@ -673,6 +808,12 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       session = CervicalSession(
         date: DateTime.now(),
         cervical: state.cervical!,
+      );
+      previousState = state;
+    } else if (state is PatientMainStateLumbar) {
+      session = LumbarSession(
+        date: DateTime.now(),
+        lumbar: state.lumbar!,
       );
       previousState = state;
     }
@@ -724,6 +865,12 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       session = CervicalSession(
         date: DateTime.now(),
         cervical: state.cervical!,
+      );
+      previousState = state;
+    } else if (state is PatientMainStateLumbar) {
+      session = LumbarSession(
+        date: DateTime.now(),
+        lumbar: state.lumbar!,
       );
       previousState = state;
     }
