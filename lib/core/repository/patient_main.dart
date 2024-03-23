@@ -80,6 +80,11 @@ class PatientMainRepository {
             existingPatient.presentedArea = 'lumbar';
 
             break;
+
+          case 'elbow':
+            existingPatient.presentedArea = 'elbow';
+
+            break;
         }
 
         existingPatient.addSession(session);
