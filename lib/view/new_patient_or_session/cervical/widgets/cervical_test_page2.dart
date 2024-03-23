@@ -1,8 +1,7 @@
 part of '../view.dart';
 
-class __CervicalTestPage2 extends StatelessWidget {
-  const __CervicalTestPage2({super.key});
-
+class _CervicalTestPage2 extends StatelessWidget {
+  const _CervicalTestPage2({super.key});
   @override
   Widget build(BuildContext context) {
     final handler = context.read<PatientMainHandler>();

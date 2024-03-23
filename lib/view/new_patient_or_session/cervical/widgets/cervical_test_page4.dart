@@ -1,7 +1,7 @@
 part of '../view.dart';
 
-class __CervicalTestPage4 extends StatelessWidget {
-  const __CervicalTestPage4({super.key});
+class _CervicalTestPage4 extends StatelessWidget {
+  const _CervicalTestPage4({super.key});
 
   @override
   Widget build(BuildContext context) {

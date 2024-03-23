@@ -2,7 +2,6 @@ import 'package:al3yadah_app/core/handlers/new_patient_alt/handler.dart';
 import 'package:al3yadah_app/core/helpers/app_colors.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/validator.dart';
-import 'package:al3yadah_app/widgets/app/app_double_form_field.dart';
 import 'package:al3yadah_app/widgets/app/app_toggle.dart';
 import 'package:al3yadah_app/widgets/app_text.dart';
 import 'package:al3yadah_app/widgets/app_text_field.dart';
@@ -24,11 +23,11 @@ class CervicalContentView extends StatelessWidget {
       case 1:
         return _CervicalTestPage1();
       case 2:
-        return __CervicalTestPage2();
+        return _CervicalTestPage2();
       case 3:
-        return __CervicalTestPage3();
+        return _CervicalTestPage3();
       case 4:
-        return __CervicalTestPage4();
+        return _CervicalTestPage4();
       default:
         return SizedBox(child: AppText(title: "none"));
     }
