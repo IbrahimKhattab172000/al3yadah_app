@@ -6,6 +6,7 @@ import 'package:al3yadah_app/core/helpers/validator.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
 import 'package:al3yadah_app/view/new_patient_or_session/ankle/view.dart';
 import 'package:al3yadah_app/view/new_patient_or_session/cervical/view.dart';
+import 'package:al3yadah_app/view/new_patient_or_session/elbow/view.dart';
 import 'package:al3yadah_app/view/new_patient_or_session/knee/view.dart';
 import 'package:al3yadah_app/view/new_patient_or_session/lumbar/view.dart';
 import 'package:al3yadah_app/view/new_patient_or_session/shoulder/view.dart';
@@ -52,6 +53,8 @@ class NewPatientOrSession extends StatelessWidget {
                         return NewPatientCervicalWidget(state: state);
                       } else if (state is PatientMainStateLumbar) {
                         return NewPatientLumbarWidget(state: state);
+                      } else if (state is PatientMainStateElbow) {
+                        return NewPatientElbowWidget(state: state);
                       } else {
                         return SizedBox(
                           child: Text("nooo state${state.toString()}"),
@@ -107,6 +110,8 @@ class BackAndForthAfterSelectingThePresentedAreaButtons
               context.read<PatientMainHandler>().previousStepCervical();
             } else if (state is PatientMainStateLumbar) {
               context.read<PatientMainHandler>().previousStepLumbar();
+            } else if (state is PatientMainStateElbow) {
+              context.read<PatientMainHandler>().previousStepElbow();
             }
           },
           titleColor: AppColors.primary,
@@ -135,6 +140,8 @@ class BackAndForthAfterSelectingThePresentedAreaButtons
               context.read<PatientMainHandler>().nextStepCervical();
             } else if (state is PatientMainStateLumbar) {
               context.read<PatientMainHandler>().nextStepLumbar();
+            } else if (state is PatientMainStateElbow) {
+              context.read<PatientMainHandler>().nextStepElbow();
             }
           },
         ),
@@ -335,6 +342,31 @@ class NewPatientLumbarWidget extends StatelessWidget {
           children: [
             SizedBox(height: 24.height),
             LumbarContentView(state: state),
+            SizedBox(height: Utils.bottomDevicePadding),
+          ],
+        ),
+      ],
+    );
+  }
+}
+
+class NewPatientElbowWidget extends StatelessWidget {
+  final PatientMainStateElbow state;
+
+  const NewPatientElbowWidget({super.key, required this.state});
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        AppStepper(
+          currentStep: state.currentStep,
+          totalSteps: state.totalSteps,
+        ),
+        Column(
+          children: [
+            SizedBox(height: 24.height),
+            ElbowContentView(state: state),
             SizedBox(height: Utils.bottomDevicePadding),
           ],
         ),
