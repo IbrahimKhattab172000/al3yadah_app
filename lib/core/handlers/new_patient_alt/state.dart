@@ -152,6 +152,38 @@ class PatientMainStateCervical extends PatientMainState {
   }
 }
 
+class PatientMainStateLumbar extends PatientMainState {
+  late final PatientGeneral patientGeneral;
+  final Lumbar? lumbar;
+  final bool addingSession;
+
+  final int currentStep;
+
+  int get totalSteps => 3;
+  bool get isLast => currentStep == 3;
+  bool get isFirst => currentStep == 1;
+  PatientMainStateLumbar({
+    required this.patientGeneral,
+    this.lumbar,
+    required this.addingSession,
+    required this.currentStep,
+  });
+
+  PatientMainStateLumbar copyWith({
+    PatientGeneral? patientGeneral,
+    Lumbar? lumbar,
+    bool? addingSession,
+    int? currentStep,
+  }) {
+    return PatientMainStateLumbar(
+      patientGeneral: patientGeneral ?? this.patientGeneral,
+      lumbar: lumbar ?? this.lumbar,
+      addingSession: addingSession ?? this.addingSession,
+      currentStep: currentStep ?? this.currentStep,
+    );
+  }
+}
+
 ///----------------------------------For adding sessions---------------------------///
 
 final class PatientMainStateAddSessionLoading extends PatientMainState {}
