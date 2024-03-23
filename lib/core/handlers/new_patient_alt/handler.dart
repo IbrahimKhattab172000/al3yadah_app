@@ -414,7 +414,7 @@ class PatientMainHandler extends Cubit<PatientMainState> {
     String? cervicalFlexionTotationTest,
     String? cranioCervicalFlexionTest,
     String? deepNeekFlexorsEnduranceTest,
-    String? cervicalMuscleStrengh,
+    String? cervicalMuscleStrenghNote,
   }) {
     final currentCervical =
         (state as PatientMainStateCervical).cervical ?? Cervical();
@@ -459,8 +459,8 @@ class PatientMainHandler extends Cubit<PatientMainState> {
               currentCervical.cranioCervicalFlexionTest,
           deepNeekFlexorsEnduranceTest: deepNeekFlexorsEnduranceTest ??
               currentCervical.deepNeekFlexorsEnduranceTest,
-          cervicalMuscleStrengh:
-              cervicalMuscleStrengh ?? currentCervical.cervicalMuscleStrengh,
+          cervicalMuscleStrenghNote: cervicalMuscleStrenghNote ??
+              currentCervical.cervicalMuscleStrenghNote,
         ),
       ),
     );
