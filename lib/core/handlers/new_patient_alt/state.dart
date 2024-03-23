@@ -121,7 +121,35 @@ class PatientMainStateAnkle extends PatientMainState {
 }
 
 class PatientMainStateCervical extends PatientMainState {
-  PatientMainStateCervical();
+  late final PatientGeneral patientGeneral;
+  final Cervical? cervical;
+  final bool addingSession;
+
+  final int currentStep;
+
+  int get totalSteps => 4;
+  bool get isLast => currentStep == 4;
+  bool get isFirst => currentStep == 1;
+  PatientMainStateCervical({
+    required this.patientGeneral,
+    this.cervical,
+    required this.addingSession,
+    required this.currentStep,
+  });
+
+  PatientMainStateCervical copyWith({
+    PatientGeneral? patientGeneral,
+    Cervical? cervical,
+    bool? addingSession,
+    int? currentStep,
+  }) {
+    return PatientMainStateCervical(
+      patientGeneral: patientGeneral ?? this.patientGeneral,
+      cervical: cervical ?? this.cervical,
+      addingSession: addingSession ?? this.addingSession,
+      currentStep: currentStep ?? this.currentStep,
+    );
+  }
 }
 
 ///----------------------------------For adding sessions---------------------------///
