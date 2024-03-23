@@ -1,5 +1,6 @@
 import 'package:al3yadah_app/core/models/ankle.dart';
 import 'package:al3yadah_app/core/models/cervical.dart';
+import 'package:al3yadah_app/core/models/elbow.dart';
 import 'package:al3yadah_app/core/models/knee.dart';
 import 'package:al3yadah_app/core/models/lumbar.dart';
 import 'package:al3yadah_app/core/models/shoulder.dart';
@@ -33,6 +34,9 @@ abstract class Session {
 
       case 'lumbar':
         return LumbarSession.fromJson(map);
+
+      case 'elbow':
+        return ElbowSession.fromJson(map);
       default:
         throw UnimplementedError('fromJson not implemented for Session');
     }
@@ -195,6 +199,38 @@ class LumbarSession extends Session {
       // id: map['id'] as int,
       date: (map['date'] as Timestamp).toDate(),
       lumbar: Lumbar.fromMap(map['lumbar'] as Map<String, dynamic>),
+    );
+  }
+}
+
+class ElbowSession extends Session {
+  final Elbow elbow;
+
+  ElbowSession({
+    // required int id,
+    required super.date,
+    required this.elbow,
+  }) : super(
+          // id: id,
+          type: 'elbow',
+        );
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      // 'id': id,
+      'date': date,
+      'type': type,
+      'elbow': elbow.toMap(),
+    };
+  }
+
+  @override
+  factory ElbowSession.fromJson(Map<String, dynamic> map) {
+    return ElbowSession(
+      // id: map['id'] as int,
+      date: (map['date'] as Timestamp).toDate(),
+      elbow: Elbow.fromMap(map['elbow'] as Map<String, dynamic>),
     );
   }
 }
