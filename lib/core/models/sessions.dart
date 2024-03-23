@@ -1,4 +1,5 @@
 import 'package:al3yadah_app/core/models/ankle.dart';
+import 'package:al3yadah_app/core/models/cervical.dart';
 import 'package:al3yadah_app/core/models/knee.dart';
 import 'package:al3yadah_app/core/models/shoulder.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -37,11 +38,10 @@ class ShoulderSession extends Session {
 
   ShoulderSession({
     // required int id,
-    required DateTime date,
+    required super.date,
     required this.shoulder,
   }) : super(
           // id: id,
-          date: date,
           type: 'shoulder',
         );
 
@@ -70,11 +70,10 @@ class KneeSession extends Session {
 
   KneeSession({
     // required int id,
-    required DateTime date,
+    required super.date,
     required this.knee,
   }) : super(
           // id: id,
-          date: date,
           type: 'knee',
         );
 
@@ -103,11 +102,10 @@ class AnkleSession extends Session {
 
   AnkleSession({
     // required int id,
-    required DateTime date,
+    required super.date,
     required this.ankle,
   }) : super(
           // id: id,
-          date: date,
           type: 'ankle',
         );
 
@@ -127,6 +125,38 @@ class AnkleSession extends Session {
       // id: map['id'] as int,
       date: (map['date'] as Timestamp).toDate(),
       ankle: Ankle.fromMap(map['ankle'] as Map<String, dynamic>),
+    );
+  }
+}
+
+class CervicalSession extends Session {
+  final Cervical cervical;
+
+  CervicalSession({
+    // required int id,
+    required super.date,
+    required this.cervical,
+  }) : super(
+          // id: id,
+          type: 'cervical',
+        );
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      // 'id': id,
+      'date': date,
+      'type': type,
+      'cervical': cervical.toMap(),
+    };
+  }
+
+  @override
+  factory CervicalSession.fromJson(Map<String, dynamic> map) {
+    return CervicalSession(
+      // id: map['id'] as int,
+      date: (map['date'] as Timestamp).toDate(),
+      cervical: Cervical.fromMap(map['cervical'] as Map<String, dynamic>),
     );
   }
 }
