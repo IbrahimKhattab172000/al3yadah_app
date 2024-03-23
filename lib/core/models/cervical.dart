@@ -20,7 +20,7 @@ class Cervical {
   String? cervicalFlexionTotationTest;
   String? cranioCervicalFlexionTest;
   String? deepNeekFlexorsEnduranceTest;
-  String? cervicalMuscleStrengh;
+  String? cervicalMuscleStrenghNote;
   Cervical({
     this.noRedFlags,
     this.psycologicCauses,
@@ -43,7 +43,7 @@ class Cervical {
     this.cervicalFlexionTotationTest,
     this.cranioCervicalFlexionTest,
     this.deepNeekFlexorsEnduranceTest,
-    this.cervicalMuscleStrengh,
+    this.cervicalMuscleStrenghNote,
   });
 
   Cervical copyWith({
@@ -68,7 +68,7 @@ class Cervical {
     String? cervicalFlexionTotationTest,
     String? cranioCervicalFlexionTest,
     String? deepNeekFlexorsEnduranceTest,
-    String? cervicalMuscleStrengh,
+    String? cervicalMuscleStrenghNote,
   }) {
     return Cervical(
       noRedFlags: noRedFlags ?? this.noRedFlags,
@@ -101,8 +101,8 @@ class Cervical {
           cranioCervicalFlexionTest ?? this.cranioCervicalFlexionTest,
       deepNeekFlexorsEnduranceTest:
           deepNeekFlexorsEnduranceTest ?? this.deepNeekFlexorsEnduranceTest,
-      cervicalMuscleStrengh:
-          cervicalMuscleStrengh ?? this.cervicalMuscleStrengh,
+      cervicalMuscleStrenghNote:
+          cervicalMuscleStrenghNote ?? this.cervicalMuscleStrenghNote,
     );
   }
 
@@ -129,7 +129,7 @@ class Cervical {
       'cervicalFlexionTotationTest': cervicalFlexionTotationTest,
       'cranioCervicalFlexionTest': cranioCervicalFlexionTest,
       'deepNeekFlexorsEnduranceTest': deepNeekFlexorsEnduranceTest,
-      'cervicalMuscleStrengh': cervicalMuscleStrengh,
+      'cervicalMuscleStrenghNote': cervicalMuscleStrenghNote,
     };
   }
 
@@ -193,14 +193,14 @@ class Cervical {
       deepNeekFlexorsEnduranceTest: map['deepNeekFlexorsEnduranceTest'] != null
           ? map['deepNeekFlexorsEnduranceTest'] as String
           : null,
-      cervicalMuscleStrengh: map['cervicalMuscleStrengh'] != null
-          ? map['cervicalMuscleStrengh'] as String
+      cervicalMuscleStrenghNote: map['cervicalMuscleStrenghNote'] != null
+          ? map['cervicalMuscleStrenghNote'] as String
           : null,
     );
   }
 
   @override
   String toString() {
-    return 'Cervical(noRedFlags: $noRedFlags, psycologicCauses: $psycologicCauses, historyNote: $historyNote, painPlaceOrDermatomeNote: $painPlaceOrDermatomeNote, painVasNumber: $painVasNumber, romFlexionNumber: $romFlexionNumber, romExtensionNumber: $romExtensionNumber, romLSideBendingNumber: $romLSideBendingNumber, romRSideBendingNumber: $romRSideBendingNumber, romLRotationNumber: $romLRotationNumber, romRRotationNumber: $romRRotationNumber, romNote: $romNote, segmentalMobilityNote: $segmentalMobilityNote, muscleAssessmentNote: $muscleAssessmentNote, peripheralJointScanNote: $peripheralJointScanNote, distractionTest: $distractionTest, spurlingCompressionTest: $spurlingCompressionTest, cervicalQuadrantTest: $cervicalQuadrantTest, cervicalFlexionTotationTest: $cervicalFlexionTotationTest, cranioCervicalFlexionTest: $cranioCervicalFlexionTest, deepNeekFlexorsEnduranceTest: $deepNeekFlexorsEnduranceTest, cervicalMuscleStrengh: $cervicalMuscleStrengh)';
+    return 'Cervical(noRedFlags: $noRedFlags, psycologicCauses: $psycologicCauses, historyNote: $historyNote, painPlaceOrDermatomeNote: $painPlaceOrDermatomeNote, painVasNumber: $painVasNumber, romFlexionNumber: $romFlexionNumber, romExtensionNumber: $romExtensionNumber, romLSideBendingNumber: $romLSideBendingNumber, romRSideBendingNumber: $romRSideBendingNumber, romLRotationNumber: $romLRotationNumber, romRRotationNumber: $romRRotationNumber, romNote: $romNote, segmentalMobilityNote: $segmentalMobilityNote, muscleAssessmentNote: $muscleAssessmentNote, peripheralJointScanNote: $peripheralJointScanNote, distractionTest: $distractionTest, spurlingCompressionTest: $spurlingCompressionTest, cervicalQuadrantTest: $cervicalQuadrantTest, cervicalFlexionTotationTest: $cervicalFlexionTotationTest, cranioCervicalFlexionTest: $cranioCervicalFlexionTest, deepNeekFlexorsEnduranceTest: $deepNeekFlexorsEnduranceTest, cervicalMuscleStrenghNote: $cervicalMuscleStrenghNote)';
   }
 }
