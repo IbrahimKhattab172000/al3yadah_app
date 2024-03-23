@@ -30,6 +30,9 @@ abstract class Session {
         return AnkleSession.fromJson(map);
       case 'cervical':
         return CervicalSession.fromJson(map);
+
+      case 'lumbar':
+        return LumbarSession.fromJson(map);
       default:
         throw UnimplementedError('fromJson not implemented for Session');
     }
