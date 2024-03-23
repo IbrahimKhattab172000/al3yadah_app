@@ -1,4 +1,5 @@
 import 'package:al3yadah_app/core/models/ankle.dart';
+import 'package:al3yadah_app/core/models/cervical.dart';
 import 'package:al3yadah_app/core/models/knee.dart';
 import 'package:al3yadah_app/core/models/patient.dart';
 import 'package:al3yadah_app/core/models/patient_general.dart';
@@ -364,6 +365,107 @@ class PatientMainHandler extends Cubit<PatientMainState> {
     );
   }
 
+//Cervical--------------------------------------------------------------------
+  void nextStepCervical() {
+    if ((state as PatientMainStateCervical).currentStep < 4) {
+      emit((state as PatientMainStateCervical).copyWith(
+          currentStep: (state as PatientMainStateCervical).currentStep + 1));
+      print((state as PatientMainStateCervical).currentStep);
+    } else {
+      (state as PatientMainStateCervical).addingSession
+          ? addSessionToPatient(state: state)
+          : submitNewPatient(state: state);
+      RouteUtils.navigateTo(SuccessView());
+    }
+  }
+
+  void previousStepCervical() {
+    if (!(state as PatientMainStateCervical).isFirst) {
+      emit((state as PatientMainStateCervical).copyWith(
+          currentStep: (state as PatientMainStateCervical).currentStep - 1));
+      print((state as PatientMainStateCervical).currentStep);
+    } else {
+      print((state as PatientMainStateCervical).currentStep);
+
+      emit(PatientMainStateGeneralInfo(
+          patientGeneral: (state as PatientMainStateCervical).patientGeneral));
+    }
+  }
+
+  updateCervicalValues({
+    String? noRedFlags,
+    String? psycologicCauses,
+    String? historyNote,
+    String? painPlaceOrDermatomeNote,
+    int? painVasNumber,
+    int? romFlexionNumber,
+    int? romExtensionNumber,
+    int? romLSideBendingNumber,
+    int? romRSideBendingNumber,
+    int? romLRotationNumber,
+    int? romRRotationNumber,
+    String? romNote,
+    String? segmentalMobilityNote,
+    String? muscleAssessmentNote,
+    String? peripheralJointScanNote,
+    String? distractionTest,
+    String? spurlingCompressionTest,
+    String? cervicalQuadrantTest,
+    String? cervicalFlexionTotationTest,
+    String? cranioCervicalFlexionTest,
+    String? deepNeekFlexorsEnduranceTest,
+    String? cervicalMuscleStrengh,
+  }) {
+    final currentCervical =
+        (state as PatientMainStateCervical).cervical ?? Cervical();
+
+    emit(
+      (state as PatientMainStateCervical).copyWith(
+        cervical: Cervical(
+          noRedFlags: noRedFlags ?? currentCervical.noRedFlags,
+          psycologicCauses:
+              psycologicCauses ?? currentCervical.psycologicCauses,
+          historyNote: historyNote ?? currentCervical.historyNote,
+          painPlaceOrDermatomeNote: painPlaceOrDermatomeNote ??
+              currentCervical.painPlaceOrDermatomeNote,
+          painVasNumber: painVasNumber ?? currentCervical.painVasNumber,
+          romFlexionNumber:
+              romFlexionNumber ?? currentCervical.romFlexionNumber,
+          romExtensionNumber:
+              romExtensionNumber ?? currentCervical.romExtensionNumber,
+          romLSideBendingNumber:
+              romLSideBendingNumber ?? currentCervical.romLSideBendingNumber,
+          romRSideBendingNumber:
+              romRSideBendingNumber ?? currentCervical.romRSideBendingNumber,
+          romLRotationNumber:
+              romLRotationNumber ?? currentCervical.romLRotationNumber,
+          romRRotationNumber:
+              romRRotationNumber ?? currentCervical.romRRotationNumber,
+          romNote: romNote ?? currentCervical.romNote,
+          segmentalMobilityNote:
+              segmentalMobilityNote ?? currentCervical.segmentalMobilityNote,
+          muscleAssessmentNote:
+              muscleAssessmentNote ?? currentCervical.muscleAssessmentNote,
+          peripheralJointScanNote: peripheralJointScanNote ??
+              currentCervical.peripheralJointScanNote,
+          distractionTest: distractionTest ?? currentCervical.distractionTest,
+          spurlingCompressionTest: spurlingCompressionTest ??
+              currentCervical.spurlingCompressionTest,
+          cervicalQuadrantTest:
+              cervicalQuadrantTest ?? currentCervical.cervicalQuadrantTest,
+          cervicalFlexionTotationTest: cervicalFlexionTotationTest ??
+              currentCervical.cervicalFlexionTotationTest,
+          cranioCervicalFlexionTest: cranioCervicalFlexionTest ??
+              currentCervical.cranioCervicalFlexionTest,
+          deepNeekFlexorsEnduranceTest: deepNeekFlexorsEnduranceTest ??
+              currentCervical.deepNeekFlexorsEnduranceTest,
+          cervicalMuscleStrengh:
+              cervicalMuscleStrengh ?? currentCervical.cervicalMuscleStrengh,
+        ),
+      ),
+    );
+  }
+
 //For all states -------------------------------------------------------------
   dynamic selectedIndexInterpretation({required int selectedIndex}) {
     if (selectedIndex == 0) {
@@ -402,17 +504,15 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       } else {
         return "Next-An";
       }
-    }
-    // else if (state is PatientMainStateCervical) {
-    //   if (state.isLast && !state.addingSession) {
-    //     return "Submit";
-    //   } else if (state.addingSession && state.isLast) {
-    //     return "Add session";
-    //   } else {
-    //     return "Next";
-    //   }
-    // }
-    else {
+    } else if (state is PatientMainStateCervical) {
+      if (state.isLast && !state.addingSession) {
+        return "Submit-Ce";
+      } else if (state.addingSession && state.isLast) {
+        return "Add session-Ce";
+      } else {
+        return "Next-Ce";
+      }
+    } else {
       return "Next to area";
     }
   }
@@ -484,6 +584,18 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         RouteUtils.navigateTo(NewPatientOrSession());
 
         break;
+      case 'Cervical':
+        emit(
+          PatientMainStateCervical(
+            patientGeneral: patientGeneral,
+            currentStep: currentStep,
+            addingSession: true,
+          ),
+        );
+
+        RouteUtils.navigateTo(NewPatientOrSession());
+
+        break;
       default:
       // return DefaultPage();
     }
@@ -512,6 +624,14 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
             "Ankle") {
       emit(PatientMainStateAnkle(
+        patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
+        currentStep: 1,
+        addingSession: false,
+      ));
+    } else if (state is PatientMainStateGeneralInfo &&
+        (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
+            "Cervical") {
+      emit(PatientMainStateCervical(
         patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
         currentStep: 1,
         addingSession: false,
@@ -547,6 +667,12 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       session = AnkleSession(
         date: DateTime.now(),
         ankle: state.ankle!,
+      );
+      previousState = state;
+    } else if (state is PatientMainStateCervical) {
+      session = CervicalSession(
+        date: DateTime.now(),
+        cervical: state.cervical!,
       );
       previousState = state;
     }
@@ -592,6 +718,12 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       session = AnkleSession(
         date: DateTime.now(),
         ankle: state.ankle!,
+      );
+      previousState = state;
+    } else if (state is PatientMainStateCervical) {
+      session = CervicalSession(
+        date: DateTime.now(),
+        cervical: state.cervical!,
       );
       previousState = state;
     }
