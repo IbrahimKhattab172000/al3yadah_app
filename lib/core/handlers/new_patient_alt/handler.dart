@@ -486,10 +486,7 @@ class PatientMainHandler extends Cubit<PatientMainState> {
     if (!(state as PatientMainStateLumbar).isFirst) {
       emit((state as PatientMainStateLumbar).copyWith(
           currentStep: (state as PatientMainStateLumbar).currentStep - 1));
-      print((state as PatientMainStateCervical).currentStep);
     } else {
-      print((state as PatientMainStateLumbar).currentStep);
-
       emit(PatientMainStateGeneralInfo(
           patientGeneral: (state as PatientMainStateLumbar).patientGeneral));
     }
@@ -574,6 +571,85 @@ class PatientMainHandler extends Cubit<PatientMainState> {
     );
   }
 
+//Elbow--------------------------------------------------------------------
+  void nextStepElbow() {
+    if ((state as PatientMainStateElbow).currentStep < 2) {
+      emit((state as PatientMainStateElbow).copyWith(
+          currentStep: (state as PatientMainStateElbow).currentStep + 1));
+      print((state as PatientMainStateElbow).currentStep);
+    } else {
+      (state as PatientMainStateElbow).addingSession
+          ? addSessionToPatient(state: state)
+          : submitNewPatient(state: state);
+      RouteUtils.navigateTo(SuccessView());
+    }
+  }
+
+  void previousStepElbow() {
+    if (!(state as PatientMainStateElbow).isFirst) {
+      emit((state as PatientMainStateElbow).copyWith(
+          currentStep: (state as PatientMainStateElbow).currentStep - 1));
+    } else {
+      print((state as PatientMainStateElbow).currentStep);
+
+      emit(PatientMainStateGeneralInfo(
+          patientGeneral: (state as PatientMainStateElbow).patientGeneral));
+    }
+  }
+
+  updateElbowValues({
+    String? historyNote,
+    String? palpationNote,
+    String? painPlaceNote,
+    String? painVasNote,
+    int? romFlexionNumber,
+    int? romExtensionNumber,
+    int? romSupinationNumber,
+    int? romPronationNumber,
+    String? romNote,
+    String? muscleAssessmentNote,
+    String? mclStressTest,
+    String? lclStressTest,
+    String? cozensTestOrResistance,
+    String? millsTestOrPassiveStretch,
+    String? maudsleysTest,
+    String? tinnelSign,
+    String? ulnarNerveCompressionTest,
+  }) {
+    final currentElbow = (state as PatientMainStateElbow).elbow ?? Elbow();
+
+    emit(
+      (state as PatientMainStateElbow).copyWith(
+        elbow: Elbow(
+          historyNote: historyNote ?? currentElbow.historyNote,
+          palpationNote: palpationNote ?? currentElbow.palpationNote,
+          painPlaceNote: painPlaceNote ?? currentElbow.painPlaceNote,
+          painVasNote: painVasNote ?? currentElbow.painVasNote,
+          romFlexionNumber: romFlexionNumber ?? currentElbow.romFlexionNumber,
+          romExtensionNumber:
+              romExtensionNumber ?? currentElbow.romExtensionNumber,
+          romSupinationNumber:
+              romSupinationNumber ?? currentElbow.romSupinationNumber,
+          romPronationNumber:
+              romPronationNumber ?? currentElbow.romPronationNumber,
+          romNote: romNote ?? currentElbow.romNote,
+          muscleAssessmentNote:
+              muscleAssessmentNote ?? currentElbow.muscleAssessmentNote,
+          mclStressTest: mclStressTest ?? currentElbow.mclStressTest,
+          lclStressTest: lclStressTest ?? currentElbow.lclStressTest,
+          cozensTestOrResistance:
+              cozensTestOrResistance ?? currentElbow.cozensTestOrResistance,
+          millsTestOrPassiveStretch: millsTestOrPassiveStretch ??
+              currentElbow.millsTestOrPassiveStretch,
+          maudsleysTest: maudsleysTest ?? currentElbow.maudsleysTest,
+          tinnelSign: tinnelSign ?? currentElbow.tinnelSign,
+          ulnarNerveCompressionTest: ulnarNerveCompressionTest ??
+              currentElbow.ulnarNerveCompressionTest,
+        ),
+      ),
+    );
+  }
+
 //For all states -------------------------------------------------------------
   dynamic selectedIndexInterpretation({required int selectedIndex}) {
     if (selectedIndex == 0) {
@@ -627,6 +703,14 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         return "Add session-Lu";
       } else {
         return "Next-Lu";
+      }
+    } else if (state is PatientMainStateElbow) {
+      if (state.isLast && !state.addingSession) {
+        return "Submit-El";
+      } else if (state.addingSession && state.isLast) {
+        return "Add session-El";
+      } else {
+        return "Next-El";
       }
     } else {
       return "Next to area";
@@ -724,6 +808,18 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         RouteUtils.navigateTo(NewPatientOrSession());
 
         break;
+      case 'Elbow':
+        emit(
+          PatientMainStateElbow(
+            patientGeneral: patientGeneral,
+            currentStep: currentStep,
+            addingSession: true,
+          ),
+        );
+
+        RouteUtils.navigateTo(NewPatientOrSession());
+
+        break;
       default:
       // return DefaultPage();
     }
@@ -772,6 +868,14 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         currentStep: 1,
         addingSession: false,
       ));
+    } else if (state is PatientMainStateGeneralInfo &&
+        (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
+            "Elbow") {
+      emit(PatientMainStateElbow(
+        patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
+        currentStep: 1,
+        addingSession: false,
+      ));
     } else {
       return;
     }
@@ -815,6 +919,12 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       session = LumbarSession(
         date: DateTime.now(),
         lumbar: state.lumbar!,
+      );
+      previousState = state;
+    } else if (state is PatientMainStateElbow) {
+      session = ElbowSession(
+        date: DateTime.now(),
+        elbow: state.elbow!,
       );
       previousState = state;
     }
@@ -872,6 +982,12 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       session = LumbarSession(
         date: DateTime.now(),
         lumbar: state.lumbar!,
+      );
+      previousState = state;
+    } else if (state is PatientMainStateElbow) {
+      session = ElbowSession(
+        date: DateTime.now(),
+        elbow: state.elbow!,
       );
       previousState = state;
     }
