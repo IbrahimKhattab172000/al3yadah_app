@@ -71,9 +71,13 @@ class PatientMainRepository {
             existingPatient.presentedArea = 'ankle';
 
             break;
-
           case 'cervical':
             existingPatient.presentedArea = 'cervical';
+
+            break;
+
+          case 'lumbar':
+            existingPatient.presentedArea = 'lumbar';
 
             break;
         }
