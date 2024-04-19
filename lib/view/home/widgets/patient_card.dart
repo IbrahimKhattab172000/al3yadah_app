@@ -92,8 +92,11 @@ class PatientCard extends StatelessWidget {
                       SizedBox(width: 10.width),
                       AppText(
                         title: DateFormat('dd MMM').format(
-                            patient.followups?.last.date ??
-                                patient.session.date),
+                          (patient.followups?.isNotEmpty == true)
+                              ? patient.followups!.last.date ??
+                                  patient.session.date
+                              : patient.session.date,
+                        ),
                         color: AppColors.txtFieldlable1,
                         fontSize: 16,
                         fontWeight: FontWeight.w500,
