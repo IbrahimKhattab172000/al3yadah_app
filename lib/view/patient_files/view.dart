@@ -2,11 +2,17 @@ import 'package:al3yadah_app/core/handlers/new_patient_alt/handler.dart';
 import 'package:al3yadah_app/core/helpers/app_colors.dart';
 import 'package:al3yadah_app/core/helpers/dimensions.dart';
 import 'package:al3yadah_app/core/helpers/utils.dart';
+import 'package:al3yadah_app/core/models/followup.dart';
 import 'package:al3yadah_app/core/models/patient.dart';
+import 'package:al3yadah_app/core/route_utils/route_utils.dart';
 import 'package:al3yadah_app/view/add_session/view.dart';
+import 'package:al3yadah_app/view/follow_up_session/view.dart';
+import 'package:al3yadah_app/view/patient_files/widget/follow_up_card.dart';
+import 'package:al3yadah_app/view/patient_files/widget/follow_up_items.dart';
 import 'package:al3yadah_app/view/patient_files/widget/session_card.dart';
 import 'package:al3yadah_app/widgets/app/app_data_show_card.dart';
 import 'package:al3yadah_app/widgets/app_app_bar.dart';
+import 'package:al3yadah_app/widgets/app_button.dart';
 import 'package:al3yadah_app/widgets/app_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,6 +67,7 @@ class PatientFilesView extends StatelessWidget {
         return Scaffold(
           appBar: AppAppBar(title: patient.name),
           body: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
               child: Column(
@@ -100,7 +107,7 @@ class PatientFilesView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         AppText(
-                          title: "Last Presented Area:",
+                          title: "Presented Area:",
                           color: AppColors.txtFieldlable2,
                           fontWeight: FontWeight.w700,
                         ),
@@ -121,22 +128,33 @@ class PatientFilesView extends StatelessWidget {
                     ),
                   ],
                   SizedBox(height: 24.height),
+                  SessionCard(
+                    patient: patient,
+                  ),
                   ListView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemCount: patient.sessions.length,
+                    itemCount: patient.followups?.length ?? 0,
                     itemBuilder: (context, index) {
-                      return SessionCard(
-                        patient: patient,
+                      return FollowupCard(
+                        followUp: patient.followups?[index] ?? FollowUp(),
                         index: index,
                       );
                     },
                   ),
                   SizedBox(height: 24.height),
-                  AddSessionView(
-                    newPatientAltHandler: context.read<PatientMainHandler>(),
-                    currentPatient: patient,
+                  AppButton(
+                    title: "Follow Up Session",
+                    onTap: () {
+                      RouteUtils.navigateTo(FollowUpSession(
+                        patientName: patient.name,
+                      ));
+                    },
                   ),
+                  // AddSessionView(
+                  //   newPatientAltHandler: context.read<PatientMainHandler>(),
+                  //   currentPatient: patient,
+                  // ),
                   SizedBox(height: Utils.bottomDevicePadding),
                 ],
               ),

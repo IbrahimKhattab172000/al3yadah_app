@@ -28,11 +28,7 @@ class NewPatientOrSession extends StatelessWidget {
     return BlocBuilder<PatientMainHandler, PatientMainState>(
       builder: (context, state) {
         return Scaffold(
-          appBar: AppAppBar(
-              title:
-                  (state is PatientMainStateShoulder) && (state).addingSession
-                      ? "Add"
-                      : "New Patient"),
+          appBar: AppAppBar(title: "New Patient"),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
             child: SingleChildScrollView(

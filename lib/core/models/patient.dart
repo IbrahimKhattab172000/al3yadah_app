@@ -1,3 +1,4 @@
+import 'package:al3yadah_app/core/models/followup.dart';
 import 'package:al3yadah_app/core/models/sessions.dart';
 
 class Patient {
@@ -9,7 +10,8 @@ class Patient {
   String chiefComplaint;
   String course;
   String presentedArea;
-  List<Session> sessions;
+  Session session;
+  List<FollowUp>? followups;
 
   Patient({
     required this.name,
@@ -20,7 +22,8 @@ class Patient {
     required this.chiefComplaint,
     required this.course,
     required this.presentedArea,
-    required this.sessions,
+    required this.session,
+    this.followups,
   });
 
   factory Patient.fromJson(Map<String, dynamic> json) => Patient(
@@ -32,9 +35,11 @@ class Patient {
         chiefComplaint: json['chiefComplaint'],
         course: json['course'],
         presentedArea: json['presentedArea'],
-        sessions: List<Session>.from(
-          json['sessions'].map((sessionJson) => Session.fromJson(sessionJson)),
-        ),
+        session: Session.fromJson(json['session']),
+        followups: json['followups'] != null
+            ? List<FollowUp>.from(
+                json['followups'].map((x) => FollowUp.fromMap(x)))
+            : null,
       );
 
   Map<String, dynamic> toJson() => {
@@ -46,7 +51,10 @@ class Patient {
         'chiefComplaint': chiefComplaint,
         'course': course,
         'presentedArea': presentedArea,
-        'sessions': sessions.map((session) => session.toJson()).toList(),
+        'session': session.toJson(),
+        'followups': followups != null
+            ? List<dynamic>.from(followups!.map((x) => x.toMap()))
+            : null,
       };
 
   Patient copyWith({
@@ -58,7 +66,8 @@ class Patient {
     String? chiefComplaint,
     String? course,
     String? presentedArea,
-    List<Session>? sessions,
+    Session? session,
+    List<FollowUp>? followups,
   }) {
     return Patient(
       name: name ?? this.name,
@@ -69,11 +78,20 @@ class Patient {
       chiefComplaint: chiefComplaint ?? this.chiefComplaint,
       course: course ?? this.course,
       presentedArea: presentedArea ?? this.presentedArea,
-      sessions: sessions ?? this.sessions,
+      session: session ?? this.session,
+      followups: followups ?? this.followups,
     );
   }
 
   void addSession(Session session) {
-    sessions.add(session);
+    this.session = session;
+  }
+
+  void addFollowUp(FollowUp followup) {
+    if (followups == null) {
+      followups = [followup];
+    } else {
+      followups!.add(followup);
+    }
   }
 }

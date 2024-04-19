@@ -1,6 +1,7 @@
 import 'package:al3yadah_app/core/handlers/new_patient_alt/handler.dart';
 import 'package:al3yadah_app/core/repository/patient_main.dart';
 import 'package:al3yadah_app/firebase_options.dart';
+import 'package:al3yadah_app/view/follow_up_session/cubit.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,9 @@ void main() async {
           create: (context) => PatientMainHandler(
               patientMainRepository: PatientMainRepository()),
         ),
-        // Add more providers if needed
+        BlocProvider<FollowUpCubit>(
+          create: (context) => FollowUpCubit(),
+        ),
       ],
       child: EasyLocalization(
         supportedLocales: [

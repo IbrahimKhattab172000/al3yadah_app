@@ -9,7 +9,6 @@ import 'package:al3yadah_app/core/models/sessions.dart';
 import 'package:al3yadah_app/core/models/shoulder.dart';
 import 'package:al3yadah_app/core/repository/patient_main.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
-import 'package:al3yadah_app/view/new_patient_or_session/new_patient_or_session.dart';
 import 'package:al3yadah_app/view/success/view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -29,28 +28,28 @@ class PatientMainHandler extends Cubit<PatientMainState> {
     PatientGeneral? patientGeneral,
     String? presentedArea,
   }) {
-    if (!addingSession) {
-      emit(
-        PatientMainStateGeneralInfo(
-          patientGeneral: PatientGeneral(
-            name: "name",
-            age: 1,
-            occupation: "occupation",
-            medicalRef: "medicalRef",
-            weight: 1,
-            chiefComplaint: "chiefComplaint",
-            course: "course",
-            presentedArea: "presentedArea",
-          ),
+    // if (!addingSession) {
+    emit(
+      PatientMainStateGeneralInfo(
+        patientGeneral: PatientGeneral(
+          name: "name",
+          age: 1,
+          occupation: "occupation",
+          medicalRef: "medicalRef",
+          weight: 1,
+          chiefComplaint: "chiefComplaint",
+          course: "course",
+          presentedArea: "presentedArea",
         ),
-      );
-    } else {
-      generateStateAccordingToTheSelectedPresentedAreaForAddingSessions(
-        currentStep: 1,
-        patientGeneral: patientGeneral!,
-        presentedArea: presentedArea!,
-      );
-    }
+      ),
+    );
+    // } else {
+    //   generateStateAccordingToTheSelectedPresentedAreaForAddingSessions(
+    //     currentStep: 1,
+    //     patientGeneral: patientGeneral!,
+    //     presentedArea: presentedArea!,
+    //   );
+    // }
   }
 
 // TextEditingController nameController = TextEditingController();
@@ -80,9 +79,10 @@ class PatientMainHandler extends Cubit<PatientMainState> {
           currentStep: (state as PatientMainStateShoulder).currentStep + 1));
       print((state as PatientMainStateShoulder).currentStep);
     } else {
-      (state as PatientMainStateShoulder).addingSession
-          ? addSessionToPatient(state: state)
-          : submitNewPatient(state: state);
+      // (state as PatientMainStateShoulder).addingSession
+      //     ? addSessionToPatient(state: state)
+      //     :
+      submitNewPatient(state: state);
       RouteUtils.navigateTo(SuccessView());
     }
   }
@@ -199,9 +199,10 @@ class PatientMainHandler extends Cubit<PatientMainState> {
           currentStep: (state as PatientMainStateKnee).currentStep + 1));
       print((state as PatientMainStateKnee).currentStep);
     } else {
-      (state as PatientMainStateKnee).addingSession
-          ? addSessionToPatient(state: state)
-          : submitNewPatient(state: state);
+      // (state as PatientMainStateKnee).addingSession
+      //     ? addSessionToPatient(state: state)
+      //     :
+      submitNewPatient(state: state);
       RouteUtils.navigateTo(SuccessView());
     }
   }
@@ -290,9 +291,10 @@ class PatientMainHandler extends Cubit<PatientMainState> {
           currentStep: (state as PatientMainStateAnkle).currentStep + 1));
       print((state as PatientMainStateAnkle).currentStep);
     } else {
-      (state as PatientMainStateAnkle).addingSession
-          ? addSessionToPatient(state: state)
-          : submitNewPatient(state: state);
+      // (state as PatientMainStateAnkle).addingSession
+      //     ? addSessionToPatient(state: state)
+      //     :
+      submitNewPatient(state: state);
       RouteUtils.navigateTo(SuccessView());
     }
   }
@@ -374,9 +376,10 @@ class PatientMainHandler extends Cubit<PatientMainState> {
           currentStep: (state as PatientMainStateCervical).currentStep + 1));
       print((state as PatientMainStateCervical).currentStep);
     } else {
-      (state as PatientMainStateCervical).addingSession
-          ? addSessionToPatient(state: state)
-          : submitNewPatient(state: state);
+      // (state as PatientMainStateCervical).addingSession
+      //     ? addSessionToPatient(state: state)
+      //     :
+      submitNewPatient(state: state);
       RouteUtils.navigateTo(SuccessView());
     }
   }
@@ -475,9 +478,10 @@ class PatientMainHandler extends Cubit<PatientMainState> {
           currentStep: (state as PatientMainStateLumbar).currentStep + 1));
       print((state as PatientMainStateLumbar).currentStep);
     } else {
-      (state as PatientMainStateLumbar).addingSession
-          ? addSessionToPatient(state: state)
-          : submitNewPatient(state: state);
+      // (state as PatientMainStateLumbar).addingSession
+      //     ? addSessionToPatient(state: state)
+      //     :
+      submitNewPatient(state: state);
       RouteUtils.navigateTo(SuccessView());
     }
   }
@@ -578,9 +582,10 @@ class PatientMainHandler extends Cubit<PatientMainState> {
           currentStep: (state as PatientMainStateElbow).currentStep + 1));
       print((state as PatientMainStateElbow).currentStep);
     } else {
-      (state as PatientMainStateElbow).addingSession
-          ? addSessionToPatient(state: state)
-          : submitNewPatient(state: state);
+      // (state as PatientMainStateElbow).addingSession
+      //     ? addSessionToPatient(state: state)
+      //     :
+      submitNewPatient(state: state);
       RouteUtils.navigateTo(SuccessView());
     }
   }
@@ -661,55 +666,78 @@ class PatientMainHandler extends Cubit<PatientMainState> {
     }
   }
 
-//TODO: Check chatgpt chat called  getTitleForNextButtonBasedOnTheState
   String getTitleForNextButtonBasedOnTheState(
       {required PatientMainState state}) {
     if (state is PatientMainStateShoulder) {
-      if (state.isLast && !state.addingSession) {
+      if (state.isLast
+          // && !state.addingSession
+          ) {
         return "Submit-Sh";
-      } else if (state.addingSession && state.isLast) {
-        return "Add session-Sh";
-      } else {
+      }
+      //  else if (state.addingSession && state.isLast) {
+      //   return "Add session-Sh";
+      // }
+      else {
         return "Next-Sh";
       }
     } else if (state is PatientMainStateKnee) {
-      if (state.isLast && !state.addingSession) {
+      if (state.isLast
+          // && !state.addingSession
+          ) {
         return "Submit-Kn";
-      } else if (state.addingSession && state.isLast) {
-        return "Add session-Kn";
-      } else {
+      }
+      // else if (state.addingSession && state.isLast) {
+      //   return "Add session-Kn";
+      // }
+      else {
         return "Next-Kn";
       }
     } else if (state is PatientMainStateAnkle) {
-      if (state.isLast && !state.addingSession) {
+      if (state.isLast
+          //  && !state.addingSession
+          ) {
         return "Submit-An";
-      } else if (state.addingSession && state.isLast) {
-        return "Add session-An";
-      } else {
+      }
+      // else if (state.addingSession && state.isLast) {
+      //   return "Add session-An";
+      // }
+      else {
         return "Next-An";
       }
     } else if (state is PatientMainStateCervical) {
-      if (state.isLast && !state.addingSession) {
+      if (state.isLast
+          // && !state.addingSession
+          ) {
         return "Submit-Ce";
-      } else if (state.addingSession && state.isLast) {
-        return "Add session-Ce";
-      } else {
+      }
+      //  else if (state.addingSession && state.isLast) {
+      //   return "Add session-Ce";
+      // }
+      else {
         return "Next-Ce";
       }
     } else if (state is PatientMainStateLumbar) {
-      if (state.isLast && !state.addingSession) {
+      if (state.isLast
+          //  && !state.addingSession
+          ) {
         return "Submit-Lu";
-      } else if (state.addingSession && state.isLast) {
-        return "Add session-Lu";
-      } else {
+      }
+      // else if (state.addingSession && state.isLast) {
+      //   return "Add session-Lu";
+      // }
+      else {
         return "Next-Lu";
       }
     } else if (state is PatientMainStateElbow) {
-      if (state.isLast && !state.addingSession) {
+      if (state.isLast
+          //  && !state.addingSession
+          ) {
         return "Submit-El";
-      } else if (state.addingSession && state.isLast) {
-        return "Add session-El";
-      } else {
+      }
+      // else if (state.addingSession && state.isLast) {
+      //   return "Add session-El";
+      // }
+      else {
         return "Next-El";
       }
     } else {
@@ -742,88 +770,88 @@ class PatientMainHandler extends Cubit<PatientMainState> {
     );
   }
 
-  generateStateAccordingToTheSelectedPresentedAreaForAddingSessions({
-    required String presentedArea,
-    required PatientGeneral patientGeneral,
-    required int currentStep,
-  }) {
-    switch (presentedArea) {
-      case 'Shoulder':
-        emit(
-          PatientMainStateShoulder(
-            patientGeneral: patientGeneral,
-            currentStep: currentStep,
-            addingSession: true,
-          ),
-        );
+  // generateStateAccordingToTheSelectedPresentedAreaForAddingSessions({
+  //   required String presentedArea,
+  //   required PatientGeneral patientGeneral,
+  //   required int currentStep,
+  // }) {
+  //   switch (presentedArea) {
+  //     case 'Shoulder':
+  //       emit(
+  //         PatientMainStateShoulder(
+  //           patientGeneral: patientGeneral,
+  //           currentStep: currentStep,
+  //           addingSession: true,
+  //         ),
+  //       );
 
-        RouteUtils.navigateTo(NewPatientOrSession());
+  //       RouteUtils.navigateTo(NewPatientOrSession());
 
-        break;
-      case 'Knee':
-        emit(
-          PatientMainStateKnee(
-            patientGeneral: patientGeneral,
-            currentStep: currentStep,
-            addingSession: true,
-          ),
-        );
+  //       break;
+  //     case 'Knee':
+  //       emit(
+  //         PatientMainStateKnee(
+  //           patientGeneral: patientGeneral,
+  //           currentStep: currentStep,
+  //           addingSession: true,
+  //         ),
+  //       );
 
-        RouteUtils.navigateTo(NewPatientOrSession());
+  //       RouteUtils.navigateTo(NewPatientOrSession());
 
-        break;
-      case 'Ankle':
-        emit(
-          PatientMainStateAnkle(
-            patientGeneral: patientGeneral,
-            currentStep: currentStep,
-            addingSession: true,
-          ),
-        );
+  //       break;
+  //     case 'Ankle':
+  //       emit(
+  //         PatientMainStateAnkle(
+  //           patientGeneral: patientGeneral,
+  //           currentStep: currentStep,
+  //           addingSession: true,
+  //         ),
+  //       );
 
-        RouteUtils.navigateTo(NewPatientOrSession());
+  //       RouteUtils.navigateTo(NewPatientOrSession());
 
-        break;
-      case 'Cervical':
-        emit(
-          PatientMainStateCervical(
-            patientGeneral: patientGeneral,
-            currentStep: currentStep,
-            addingSession: true,
-          ),
-        );
+  //       break;
+  //     case 'Cervical':
+  //       emit(
+  //         PatientMainStateCervical(
+  //           patientGeneral: patientGeneral,
+  //           currentStep: currentStep,
+  //           addingSession: true,
+  //         ),
+  //       );
 
-        RouteUtils.navigateTo(NewPatientOrSession());
+  //       RouteUtils.navigateTo(NewPatientOrSession());
 
-        break;
-      case 'Lumbar':
-        emit(
-          PatientMainStateLumbar(
-            patientGeneral: patientGeneral,
-            currentStep: currentStep,
-            addingSession: true,
-          ),
-        );
+  //       break;
+  //     case 'Lumbar':
+  //       emit(
+  //         PatientMainStateLumbar(
+  //           patientGeneral: patientGeneral,
+  //           currentStep: currentStep,
+  //           addingSession: true,
+  //         ),
+  //       );
 
-        RouteUtils.navigateTo(NewPatientOrSession());
+  //       RouteUtils.navigateTo(NewPatientOrSession());
 
-        break;
-      case 'Elbow':
-        emit(
-          PatientMainStateElbow(
-            patientGeneral: patientGeneral,
-            currentStep: currentStep,
-            addingSession: true,
-          ),
-        );
+  //       break;
+  //     case 'Elbow':
+  //       emit(
+  //         PatientMainStateElbow(
+  //           patientGeneral: patientGeneral,
+  //           currentStep: currentStep,
+  //           addingSession: true,
+  //         ),
+  //       );
 
-        RouteUtils.navigateTo(NewPatientOrSession());
+  //       RouteUtils.navigateTo(NewPatientOrSession());
 
-        break;
-      default:
-      // return DefaultPage();
-    }
-  }
+  //       break;
+  //     default:
+  //     // return DefaultPage();
+  //   }
+  // }
 
   moveNextAccordingToPresentedArea({required String presentedArea}) {
     if (state is PatientMainStateGeneralInfo &&
@@ -833,7 +861,7 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         PatientMainStateShoulder(
           patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
           currentStep: 1,
-          addingSession: false,
+          // addingSession: false,
         ),
       );
     } else if (state is PatientMainStateGeneralInfo &&
@@ -842,7 +870,7 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       emit(PatientMainStateKnee(
         patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
         currentStep: 1,
-        addingSession: false,
+        // addingSession: false,
       ));
     } else if (state is PatientMainStateGeneralInfo &&
         (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
@@ -850,7 +878,7 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       emit(PatientMainStateAnkle(
         patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
         currentStep: 1,
-        addingSession: false,
+        // addingSession: false,
       ));
     } else if (state is PatientMainStateGeneralInfo &&
         (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
@@ -858,7 +886,7 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       emit(PatientMainStateCervical(
         patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
         currentStep: 1,
-        addingSession: false,
+        // addingSession: false,
       ));
     } else if (state is PatientMainStateGeneralInfo &&
         (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
@@ -866,7 +894,7 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       emit(PatientMainStateLumbar(
         patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
         currentStep: 1,
-        addingSession: false,
+        // addingSession: false,
       ));
     } else if (state is PatientMainStateGeneralInfo &&
         (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
@@ -874,7 +902,7 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       emit(PatientMainStateElbow(
         patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
         currentStep: 1,
-        addingSession: false,
+        // addingSession: false,
       ));
     } else {
       return;
@@ -939,98 +967,10 @@ class PatientMainHandler extends Cubit<PatientMainState> {
         medicalRef: previousState.patientGeneral.medicalRef,
         occupation: previousState.patientGeneral.occupation,
         presentedArea: previousState.patientGeneral.presentedArea,
-        sessions: [session],
+        session: session,
+        followups: [],
       ),
     );
-  }
-
-  void addSessionToPatient({required PatientMainState state}) async {
-    //Default session
-    Session session = ShoulderSession(
-      date: DateTime.now(),
-      shoulder: Shoulder(),
-    );
-    //Default state
-    dynamic previousState;
-
-//controlling the states and therefore the sessions
-    if (state is PatientMainStateShoulder) {
-      session = ShoulderSession(
-        date: DateTime.now(),
-        shoulder: state.shoulder!,
-      );
-      previousState = state;
-    } else if (state is PatientMainStateKnee) {
-      session = KneeSession(
-        date: DateTime.now(),
-        knee: state.knee!,
-      );
-      previousState = state;
-    } else if (state is PatientMainStateAnkle) {
-      session = AnkleSession(
-        date: DateTime.now(),
-        ankle: state.ankle!,
-      );
-      previousState = state;
-    } else if (state is PatientMainStateCervical) {
-      session = CervicalSession(
-        date: DateTime.now(),
-        cervical: state.cervical!,
-      );
-      previousState = state;
-    } else if (state is PatientMainStateLumbar) {
-      session = LumbarSession(
-        date: DateTime.now(),
-        lumbar: state.lumbar!,
-      );
-      previousState = state;
-    } else if (state is PatientMainStateElbow) {
-      session = ElbowSession(
-        date: DateTime.now(),
-        elbow: state.elbow!,
-      );
-      previousState = state;
-    }
-
-    try {
-      print(previousState.patientGeneral.name);
-      await patientMainRepository.addSessionToPatient(
-        name: previousState.patientGeneral.name,
-        session: session,
-      );
-
-      emit(PatientMainStateAddSessionSuccess());
-    } catch (e) {
-      emit(PatientMainStateAddSessionError(
-          errorMessage: 'Error adding session: $e'));
-    }
-
-    //   final previousState = (state as PatientMainStateShoulder);
-
-    //   emit(
-    //     PatientMainStateSubmit(
-    //       patientGeneral: previousState.patientGeneral,
-    //       shoulder: previousState.shoulder!,
-    //     ),
-    //   );
-    //   final submitState = (state as PatientMainStateSubmit);
-
-    //   try {
-    //     print(submitState.patientGeneral.name);
-    //     await patientMainRepository.addSessionToPatient(
-    //       name: submitState.patientGeneral.name,
-    //       session: ShoulderSession(
-    //         id: 1,
-    //         date: DateTime.now(),
-    //         shoulder: submitState.shoulder,
-    //       ),
-    //     );
-
-    //     emit(PatientMainStateAddSessionSuccess());
-    //   } catch (e) {
-    //     emit(PatientMainStateAddSessionError(
-    //         errorMessage: 'Error adding session: $e'));
-    //   }
   }
 }
 

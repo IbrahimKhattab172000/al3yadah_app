@@ -26,7 +26,7 @@ class PatientMainStateGeneralInfo extends PatientMainState {
 class PatientMainStateShoulder extends PatientMainState {
   late final PatientGeneral patientGeneral;
   final Shoulder? shoulder;
-  final bool addingSession;
+  // final bool addingSession;
 
   final int currentStep;
 
@@ -38,7 +38,7 @@ class PatientMainStateShoulder extends PatientMainState {
     required this.patientGeneral,
     required this.currentStep,
     this.shoulder,
-    required this.addingSession,
+    // required this.addingSession,
   });
 
   PatientMainStateShoulder copyWith({
@@ -51,7 +51,7 @@ class PatientMainStateShoulder extends PatientMainState {
       patientGeneral: patientGeneral ?? this.patientGeneral,
       shoulder: shoulder ?? this.shoulder,
       currentStep: currentStep ?? this.currentStep,
-      addingSession: addingSession ?? this.addingSession,
+      // addingSession: addingSession ?? this.addingSession,
     );
   }
 }
@@ -59,7 +59,7 @@ class PatientMainStateShoulder extends PatientMainState {
 class PatientMainStateKnee extends PatientMainState {
   late final PatientGeneral patientGeneral;
   final Knee? knee;
-  final bool addingSession;
+  // final bool addingSession;
 
   final int currentStep;
 
@@ -69,7 +69,7 @@ class PatientMainStateKnee extends PatientMainState {
   PatientMainStateKnee({
     required this.patientGeneral,
     this.knee,
-    required this.addingSession,
+    // required this.addingSession,
     required this.currentStep,
   });
 
@@ -82,7 +82,7 @@ class PatientMainStateKnee extends PatientMainState {
     return PatientMainStateKnee(
       patientGeneral: patientGeneral ?? this.patientGeneral,
       knee: knee ?? this.knee,
-      addingSession: addingSession ?? this.addingSession,
+      // addingSession: addingSession ?? this.addingSession,
       currentStep: currentStep ?? this.currentStep,
     );
   }
@@ -91,7 +91,7 @@ class PatientMainStateKnee extends PatientMainState {
 class PatientMainStateAnkle extends PatientMainState {
   late final PatientGeneral patientGeneral;
   final Ankle? ankle;
-  final bool addingSession;
+  // final bool addingSession;
 
   final int currentStep;
 
@@ -101,7 +101,7 @@ class PatientMainStateAnkle extends PatientMainState {
   PatientMainStateAnkle({
     required this.patientGeneral,
     this.ankle,
-    required this.addingSession,
+    // required this.addingSession,
     required this.currentStep,
   });
 
@@ -114,7 +114,7 @@ class PatientMainStateAnkle extends PatientMainState {
     return PatientMainStateAnkle(
       patientGeneral: patientGeneral ?? this.patientGeneral,
       ankle: ankle ?? this.ankle,
-      addingSession: addingSession ?? this.addingSession,
+      // addingSession: addingSession ?? this.addingSession,
       currentStep: currentStep ?? this.currentStep,
     );
   }
@@ -123,7 +123,7 @@ class PatientMainStateAnkle extends PatientMainState {
 class PatientMainStateCervical extends PatientMainState {
   late final PatientGeneral patientGeneral;
   final Cervical? cervical;
-  final bool addingSession;
+  // final bool addingSession;
 
   final int currentStep;
 
@@ -133,7 +133,7 @@ class PatientMainStateCervical extends PatientMainState {
   PatientMainStateCervical({
     required this.patientGeneral,
     this.cervical,
-    required this.addingSession,
+    // required this.addingSession,
     required this.currentStep,
   });
 
@@ -146,7 +146,7 @@ class PatientMainStateCervical extends PatientMainState {
     return PatientMainStateCervical(
       patientGeneral: patientGeneral ?? this.patientGeneral,
       cervical: cervical ?? this.cervical,
-      addingSession: addingSession ?? this.addingSession,
+      // addingSession: addingSession ?? this.addingSession,
       currentStep: currentStep ?? this.currentStep,
     );
   }
@@ -155,7 +155,7 @@ class PatientMainStateCervical extends PatientMainState {
 class PatientMainStateLumbar extends PatientMainState {
   late final PatientGeneral patientGeneral;
   final Lumbar? lumbar;
-  final bool addingSession;
+  // final bool addingSession;
 
   final int currentStep;
 
@@ -165,7 +165,7 @@ class PatientMainStateLumbar extends PatientMainState {
   PatientMainStateLumbar({
     required this.patientGeneral,
     this.lumbar,
-    required this.addingSession,
+    // required this.addingSession,
     required this.currentStep,
   });
 
@@ -178,7 +178,7 @@ class PatientMainStateLumbar extends PatientMainState {
     return PatientMainStateLumbar(
       patientGeneral: patientGeneral ?? this.patientGeneral,
       lumbar: lumbar ?? this.lumbar,
-      addingSession: addingSession ?? this.addingSession,
+      // addingSession: addingSession ?? this.addingSession,
       currentStep: currentStep ?? this.currentStep,
     );
   }
@@ -187,7 +187,7 @@ class PatientMainStateLumbar extends PatientMainState {
 class PatientMainStateElbow extends PatientMainState {
   late final PatientGeneral patientGeneral;
   final Elbow? elbow;
-  final bool addingSession;
+  // final bool addingSession;
 
   final int currentStep;
 
@@ -197,7 +197,7 @@ class PatientMainStateElbow extends PatientMainState {
   PatientMainStateElbow({
     required this.patientGeneral,
     this.elbow,
-    required this.addingSession,
+    // required this.addingSession,
     required this.currentStep,
   });
 
@@ -210,7 +210,7 @@ class PatientMainStateElbow extends PatientMainState {
     return PatientMainStateElbow(
       patientGeneral: patientGeneral ?? this.patientGeneral,
       elbow: elbow ?? this.elbow,
-      addingSession: addingSession ?? this.addingSession,
+      // addingSession: addingSession ?? this.addingSession,
       currentStep: currentStep ?? this.currentStep,
     );
   }

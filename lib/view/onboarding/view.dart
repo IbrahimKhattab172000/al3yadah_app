@@ -50,16 +50,19 @@ class _OnBoardingViewState extends State<OnBoardingView> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            Padding(
-              padding: EdgeInsets.only(top: Utils.topDevicePadding),
-              child: Align(
-                alignment: Alignment.topRight,
-                child: AppText(
-                  title: "Skip",
-                  color: AppColors.primary,
-                  decoration: TextDecoration.underline,
-                  fontWeight: FontWeight.w700,
-                  fontSize: 16,
+            InkWell(
+              onTap: () => RouteUtils.navigateTo(const NavBarView()),
+              child: Padding(
+                padding: EdgeInsets.only(top: Utils.topDevicePadding),
+                child: Align(
+                  alignment: Alignment.topRight,
+                  child: AppText(
+                    title: "Skip",
+                    color: AppColors.primary,
+                    decoration: TextDecoration.underline,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 16,
+                  ),
                 ),
               ),
             ),
