@@ -7,6 +7,7 @@ import 'package:al3yadah_app/core/models/patient.dart';
 import 'package:al3yadah_app/core/models/patient_general.dart';
 import 'package:al3yadah_app/core/models/sessions.dart';
 import 'package:al3yadah_app/core/models/shoulder.dart';
+import 'package:al3yadah_app/core/models/wrest_finger.dart';
 import 'package:al3yadah_app/core/repository/patient_main.dart';
 import 'package:al3yadah_app/core/route_utils/route_utils.dart';
 import 'package:al3yadah_app/view/success/view.dart';
@@ -68,7 +69,8 @@ class PatientMainHandler extends Cubit<PatientMainState> {
     'Ankle',
     'Cervical',
     'Lumbar',
-    'Elbow'
+    'Elbow',
+    "Wrest-Finger"
   ];
   // String? presentedArea;
 
@@ -655,6 +657,95 @@ class PatientMainHandler extends Cubit<PatientMainState> {
     );
   }
 
+//WrestFinger---------------------------------------------------------------
+  void nextStepWrestFinger() {
+    if ((state as PatientMainStateWrestFinger).currentStep < 3) {
+      emit((state as PatientMainStateWrestFinger).copyWith(
+          currentStep: (state as PatientMainStateWrestFinger).currentStep + 1));
+      print((state as PatientMainStateWrestFinger).currentStep);
+    } else {
+      // (state as PatientMainStateElbow).addingSession
+      //     ? addSessionToPatient(state: state)
+      //     :
+      submitNewPatient(state: state);
+      RouteUtils.navigateTo(SuccessView());
+    }
+  }
+
+  void previousStepWrestFinger() {
+    if (!(state as PatientMainStateWrestFinger).isFirst) {
+      emit((state as PatientMainStateWrestFinger).copyWith(
+          currentStep: (state as PatientMainStateWrestFinger).currentStep - 1));
+    } else {
+      emit(PatientMainStateGeneralInfo(
+          patientGeneral:
+              (state as PatientMainStateWrestFinger).patientGeneral));
+    }
+  }
+
+  updateWrestFingerValues({
+    String? proximalRadiatingPain,
+    String? historyNote,
+    String? painPlaceOrNerveDistrbutionNote,
+    String? vasNumber,
+    String? palpationNote,
+    int? romFlexionNumber,
+    int? romExtensionNumber,
+    String? romNote,
+    String? muscleTestNote,
+    String? thumbIsFree,
+    String? thumbIsFreeNote,
+    String? fingersIsFree,
+    String? fingersIsFreeNote,
+    String? ctsPhalenTest,
+    String? ctsTinnelSign,
+    String? ctsNote,
+    String? finkelsteinTest,
+    String? medialNerve,
+    String? ulnarNerve,
+    String? radialNerve,
+    String? neuroDynamictestNote,
+  }) {
+    final currentWrestFinger =
+        (state as PatientMainStateWrestFinger).wrestFinger ?? WrestFinger();
+
+    emit(
+      (state as PatientMainStateWrestFinger).copyWith(
+        wrestFinger: WrestFinger(
+          proximalRadiatingPain:
+              proximalRadiatingPain ?? currentWrestFinger.proximalRadiatingPain,
+          historyNote: historyNote ?? currentWrestFinger.historyNote,
+          painPlaceOrNerveDistrbutionNote: painPlaceOrNerveDistrbutionNote ??
+              currentWrestFinger.painPlaceOrNerveDistrbutionNote,
+          vasNumber: vasNumber ?? currentWrestFinger.vasNumber,
+          palpationNote: palpationNote ?? currentWrestFinger.palpationNote,
+          romFlexionNumber:
+              romFlexionNumber ?? currentWrestFinger.romFlexionNumber,
+          romExtensionNumber:
+              romExtensionNumber ?? currentWrestFinger.romExtensionNumber,
+          romNote: romNote ?? currentWrestFinger.romNote,
+          muscleTestNote: muscleTestNote ?? currentWrestFinger.muscleTestNote,
+          thumbIsFree: thumbIsFree ?? currentWrestFinger.thumbIsFree,
+          thumbIsFreeNote:
+              thumbIsFreeNote ?? currentWrestFinger.thumbIsFreeNote,
+          fingersIsFree: fingersIsFree ?? currentWrestFinger.fingersIsFree,
+          fingersIsFreeNote:
+              fingersIsFreeNote ?? currentWrestFinger.fingersIsFreeNote,
+          ctsPhalenTest: ctsPhalenTest ?? currentWrestFinger.ctsPhalenTest,
+          ctsTinnelSign: ctsTinnelSign ?? currentWrestFinger.ctsTinnelSign,
+          ctsNote: ctsNote ?? currentWrestFinger.ctsNote,
+          finkelsteinTest:
+              finkelsteinTest ?? currentWrestFinger.finkelsteinTest,
+          medialNerve: medialNerve ?? currentWrestFinger.medialNerve,
+          ulnarNerve: ulnarNerve ?? currentWrestFinger.ulnarNerve,
+          radialNerve: radialNerve ?? currentWrestFinger.radialNerve,
+          neuroDynamictestNote:
+              neuroDynamictestNote ?? currentWrestFinger.neuroDynamictestNote,
+        ),
+      ),
+    );
+  }
+
 //For all states -------------------------------------------------------------
   dynamic selectedIndexInterpretation({required int selectedIndex}) {
     if (selectedIndex == 0) {
@@ -739,6 +830,18 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       // }
       else {
         return "Next-El";
+      }
+    } else if (state is PatientMainStateWrestFinger) {
+      if (state.isLast
+          //  && !state.addingSession
+          ) {
+        return "Submit-WF";
+      }
+      // else if (state.addingSession && state.isLast) {
+      //   return "Add session-El";
+      // }
+      else {
+        return "Next-WF";
       }
     } else {
       return "Next to area";
@@ -898,8 +1001,16 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       ));
     } else if (state is PatientMainStateGeneralInfo &&
         (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
-            "Elbow") {
-      emit(PatientMainStateElbow(
+            "Wrest-Finger") {
+      emit(PatientMainStateWrestFinger(
+        patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
+        currentStep: 1,
+        // addingSession: false,
+      ));
+    } else if (state is PatientMainStateGeneralInfo &&
+        (state as PatientMainStateGeneralInfo).patientGeneral.presentedArea ==
+            "Wrest-Finger") {
+      emit(PatientMainStateWrestFinger(
         patientGeneral: (state as PatientMainStateGeneralInfo).patientGeneral,
         currentStep: 1,
         // addingSession: false,
@@ -953,6 +1064,12 @@ class PatientMainHandler extends Cubit<PatientMainState> {
       session = ElbowSession(
         date: DateTime.now(),
         elbow: state.elbow!,
+      );
+      previousState = state;
+    } else if (state is PatientMainStateWrestFinger) {
+      session = WrestFingerSession(
+        date: DateTime.now(),
+        wrestFinger: state.wrestFinger!,
       );
       previousState = state;
     }

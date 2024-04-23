@@ -216,6 +216,38 @@ class PatientMainStateElbow extends PatientMainState {
   }
 }
 
+class PatientMainStateWrestFinger extends PatientMainState {
+  late final PatientGeneral patientGeneral;
+  final WrestFinger? wrestFinger;
+  // final bool addingSession;
+
+  final int currentStep;
+
+  int get totalSteps => 3;
+  bool get isLast => currentStep == 3;
+  bool get isFirst => currentStep == 1;
+  PatientMainStateWrestFinger({
+    required this.patientGeneral,
+    this.wrestFinger,
+    // required this.addingSession,
+    required this.currentStep,
+  });
+
+  PatientMainStateWrestFinger copyWith({
+    PatientGeneral? patientGeneral,
+    WrestFinger? wrestFinger,
+    bool? addingSession,
+    int? currentStep,
+  }) {
+    return PatientMainStateWrestFinger(
+      patientGeneral: patientGeneral ?? this.patientGeneral,
+      wrestFinger: wrestFinger ?? this.wrestFinger,
+      // addingSession: addingSession ?? this.addingSession,
+      currentStep: currentStep ?? this.currentStep,
+    );
+  }
+}
+
 ///----------------------------------For adding sessions---------------------------///
 
 final class PatientMainStateAddSessionLoading extends PatientMainState {}

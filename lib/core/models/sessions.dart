@@ -4,6 +4,7 @@ import 'package:al3yadah_app/core/models/elbow.dart';
 import 'package:al3yadah_app/core/models/knee.dart';
 import 'package:al3yadah_app/core/models/lumbar.dart';
 import 'package:al3yadah_app/core/models/shoulder.dart';
+import 'package:al3yadah_app/core/models/wrest_finger.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 abstract class Session {
@@ -37,6 +38,8 @@ abstract class Session {
 
       case 'elbow':
         return ElbowSession.fromJson(map);
+      case 'wrestfinger':
+        return WrestFingerSession.fromJson(map);
       default:
         throw UnimplementedError('fromJson not implemented for Session');
     }
@@ -231,6 +234,39 @@ class ElbowSession extends Session {
       // id: map['id'] as int,
       date: (map['date'] as Timestamp).toDate(),
       elbow: Elbow.fromMap(map['elbow'] as Map<String, dynamic>),
+    );
+  }
+}
+
+class WrestFingerSession extends Session {
+  final WrestFinger wrestFinger;
+
+  WrestFingerSession({
+    // required int id,
+    required super.date,
+    required this.wrestFinger,
+  }) : super(
+          // id: id,
+          type: 'wrestfinger',
+        );
+
+  @override
+  Map<String, dynamic> toJson() {
+    return {
+      // 'id': id,
+      'date': date,
+      'type': type,
+      'wrestfinger': wrestFinger.toMap(),
+    };
+  }
+
+  @override
+  factory WrestFingerSession.fromJson(Map<String, dynamic> map) {
+    return WrestFingerSession(
+      // id: map['id'] as int,
+      date: (map['date'] as Timestamp).toDate(),
+      wrestFinger:
+          WrestFinger.fromMap(map['wrestfinger'] as Map<String, dynamic>),
     );
   }
 }
